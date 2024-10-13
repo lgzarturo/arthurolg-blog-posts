@@ -1,7 +1,7 @@
 ---
-title: Mi objetivo es compartir mi trabajo y mis ideas, donde puedo demostrar mi compromiso con la productividad
+title: Desarrollador Full Stack Apasionado por la Innovación y el Aprendizaje Continuo
 image: https://raw.githubusercontent.com/lgzarturo/arthurolg-blog-posts/refs/heads/main/articles/images/programming-technologies.webp
-description: El objetivo de este artículo es compartir mi trabajo y mis ideas, donde puedo demostrar mi compromiso con la productividad y la innovación en el desarrollo de software.
+description: Bienvenido a mi blog personal, donde comparto mi experiencia como Desarrollador Full Stack y mi pasión por la tecnología, la innovación y el aprendizaje continuo. Descubre mis proyectos, reflexiones y consejos sobre desarrollo de software.
 author: Arturo López
 date: 2024-10-11
 label: Reflexión
