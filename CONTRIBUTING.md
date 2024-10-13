@@ -8,11 +8,12 @@ El repositorio de los artículos es [arthurolg-blog-posts](https://github.com/lg
 2. Escribe tu artículo siguiendo la estructura de los demás.
 3. Guarda tu artículo en la carpeta `articles/`.
 4. Añade una imagen en la carpeta `articles/images` y referencia la URL en tu artículo.
-5. Haz un pull request a la rama principal del repositorio.
-6. Espera a que tu artículo sea revisado y aprobado.
-7. ¡Listo! Tu artículo será publicado en el blog.
-8. Comparte tu artículo en redes sociales y con tus amigos.
-9. ¡Gracias por contribuir!
+5. Además puedes publicar el artículo en una de las categorías principales `marketing`, `programming`, `technology` o `videogames`.
+6. Haz un pull request a la rama principal del repositorio.
+7. Espera a que tu artículo sea revisado y aprobado.
+8. ¡Listo! Tu artículo será publicado en el blog.
+9. Comparte tu artículo en redes sociales y con tus amigos.
+10. ¡Gracias por contribuir!
 
 Si tienes alguna duda, puedes abrir un issue en el repositorio.
 
@@ -31,6 +32,7 @@ image: URL de la imagen
 description: Descripción del artículo
 author: Nombre del autor
 date: Fecha de publicación
+label: Etiqueta del artículo
 ---
 
 Contenido del artículo
