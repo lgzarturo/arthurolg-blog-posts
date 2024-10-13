@@ -1,7 +1,7 @@
 ---
 title: VisitaPorMexico.com - La Plataforma para Planificar Viajes por México
-image: https://raw.githubusercontent.com/lgzarturo/arthurolg-blog-posts/refs/heads/main/articles/images/miraeljuego-web-development/visita-por-mexivo-planifica-tu-viaje.webp
-description: Plataforma diseñada para ayudar a los usuarios a planificar su **viaje ideal por México**, proporcionando herramientas para **comparar destinos, elegir hoteles** y organizar itinerarios detallados, todo en un solo lugar.
+image: https://raw.githubusercontent.com/lgzarturo/arthurolg-blog-posts/refs/heads/main/articles/images/visita-por-mexivo-planifica-tu-viaje.webp
+description: Plataforma diseñada para ayudar a los usuarios a planificar su viaje ideal por México, proporcionando herramientas para comparar destinos, elegir hoteles y organizar itinerarios detallados, todo en un solo lugar.
 author: Arturo López
 date: 2024-10-12
 label: Proyectos

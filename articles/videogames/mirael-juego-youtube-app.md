@@ -1,6 +1,6 @@
 ---
 title: Mira El Juego - Un Proyecto Experimental de YouTube que Evolucionó en un Juego de Cartas
-image: https://raw.githubusercontent.com/lgzarturo/arthurolg-blog-posts/refs/heads/main/articles/images/
+image: https://raw.githubusercontent.com/lgzarturo/arthurolg-blog-posts/refs/heads/main/articles/images/miraeljuego-web-development.webp
 description: Descripción del artículo
 author: Arturo López
 date: 2024-10-11
