@@ -29,6 +29,8 @@ Con el paso del tiempo y la creciente carga de trabajo en otros proyectos, decid
 
 Actualmente, "Mira El Juego" no es solo un canal de YouTube con subidas casuales de gameplay, sino también una página web en la que desarrollé un juego de cartas interactivo utilizando React (*con algunos bugs, que se solucionarán en el futuro*), una de las tecnologías que más disfruto. El juego es un reflejo de mi curiosidad por combinar el desarrollo web con mi pasión por los videojuegos. Aunque aún es un proyecto en proceso, el juego de cartas ha sido un buen recordatorio de la importancia de no abandonar completamente las ideas, sino de evolucionarlas y adaptarlas al tiempo disponible.
 
+Visita el sitio web: [Mira El Juego](https://www.miraeljuego.com/), es un juego de cartas hecho con React, que evoluciono a Next.js y TypeScript. Solo es un prototipo, pero es un buen ejemplo de cómo un proyecto puede transformarse y adaptarse a las circunstancias. En este caso el proyecto lo desarrolle para mi uso personal y el de mi familia.
+
 ## Un Proyecto que Me Hace Reflexionar
 
 "Mira El Juego" es más que solo un proyecto experimental, es una idea que me acompaña desde hace tiempo y a la que vuelvo cada tanto. Me gusta reflexionar sobre nuevas formas en las que podría hacer que el proyecto crezca o conecte más con la gente. A pesar de los desafíos de tiempo, cada cierto tiempo me pregunto: ¿Qué podría hacer para que este proyecto sea de mayor interés para las personas? ¿Cómo puedo hacerlo más interactivo o atractivo?
