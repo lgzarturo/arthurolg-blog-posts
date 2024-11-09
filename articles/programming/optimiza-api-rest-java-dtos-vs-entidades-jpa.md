@@ -1,7 +1,7 @@
 ---
 title: Buenas Prácticas para el Diseño de API REST. Evita Exponer Entidades JPA y Usa DTOs Eficientemente
 image: https://raw.githubusercontent.com/lgzarturo/arthurolg-blog-posts/refs/heads/main/articles/images/mejores-practicas-api-rest-java-spring-boot-dtos.webp
-description: Descubre cómo mejorar el diseño de tu API REST en Java utilizando DTOs en lugar de exponer entidades JPA directamente. Aprende a estructurar tus paquetes siguiendo buenas prácticas que optimizan el rendimiento, la seguridad y la mantenibilidad de tu aplicación en Spring Boot.
+description: Te enseño cómo mejorar el diseño de tu API REST en Java utilizando DTOs en lugar de exponer entidades JPA directamente. Aprende a estructurar tus paquetes siguiendo buenas prácticas que optimizan el rendimiento, la seguridad y la mantenibilidad de tu aplicación en Spring Boot.
 author: Arturo López
 date: 2024-10-30
 label: Arquitectura, Microservicios, Spring Boot, Java

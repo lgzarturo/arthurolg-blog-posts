@@ -1,7 +1,7 @@
 ---
 title: Estrategias para el Canal Directo en Hoteles
 image: https://raw.githubusercontent.com/lgzarturo/arthurolg-blog-posts/refs/heads/main/articles/images/super-luxury-hotel-beach.webp
-description: Descubre cómo aumentar la atracción de clientes a tu motor de reservaciones utilizando estrategias efectivas para el canal directo en el sitio web de tu hotel.
+description: Formas de aumentar la atracción de clientes a tu motor de reservaciones utilizando estrategias efectivas para el canal directo en el sitio web de tu hotel.
 author: Arturo López
 date: 2024-10-13
 label: Marketing

@@ -1,7 +1,7 @@
 ---
 title: Mejora la Productividad en el Desarrollo de Software con Kanban, Sprints Ágiles y Otras Técnicas Clave
 image: https://raw.githubusercontent.com/lgzarturo/arthurolg-blog-posts/refs/heads/main/articles/images/mejora-productividad-desarrollo-software.webp
-description: Descubre cómo optimizar la gestión de tareas y proyectos en desarrollo de software implementando técnicas como Kanban, sprints ágiles, Pomodoro y MoSCoW. Aprende a priorizar correctamente y a mejorar la eficiencia del equipo para entregar proyectos de alta calidad en menos tiempo.
+description: Optimiza tu gestión de tareas y proyectos en desarrollo de software implementando técnicas como Kanban, sprints ágiles, Pomodoro y MoSCoW. Aprende a priorizar correctamente y a mejorar la eficiencia del equipo para entregar proyectos de alta calidad en menos tiempo.
 author: Arturo López
 date: 2024-10-20
 label: Productividad

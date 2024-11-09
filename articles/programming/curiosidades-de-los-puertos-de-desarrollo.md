@@ -1,7 +1,7 @@
 ---
 title: Guía Completa sobre Puertos en Desarrollo Web - Aprende, Comparte y Mejora tus Proyectos
 image: https://raw.githubusercontent.com/lgzarturo/arthurolg-blog-posts/refs/heads/main/articles/images/ports-programming-easter-eggs.webp
-description: Descubre todo lo que necesitas saber sobre la elección de puertos en desarrollo web, desde las convenciones más comunes hasta las mejores prácticas. Aprende a evitar conflictos, mejorar la colaboración en equipo y elegir puertos efectivos para tus proyectos.
+description: Todo lo que necesitas saber sobre la elección de puertos en desarrollo web, desde las convenciones más comunes hasta las mejores prácticas. Aprende a evitar conflictos, mejorar la colaboración en equipo y elegir puertos efectivos para tus proyectos.
 author: Arturo López
 date: 2024-10-27
 label: Curiosidades

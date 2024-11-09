@@ -1,7 +1,7 @@
 ---
 title: Gratitud y Propósito - La Clave para una Vida más Significativa
 image: https://raw.githubusercontent.com/lgzarturo/arthurolg-blog-posts/refs/heads/main/articles/images/gratitud-y-proposito.webp
-description: Descubre cómo la gratitud puede transformar tu perspectiva de vida y alinear tus objetivos con un propósito más profundo. Reflexiones sobre el valor de apreciar lo que ya tienes.
+description: El concepto de la gratitud puede transformar tu perspectiva de vida y alinear tus objetivos con un propósito más profundo. Explora reflexiones sobre el valor de apreciar lo que ya tienes.
 author: Arturo López
 date: 2024-10-23
 label: Reflexión

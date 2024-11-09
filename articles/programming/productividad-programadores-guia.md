@@ -1,7 +1,7 @@
 ---
 title: Guía de Productividad para Programadores - Timeboxing, GTD y Metodologías Ágiles
 image: https://raw.githubusercontent.com/lgzarturo/arthurolg-blog-posts/refs/heads/main/articles/images/ports-programming-easter-eggs.webp
-description: Descubre cómo aumentar tu productividad como desarrollador usando timeboxing, GTD y técnicas ágiles. Guía práctica para gestionar mejor tu tiempo y mejorar la calidad del código.
+description: Hablemos de cómo aumentar tu productividad como desarrollador usando timeboxing, GTD y técnicas ágiles. Guía práctica para gestionar mejor tu tiempo y mejorar la calidad del código.
 author: Arturo López
 date: 2024-10-30
 label: Productividad

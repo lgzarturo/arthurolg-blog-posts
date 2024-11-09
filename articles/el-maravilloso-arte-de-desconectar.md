@@ -1,7 +1,7 @@
 ---
 title: ¿Burnout en Programación? ¡Por Qué los Mejores Developers Saben Cuándo No Programar!
 image: https://raw.githubusercontent.com/lgzarturo/arthurolg-blog-posts/refs/heads/main/articles/images/no-programar-para-programar-mejor.webp
-description: Descubre por qué los mejores programadores a veces no escriben código. Aprende a reconocer cuándo hacer una pausa mejorará tu productividad y calidad de código. ¡Tu mente te lo agradecerá!
+description: ¿Por qué los mejores programadores a veces no escriben código?. Aprende a reconocer cuándo hacer una pausa mejorará tu productividad y calidad de código. ¡Tu mente te lo agradecerá!
 author: Arturo López
 date: 2024-10-26
 label: Reflexión
