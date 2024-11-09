@@ -1,7 +1,7 @@
 ---
 title: Mira El Juego - Un Proyecto Experimental de YouTube que Evolucionó en un Juego de Cartas
 image: https://raw.githubusercontent.com/lgzarturo/arthurolg-blog-posts/refs/heads/main/articles/images/miraeljuego-web-development.webp
-description: "Mira El Juego" ha sido una fuente constante de inspiración y aprendizaje, también es una oportunidad de aprender y experimentar con nuevas tecnologías. ¡Explora más y únete a esta aventura creativa!
+description: El proyecto de "Mira El Juego" ha sido una fuente constante de inspiración y aprendizaje, también es una oportunidad de aprender y experimentar con nuevas tecnologías. ¡Explora más y únete a esta aventura creativa!
 author: Arturo López
 date: 2024-10-11
 label: Reflexión
