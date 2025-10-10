@@ -4,7 +4,7 @@ image: https://raw.githubusercontent.com/lgzarturo/arthurolg-blog-posts/refs/hea
 description: Descubre cómo la combinación de mentalidad estoica, disciplina de élite y estrategias de productividad puede transformar tu día a día como programador y líder técnico. Un plan de acción detallado para maximizar tu enfoque, eliminar distracciones y alcanzar tus metas profesionales y personales con claridad y propósito.
 author: Arturo López
 date: 2024-10-23
-label: Plan de acción
+label: Reflexión
 ---
 
 ## Plan de Batalla Diario
