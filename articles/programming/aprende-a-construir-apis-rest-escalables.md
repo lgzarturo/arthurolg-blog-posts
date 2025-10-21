@@ -1,10 +1,9 @@
 ---
-title: "Curso Profesional de Spring Boot: Aprende a Construir APIs REST Escalables y Seguras"
-image: image: https://raw.githubusercontent.com/lgzarturo/arthurolg-blog-posts/refs/heads/main/articles/images/el-legado-del-desarrollador.webp
-description: "Domina Spring Boot 3.x y construye APIs REST escalables y seguras con buenas prácticas profesionales. Aprende TDD, arquitectura hexagonal, seguridad avanzada y más."
+title: Curso Profesional de Spring Boot - Aprende a Construir APIs REST Escalables y Seguras
+image: https://raw.githubusercontent.com/lgzarturo/arthurolg-blog-posts/refs/heads/main/articles/images/el-legado-del-desarrollador.webp
+description: Domina Spring Boot 3.x y construye APIs REST escalables y seguras con buenas prácticas profesionales. Aprende TDD, arquitectura hexagonal, seguridad avanzada y más.
 author: Arturo López
 date: 2025-10-21
-tags: ["Spring Boot", "API REST", "Java", "Backend", "Desarrollo Profesional", "Microservicios", "Seguridad", "Testing"]
 label: Curso
 ---
 
@@ -146,3 +145,5 @@ Si quieres dar un salto en tu carrera como desarrollador backend y dominar Sprin
 ---
 
 ¡Únete y transforma tu forma de desarrollar APIs REST con Spring Boot!
+
+> Tags: ["Spring Boot", "API REST", "Java", "Backend", "Desarrollo Profesional", "Microservicios", "Seguridad", "Testing"]
