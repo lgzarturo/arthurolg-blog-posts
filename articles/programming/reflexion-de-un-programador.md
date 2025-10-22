@@ -1,9 +1,13 @@
 ---
-title: La Rutina del Programador - Lecciones de Saitama y el Mundo Empresarial | Reflexión sobre Desarrollo de Software
+title: La Rutina del Programador - Reflexión sobre Desarrollo de Software
 image: https://raw.githubusercontent.com/lgzarturo/arthurolg-blog-posts/refs/heads/main/articles/images/saitama-software-developer.webp
 description: Aprende sobre la importancia de la disciplina, la motivación, el propósito, la resiliencia, el trabajo en equipo, la resolución de bugs y la búsqueda de sentido en el desarrollo de software profesional. Una reflexión profunda sobre el día a día, los desafíos y las pequeñas victorias que definen la carrera de un programador.
+author: Arturo López
+date: 2025-10-22
+label: Productividad
 ---
 
+## Lecciones de Saitama y la Rutina del Programador
 
 **Hay días en que programar se siente como entrenar para ser un héroe en un mundo que no cree en los héroes.** _Me pasa seguido_. Abro el IDE, cargo el proyecto, y mientras los logs empiezan a desfilar, me acuerdo de _One Punch Man_. Ese tipo calvo, con capa, que con un solo golpe destruye monstruos del tamaño de edificios. **Saitama. El héroe más fuerte del mundo y, paradójicamente, el más aburrido.**
 
