@@ -7,23 +7,24 @@ date: 2025-10-24
 label: SpringBoot
 ---
 
-## Configuración práctica
 
-Tienes un proyecto Spring Boot con Kotlin y quieres buena higiene de código, cobertura y releases automáticos. Eso implica alinear versiones, configurar herramientas estáticas y poner CI que ejecute checks y publique artefactos. Lo más común que rompe todo es la incompatibilidad de versiones entre Kotlin y herramientas como Detekt o plugins. Aprende a evitar eso primero.
+## **Configuración práctica: buenas prácticas en Spring Boot con Kotlin**
 
-En proyectos Spring Boot con Kotlin la coherencia del stack no es opcional, es supervivencia. Si las versiones de Kotlin, plugins y herramientas no están alineadas, te pasas días persiguiendo errores crípticos en CI en vez de entregar funciones (*[me ha pasado en el curso de spring boot, al intentar aplicar buenas prácticas](https://lgzarturo.com/springboot-course?utm_source=direct&utm_medium=blog&utm_campaign=article)*). Herramientas como Detekt y KtLint no son un lujo estético, son la primera línea de defensa contra deuda técnica trivial: detectan malos patrones, inconsistencias y problemas que luego se vuelven costosos cuando el código crece. Mantener estas herramientas bien configuradas y con versiones fijadas evita interrupciones en el flujo del equipo y reduce el tiempo perdido en "arreglar el entorno".
+Tienes un proyecto **Spring Boot con Kotlin** y quieres buena higiene de código, cobertura y releases automáticos. Eso implica **alinear versiones**, configurar herramientas estáticas y poner **CI** que ejecute checks y publique artefactos. Lo más común que rompe todo es la incompatibilidad de versiones entre **Kotlin** y herramientas como **Detekt** o plugins. Aprende a evitar eso primero.
 
-Las ventajas prácticas son claras y directas. KtLint impone un estilo único, lo que hace que las diffs sean legibles y las revisiones más rápidas. Detekt encuentra problemas estáticos que no saltan en compilación, como patrones de rendimiento o code smells recurrentes. JaCoCo y Codecov te dan visibilidad sobre qué código está cubierto por pruebas, no para inflar métricas sino para priorizar lo que realmente importa. GitHub Actions automatiza todo esto en cada push y cada PR, lo que mantiene la calidad sin depender de la memoria o la buena voluntad de los desarrolladores. Y cuando automatizas releases con semantic-release, reduces errores humanos al publicar artefactos y generar changelogs (*esto último me ha costado mucho tiempo para configurarlo correctamente*).
+En proyectos **Spring Boot con Kotlin** la coherencia del stack no es opcional, es supervivencia. Si las versiones de **Kotlin**, plugins y herramientas no están alineadas, te pasas días persiguiendo errores crípticos en CI en vez de entregar funciones (_me ha pasado en el curso de spring boot, al intentar aplicar buenas prácticas_). Herramientas como **Detekt** y **KtLint** no son un lujo estético, son la **primera línea de defensa contra deuda técnica trivial**: detectan malos patrones, inconsistencias y problemas que luego se vuelven costosos cuando el código crece. Mantener estas herramientas bien configuradas y con versiones fijadas evita interrupciones en el flujo del equipo y reduce el tiempo perdido en "arreglar el entorno".
 
-Desde la trinchera del equipo y del líder técnico, estas prácticas aceleran el onboarding, mejoran la disciplina en las revisiones y hacen más predecible el mantenimiento. Lo práctico: fija versiones de Kotlin y plugins, documenta la política en el repo, obliga a correr checks locales antes de abrir PR y deja claras las excepciones con supresiones puntuales y comentarios justificando la decisión. Es molesto al inicio, sí, pero crea un entorno donde el trabajo real se puede hacer sin pelear con herramientas. Para un junior o un nuevo líder, adoptar esto temprano es la diferencia entre empujar parches y construir software que puedas sostener.
+Las ventajas prácticas son claras y directas. **KtLint** impone un estilo único, lo que hace que las diffs sean legibles y las revisiones más rápidas. **Detekt** encuentra problemas estáticos que no saltan en compilación, como patrones de rendimiento o _code smells_ recurrentes. **JaCoCo** y **Codecov** te dan visibilidad sobre qué código está cubierto por pruebas, no para inflar métricas sino para priorizar lo que realmente importa. **GitHub Actions** automatiza todo esto en cada push y cada PR, lo que mantiene la calidad sin depender de la memoria o la buena voluntad de los desarrolladores. Y cuando automatizas releases con **semantic-release**, reduces errores humanos al publicar artefactos y generar changelogs (_esto último me ha costado mucho tiempo para configurarlo correctamente_).
+
+Desde la trinchera del equipo y del líder técnico, estas **buenas prácticas** aceleran el onboarding, mejoran la disciplina en las revisiones y hacen más predecible el mantenimiento. Lo práctico: **fija versiones de Kotlin y plugins**, documenta la política en el repo, obliga a correr checks locales antes de abrir PR y deja claras las excepciones con supresiones puntuales y comentarios justificando la decisión. Es molesto al inicio, sí, pero crea un entorno donde el trabajo real se puede hacer sin pelear con herramientas. Para un junior o un nuevo líder, adoptar esto temprano es la diferencia entre empujar parches y construir software que puedas sostener.
 
 ---
 
-### 1. Compatibilidad Kotlin versus Detekt: problema y soluciones
+### 1. **Compatibilidad Kotlin versus Detekt: problema y soluciones**
 
 #### Qué pasa y por qué importa
 
-Detekt usa artefactos Kotlin internamente. Si Detekt fue compilado con una versión de Kotlin diferente a la que tú usas, el runtime se rompe con errores tipo:
+**Detekt** usa artefactos **Kotlin** internamente. Si Detekt fue compilado con una versión de Kotlin diferente a la que tú usas, el runtime se rompe con errores tipo:
 
 ```plaintext
 detekt was compiled with Kotlin X but is currently running with Y
@@ -33,16 +34,16 @@ Eso rompe CI y el workflow de calidad. Es una incompatibilidad binaria, no algo 
 
 #### Opciones prácticas
 
-1. Bajar Kotlin a la versión con la que Detekt es compatible.
-2. Subir Kotlin a la versión con la que Detekt fue compilado.
+1. **Bajar Kotlin** a la versión con la que Detekt es compatible.
+2. **Subir Kotlin** a la versión con la que Detekt fue compilado.
 
 #### Recomendaciones concretas
 
-* Si quieres estabilidad rápida: baja Kotlin a 1.9.21 y usa Detekt 1.23.4.
-* Si quieres modernizar y tu stack lo permite: sube a Kotlin 2.0.21 y usa Detekt 1.23.8 o 1.23.9.
+* Si quieres **estabilidad rápida**: baja Kotlin a 1.9.21 y usa Detekt 1.23.4.
+* Si quieres **modernizar** y tu stack lo permite: sube a Kotlin 2.0.21 y usa Detekt 1.23.8 o 1.23.9.
   Esto te deja a futuro con menos fricciones, pero valida todas tus dependencias.
 
-#### Ejemplo en `build.gradle.kts` para Kotlin 2.0.21 y Detekt 1.23.9
+**Ejemplo en `build.gradle.kts` para Kotlin 2.0.21 y Detekt 1.23.9:**
 
 ```kotlin
 plugins {
@@ -70,11 +71,11 @@ detekt {
 
 ---
 
-### 2. Error "Property 'formatting' is misspelled or does not exist" y cómo resolverlo
+### 2. **Error "Property 'formatting' is misspelled or does not exist" y cómo resolverlo**
 
 #### Por qué ocurre
 
-Detekt movió las reglas de formateo a un plugin separado llamado `detekt-formatting`. Antes se ponía un bloque `formatting:` dentro de `detekt.yml`. Hoy eso no funciona.
+**Detekt** movió las reglas de formateo a un plugin separado llamado `detekt-formatting`. Antes se ponía un bloque `formatting:` dentro de `detekt.yml`. Hoy eso no funciona.
 
 #### Solución rápida
 
@@ -95,13 +96,13 @@ Después de cambiar la config, genera un config base limpito para ver cómo qued
 
 ---
 
-### 3. Cómo desactivar solo la regla SpreadOperator en `detekt.yml`
+### 3. **Cómo desactivar solo la regla SpreadOperator en `detekt.yml`**
 
 #### Por qué podrías quererlo
 
 La regla `performance.SpreadOperator` alerta por el operador `*array` que copia arrays. En muchos casos reales el impacto es mínimo y la regla ruidosa. Si tu equipo la considera ruido, desactívala.
 
-#### Cómo hacerlo (en `config/detekt/detekt.yml`)
+**Cómo hacerlo (en `config/detekt/detekt.yml`):**
 
 ```yaml
 performance:
@@ -123,11 +124,9 @@ fun example(vararg args: String) {
 
 ---
 
-### 4. KtLint y la obsolescencia de `disabled_rules` en `.editorconfig`
+### 4. **KtLint y la obsolescencia de `disabled_rules` en `.editorconfig`**
 
-#### Contexto
-
-En versiones modernas de KtLint la propiedad `disabled_rules` quedó obsoleta y fue removida. Si la usas aparece el mensaje:
+En versiones modernas de **KtLint** la propiedad `disabled_rules` quedó obsoleta y fue removida. Si la usas aparece el mensaje:
 
 ```plaintext
 Editorconfig property 'disabled_rules' is obsolete and is not used by KtLint starting from version 0.49
@@ -154,6 +153,7 @@ ktlint_standard_no-space-in-parentheses = disabled
     ```kotlin
     fun ejemplo( x: Int, y: Int ) = x + y // ktlint-disable-line no-space-in-parentheses
     ```
+
   * Desactivar en todo el archivo:
 
     ```kotlin
@@ -166,7 +166,7 @@ Prefiere `.editorconfig` para reglas de estilo del equipo. Usa supresiones en c�
 
 ---
 
-### 5. Comandos útiles para ejecutar localmente y depurar
+### 5. **Comandos útiles para ejecutar localmente y depurar**
 
 ```bash
 ./gradlew clean assemble test
@@ -179,13 +179,13 @@ Si un task falla, ejecuta con `--info` o `--stacktrace` para obtener más contex
 
 ---
 
-### 6. JaCoCo y Codecov, para cobertura
+### 6. **JaCoCo y Codecov, para cobertura**
 
 #### Por qué es importante
 
-Cobertura no es la verdad absoluta, pero te da visibilidad de qué código está siendo testeado. En equipo, ayuda a no romper contratos y detectar regresiones.
+La **cobertura de código** no es la verdad absoluta, pero te da visibilidad de qué código está siendo testeado. En equipo, ayuda a no romper contratos y detectar regresiones.
 
-#### Configuración mínima en `build.gradle.kts`
+**Configuración mínima en `build.gradle.kts`:**
 
 ```kotlin
 jacoco {
@@ -221,11 +221,11 @@ En GitHub Actions usar:
     token: ${{ secrets.CODECOV_TOKEN }}
 ```
 
-Tip: proteger el token con `secrets` y marcar que falle si la subida no se puede hacer.
+> **Tip:** proteger el token con `secrets` y marcar que falle si la subida no se puede hacer.
 
 ---
 
-### 7. GitHub Actions: build.yml y release.yml, lo esencial
+### 7. **GitHub Actions: build.yml y release.yml, lo esencial**
 
 #### build.yml, jobs que deberías tener
 
@@ -238,7 +238,7 @@ Tip: proteger el token con `secrets` y marcar que falle si la subida no se puede
 * jacocoTestReport
 * upload coverage a Codecov
 
-Ejemplo mínimo:
+**Ejemplo mínimo:**
 
 ```yaml
 name: Build and Test
@@ -262,14 +262,14 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
 ```
 
-#### release.yml, cuando creas tags v*
+#### release.yml, cuando creas tags para versiones
 
 * checkout
 * build jar
 * upload artifacts
 * ejecutar semantic-release para versionado semántico y CHANGELOG.md
 
-Fragmento clave:
+**Fragmento clave:**
 
 ```yaml
 on:
@@ -296,7 +296,7 @@ Y `.releaserc.json` con plugins `@semantic-release/changelog` y `@semantic-relea
 
 ---
 
-### 8. Buenas prácticas y por qué son cruciales para el equipo
+### 8. **Buenas prácticas y por qué son cruciales para el equipo**
 
 1. **Alinear versiones**: evita horas de debugging por incompatibilidades. Si subes Kotlin, revisa Detekt, KtLint y plugins nativos.
 2. **Reglas en `.editorconfig`**: hace que el estilo sea reproducible por todos, incluyendo IDE y CI.
@@ -309,17 +309,17 @@ Y `.releaserc.json` con plugins `@semantic-release/changelog` y `@semantic-relea
 
 ---
 
-### 9. Tips rápidos y prácticos (de los que evitan reuniones innecesarias)
+### 9. **Tips rápidos y prácticos (de los que evitan reuniones innecesarias)**
 
 * Antes de abrir una PR, corre `./gradlew ktlintCheck detekt test jacocoTestReport` en tu máquina. **No es opcional**.
 * Mantén un archivo `MAINTAINERS.md` con la versión de Kotlin aprobada y pasos para actualizar dependencias principales.
 * Cuando cambies Kotlin mayor, haz una PR con solo el upgrade y la corrección de incompatibilidades. Esa PR es más fácil de revisar que mezclar cambios funcionales.
 * Si usas IntelliJ, instala los plugins de KtLint y Detekt para feedback inmediato.
-* No confundas cobertura alta con calidad. **Prioriza tests que verifiquen comportamiento crítico**.
+* No confundas cobertura alta con calidad. **Prioriza tests que verifiquen comportamiento crítico.**
 
 ---
 
-### 10. Resumen de acciones a ejecutar ahora mismo
+### 10. **Resumen de acciones a ejecutar ahora mismo**
 
 1. Decide ruta: bajar Kotlin a 1.9.21 o subir a 2.0.21.
 2. Ajusta `build.gradle.kts` con versiones coherentes y añade `detekt-formatting` como `detektPlugins`.
@@ -333,12 +333,12 @@ Y `.releaserc.json` con plugins `@semantic-release/changelog` y `@semantic-relea
 
 6. Asegura CI: actualiza `build.yml` y `release.yml` con los pasos vistos.
 
-### Conclusión
+### **Conclusión: calidad y buenas prácticas en Spring Boot con Kotlin**
 
-Adoptar estas buenas prácticas en proyectos Spring Boot con Kotlin no es solo una cuestión técnica, es una inversión en la salud a largo plazo del código y la productividad del equipo. La coherencia en versiones, la automatización de checks y la disciplina en el estilo de código crean un entorno donde los desarrolladores pueden enfocarse en lo que realmente importa: construir software de calidad que resuelva problemas reales.
+Adoptar estas **buenas prácticas** en proyectos **Spring Boot con Kotlin** no es solo una cuestión técnica, es una inversión en la salud a largo plazo del código y la productividad del equipo. La coherencia en versiones, la automatización de checks y la disciplina en el estilo de código crean un entorno donde los desarrolladores pueden enfocarse en lo que realmente importa: **construir software de calidad que resuelva problemas reales**.
 
-No subestimes el poder de una buena configuración desde el inicio. Evita la deuda técnica trivial que consume tiempo y energía. Con estas prácticas, tu equipo podrá moverse más rápido, con menos fricciones y mayor confianza en cada release.
+No subestimes el poder de una buena configuración desde el inicio. Evita la **deuda técnica trivial** que consume tiempo y energía. Con estas prácticas, tu equipo podrá moverse más rápido, con menos fricciones y mayor confianza en cada release.
 
-Adopta estas recomendaciones hoy mismo y observa cómo la calidad y la eficiencia de tu equipo mejoran significativamente. 
+Adopta estas recomendaciones hoy mismo y observa cómo la **calidad y la eficiencia de tu equipo mejoran significativamente**.
 
 ¡Happy Coding!
