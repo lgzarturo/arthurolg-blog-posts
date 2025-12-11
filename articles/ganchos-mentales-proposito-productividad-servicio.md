@@ -39,29 +39,34 @@ Si el código es "sucio" pero el producto cambia la vida del usuario hoy, es inf
 
 > Sé que no voy a inventar un sistema operativo, o una herramienta de control de versiones revolucionaria de la noche a la mañana. Pero cada línea de código que escribo, cada diseño que creo, cada artículo que publico, es una contribución incremental hacia un mundo mejor. Acepto mis limitaciones y celebro mis pequeñas victorias.
 
-Pienso que la grandeza se alcanza cuando buscamos superarnos y ser un poco mejor que el día anterior no por competencia con los demás, sino por respeto al oficio y a los destinatarios de nuestro trabajo. La filosofía japonesa del *Kaizen* (mejora continua) se resume en frases populares como: **"Hoy mejor que ayer, mañana mejor que hoy"**. Es un recordatorio de que la excelencia es un hábito, no un acto aislado.
+Pienso que la grandeza se alcanza cuando buscamos superarnos y ser un poco mejor que el día anterior no por competencia con los demás, sino por respeto al oficio y a los destinatarios de nuestro trabajo. La filosofía japonesa del _Kaizen_ (mejora continua) se resume en frases populares como: **"Hoy mejor que ayer, mañana mejor que hoy"**. Es un recordatorio de que la excelencia es un hábito, no un acto aislado.
 
 ### Nuevos Ganchos para tu Arsenal Mental
 
 Para mí, enriquecer este "sistema operativo" personal es importante, he recopilado y analizado otras frases populares de productividad y sabiduría práctica. No las veas como clichés de póster motivacional, sino como instrucciones de comando para momentos específicos:
 
 #### 1. "Hecho es mejor que perfecto" (Sheryl Sandberg)
+
 **El Contexto:** Esta es la hermana moderna de la frase de Voltaire. Para un creativo, el miedo a lanzar algo imperfecto es paralizante.
 **La Aplicación:** La uso cuando me encuentro puliendo detalles irrelevantes por miedo a la crítica. Lanza, entrega, sirve. La corrección se hace en el camino, pero el servicio solo empieza cuando entregas.
 
 #### 2. "Si quieres ir rápido, camina solo; si quieres llegar lejos, camina acompañado" (Proverbio Africano)
+
 **El Contexto:** En el mundo del desarrollo y la creatividad, el mito del "genio solitario" es peligroso.
 **La Aplicación:** Esta frase me recuerda que el impacto real (llegar lejos) requiere colaboración. Servir a otros también implica dejar que otros nos ayuden. La vida con significado es una experiencia compartida.
 
 #### 3. "No cuentes los días, haz que los días cuenten" (Muhammad Ali)
+
 **El Contexto:** Fácilmente caemos en la rutina de "sobrevivir" la semana esperando el viernes.
 **La Aplicación:** Este es un gancho para la consciencia plena. Me obliga a preguntarme al final de la jornada: ¿Qué hice hoy que valiera la pena? ¿Hice reír a alguien? ¿Resolví un problema? ¿Fui sincero?
 
 #### 4. "La mejor forma de predecir el futuro es crearlo" (Peter Drucker / Abraham Lincoln)
+
 **El Contexto:** La pasividad es el enemigo del propósito.
 **La Aplicación:** Como programadores y creativos, somos literalmente constructores de futuro. No esperamos a ver qué pasa; escribimos el guion. Este mantra nos empodera para tomar responsabilidad sobre nuestro entorno.
 
 #### 5. "El hombre que mueve una montaña empieza apartando pequeñas piedras" (Confucio)
+
 **El Contexto:** Los grandes proyectos o los grandes cambios de vida pueden abrumar.
 **La Aplicación:** Enfócate en la tarea inmediata. La innovación incremental es más sostenible que la disrupción radical constante. Si quieres mejorar como persona, no intentes cambiar todo hoy; cambia una pequeña piedra.
 
@@ -81,7 +86,7 @@ Si pierdes la diversión, pierdes la creatividad. Si pierdes la sinceridad, pier
 
 ### El Aporte Individual: Tu Vida como Obra
 
-Al final, todo se reduce a la pregunta del millón: ¿Qué hace que *tu* vida valga la pena ser vivida?
+Al final, todo se reduce a la pregunta del millón: ¿Qué hace que _tu_ vida valga la pena ser vivida?
 
 No se trata de salvar al mundo entero (eso es un peso demasiado grande para un solo individuo). Se trata de tu ecosistema inmediato. Se trata de la satisfacción tranquila de cerrar la laptop sabiendo que hoy creaste algo que funciona. Se trata de la sonrisa que provocas al ser amable. Se trata de la integridad de saber que no traicionaste tus valores por un atajo. De dormir tranquilo sabiendo que, en tu pequeño rincón del universo, hiciste lo mejor que pudiste.
 
@@ -99,4 +104,4 @@ Como creativos y constructores, tenemos el privilegio de materializar ideas. Use
 
 Mantén tus ganchos mentales afilados. Busca la sinceridad en cada línea de código y en cada conversación. Y sobre todo, asegúrate de que, mientras sirves a los demás, te estés divirtiendo en el proceso. Porque si la vida es un viaje, más vale que disfrutemos del paisaje mientras ayudamos a otros a subir la montaña.
 
-Accede a mi [Manifiesto del Programador Pragmático](https://arthurolg-blog-posts/articles/manifiesto-programador-pragmatico.md) para ver cómo estos principios se traducen en acciones diarias concretas.
+Accede a mi [Manifiesto del Programador Pragmático](https://www.arthurolg.com/article/manifiesto-programador-pragmatico) para ver cómo estos principios se traducen en acciones diarias concretas.

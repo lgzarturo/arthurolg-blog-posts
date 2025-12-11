@@ -9,10 +9,10 @@ label: Reflexión
 
 ## Manifiesto del Programador Pragmático
 
-> Cabe mencionar, que este manifiesto es una adaptación personal inspirada en el libro *The Pragmatic Programmer*, pero con mi enfoque particular hacia el servicio, la sinceridad y la diversión en el trabajo y la vida.
+> Cabe mencionar, que este manifiesto es una adaptación personal inspirada en el libro _The Pragmatic Programmer_, pero con mi enfoque particular hacia el servicio, la sinceridad y la diversión en el trabajo y la vida.
 
 **1. El Servicio es mi Sistema Operativo.**
-No estoy aquí por accidente, estoy aquí para aportar. Todo lo que hago, desde una línea de código hasta una conversación, tiene el propósito de ser útil. Si no sirve a alguien, no merece mi energía. *Quien no vive para servir, no sirve para vivir.*
+No estoy aquí por accidente, estoy aquí para aportar. Todo lo que hago, desde una línea de código hasta una conversación, tiene el propósito de ser útil. Si no sirve a alguien, no merece mi energía. _Quien no vive para servir, no sirve para vivir._
 
 **2. Impacto sobre Pureza.**
 No busco la perfección académica ni la elegancia vacía. Busco solucionar problemas reales de personas reales. Mi código y mis acciones son herramientas, no piezas de museo. Prefiero algo "sucio" que funcione y ayude hoy, a algo "perfecto" que nunca vea la luz.
@@ -30,13 +30,13 @@ La vida es demasiado corta para sufrir el proceso. Si no me estoy divirtiendo, s
 La parálisis por análisis no tiene cabida aquí. Ante la duda, ejecuto. Lanzo, pruebo, corrijo y aprendo. El valor se entrega en el ruedo, no en la grada pensando en la estrategia perfecta.
 
 **7. Simplicidad Radical.**
-La vida es compleja, mi filosofía no tiene por qué serlo. Utilizo "ganchos mentales" y conceptos sencillos para mantenerme enfocado. Si no puedo explicar mi propósito de forma simple, es que no lo entiendo lo suficiente. Filosofía *for dummies* para una vida inteligente.
+La vida es compleja, mi filosofía no tiene por qué serlo. Utilizo "ganchos mentales" y conceptos sencillos para mantenerme enfocado. Si no puedo explicar mi propósito de forma simple, es que no lo entiendo lo suficiente. Filosofía _for dummies_ para una vida inteligente.
 
 **8. Innovar para Servir Mejor.**
 No innovo por la novedad, innovo por la utilidad. Busco nuevas formas de hacer las cosas porque creo que siempre hay una manera más amable, eficiente o impactante de ayudar a los demás.
 
 **9. Significado sobre Reconocimiento.**
-No trabajo para el aplauso, la fama o los *likes*. Trabajo por la satisfacción silenciosa de saber que mi día tuvo sentido. El éxito se mide en qué tan tranquilo duermo y en cuánto valor aporté, no en quién conoce mi nombre.
+No trabajo para el aplauso, la fama o los _likes_. Trabajo por la satisfacción silenciosa de saber que mi día tuvo sentido. El éxito se mide en qué tan tranquilo duermo y en cuánto valor aporté, no en quién conoce mi nombre.
 
 **10. Vivir Deliberadamente.**
 No dejo que los días pasen en piloto automático. Cada mañana decido darle intención a mi jornada. Mi vida vale la pena ser vivida porque yo decido, activamente, llenarla de propósito, servicio y alegría.
@@ -46,12 +46,13 @@ No dejo que los días pasen en piloto automático. Cada mañana decido darle int
 ### Sugerencia de uso:
 
 Lee el punto que más necesites en ese momento.
-* ¿Te sientes bloqueado por el perfeccionismo? Lee el **Punto 6**.
-* ¿Sientes que tu trabajo es monótono? Revisa el **Punto 1** y el **Punto 5**.
-* ¿Te sientes abrumado? Vuelve al **Punto 7**.
-* ¿Necesitas un empujón para mejorar? El **Punto 3** es tu amigo.
-* ¿Te sientes desconectado de tu trabajo? El **Punto 4** te ayudará a reenfocar.
+
+- ¿Te sientes bloqueado por el perfeccionismo? Lee el **Punto 6**.
+- ¿Sientes que tu trabajo es monótono? Revisa el **Punto 1** y el **Punto 5**.
+- ¿Te sientes abrumado? Vuelve al **Punto 7**.
+- ¿Necesitas un empujón para mejorar? El **Punto 3** es tu amigo.
+- ¿Te sientes desconectado de tu trabajo? El **Punto 4** te ayudará a reenfocar.
 
 Repite este manifiesto tantas veces como necesites. Adáptalo, modifícalo, hazlo tuyo. Lo importante es que te sirva para mantenerte en el camino del programador pragmático que vive para servir, con sinceridad y diversión.
 
-Si quieres profundizar más en estos conceptos, te invito a leer mi artículo sobre [Ganchos Mentales para Propósito, Productividad y Servicio](https://arthurolg-blog-posts/articles/ganchos-mentales-proposito-productividad-servicio.md), donde exploro cada uno de estos puntos con más detalle y ejemplos prácticos.
+Si quieres profundizar más en estos conceptos, te invito a leer mi artículo sobre [Ganchos Mentales para Propósito, Productividad y Servicio](https://www.arthurolg.com/article/ganchos-mentales-proposito-productividad-servicio), donde exploro cada uno de estos puntos con más detalle y ejemplos prácticos.
