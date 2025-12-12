@@ -1,7 +1,7 @@
 ---
-title: 10 Mantras para una Vida con Propósito e Impacto - Ganchos Mentales
+title: Mantras para una Vida con Propósito e Impacto - Ganchos Mentales
 image: https://raw.githubusercontent.com/lgzarturo/arthurolg-blog-posts/refs/heads/main/articles/images/ganchos-mentales-cerebro-diagrama-proposito-mantras.webp
-description: ¿Buscas una vida de significado? Aprende a usar 10 'ganchos mentales' de productividad y servicio. Transforma tu enfoque creativo - impacta más y busca la sinceridad.
+description: ¿Buscas una vida de significado? Aprende a usar 'ganchos mentales' de productividad y servicio. Transforma tu enfoque creativo - impacta más y busca la sinceridad.
 author: Arturo López
 date: 2025-12-11
 label: Reflexión
