@@ -3,7 +3,7 @@ title: 2025 volver a los fundamentos para construir mejor software, y por qué a
 image: https://raw.githubusercontent.com/lgzarturo/arthurolg-blog-posts/refs/heads/main/articles/images/2025-springboot-django-stack-side-projects.webp
 description: Un recorrido técnico y honesto por mi aprendizaje en 2025, dominar JavaScript nativo, entender el DOM y React desde sus bases, apostar por PWAs, Django y arquitectura consciente, y la promesa de seguir aprendiendo en 2026 con criterio, no por moda.
 author: Arturo López
-date: 2025-01-02
+date: 2026-01-02
 label: Reflexión
 ---
 
