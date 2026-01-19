@@ -3,7 +3,7 @@ title: Por qué los Fundamentos de Programación son más importantes que los Fr
 image: https://raw.githubusercontent.com/lgzarturo/arthurolg-blog-posts/refs/heads/main/articles/images/manifiesto-programador-pragmatico.webp
 description: Descubre por qué dominar el negocio y los fundamentos es la verdadera clave del éxito en IT. Una historia sobre la reinvención de un programador, del burnout al valor real.
 author: Arturo López
-date: 2025-01-18
+date: 2026-01-18
 label: Reflexión
 ---
 
