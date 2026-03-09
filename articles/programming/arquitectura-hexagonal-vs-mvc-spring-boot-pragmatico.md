@@ -1,6 +1,6 @@
 ---
 title: Arquitectura Hexagonal vs. MVC - El fin de la ceremonia innecesaria en Spring Boot
-image: https://raw.githubusercontent.com/lgzarturo/arthurolg-blog-posts/refs/heads/main/articles/images/arquitectura-hexagonal-mvc-spring-boot-tablet.webp
+image: https://raw.githubusercontent.com/lgzarturo/arthurolg-blog-posts/refs/heads/main/articles/images/arquitectura-hexagonal-mvc-spring-boot.webp
 description: ¿La arquitectura hexagonal está matando tu productividad? Descubre por qué la "ceremonia" técnica aleja a los desarrolladores junior y cómo migrar a un MVC orientado al dominio para recuperar la agilidad sin perder la calidad técnica.
 author: Arturo López
 date: 2026-03-08
