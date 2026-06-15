@@ -1,11 +1,13 @@
 ---
-title: Configurar Claude Code para trabajo serio: velocidad, control de tokens y un arnés de seguridad
+title: Configurar Claude Code para trabajo serio - velocidad, control de tokens y un arnés de seguridad
 image: https://raw.githubusercontent.com/lgzarturo/arthurolg-blog-posts/refs/heads/main/articles/images/configurar-claude-code-para-trabajo-serio.webp
 description: Claude Code es potente desde el primer arranque, pero su configuración por defecto está pensada para empezar rápido, no para un equipo que lo usa todos los días sobre código real. Aprende a configurarlo para optimizar tokens, velocidad y seguridad.
 author: Arturo López
 date: 2026-06-14
 label: Guía
 ---
+
+## Resumen
 
 Claude Code es potente desde el primer arranque, pero su configuración por defecto está pensada para empezar rápido, no para un equipo que lo usa todos los días sobre código real. Sin afinarlo, terminas aprobando los mismos comandos una y otra vez, gastando tokens en razonamiento que no pediste, y dejando abiertas operaciones que nunca deberían ejecutarse sin supervisión.
 
