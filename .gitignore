@@ -1,2 +1,4 @@
 .DS_Store
 /articles/draft
+# Added by code-review-graph
+.code-review-graph/
