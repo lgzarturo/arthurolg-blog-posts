@@ -70,16 +70,34 @@ Existe una cantidad absurda de contenido en internet promocionando "prompts secr
 
 Escribir un prompt ordenándole a la máquina que _"actúe como un arquitecto senior de Google"_ no te convierte en usuario avanzado. El verdadero multiplicador de productividad no reside en la elocuencia de tus palabras, sino en la calidad de la estructura que rodea a la consulta:
 
-$$\text{Efectividad} = \text{Contexto} + \text{Objetivo} + \text{Restricciones} + \text{Criterios de Aceptación} + \text{Herramientas} + \text{Verificación}$$
+```text
+Efectividad = Contexto
+    + Objetivo
+    + Restricciones
+    + Criterios de Aceptación
+    + Herramientas
+    + Verificación
+```
 
 El propio Sam Altman ha señalado una preocupación genuina: el riesgo de la **atrofia cognitiva**. Cuando los desarrolladores delegan el pensamiento crítico a la IA —aceptando sugerencias a ciegas sin cuestionar la arquitectura— terminan atrofiando las capacidades fundamentales que los convierten en ingenieros.
 
 La clave para evitar esta trampa está en distinguir claramente entre dos modelos de uso:
 
 * **El Mal Uso (Sustitución de Pensamiento):**
-  $$\text{Humano} \longrightarrow \text{Pregunta} \longrightarrow \text{IA} \longrightarrow \text{Respuesta} \longrightarrow \text{Humano Copia}$$
+
+```text
+  Humano → Pregunta → IA → Respuesta → Humano Copia
+```
+
 * **El Buen Uso (Amplificación de Pensamiento):**
-  $$\text{Humano Define Objetivo} \longrightarrow \text{IA Analiza Contexto} \longrightarrow \text{Humano Evalúa Plan} \longrightarrow \text{IA Ejecuta y Prueba} \longrightarrow \text{Humano Decide}$$
+
+```text
+  Humano Define Objetivo
+    → IA Analiza Contexto
+    → Humano Evalúa Plan
+    → IA Ejecuta y Prueba
+    → Humano Decide
+```
 
 Cuando utilizas la IA para amplificar tu pensamiento, no estás cediendo el control; estás liberando tu mente para concentrarte en el diseño de sistemas, el dominio del negocio y la calidad del producto.
 
@@ -204,7 +222,7 @@ Si deseas dar el verdadero salto de productividad este año, deja de buscar el p
 
 ¿Ya estás implementando este enfoque en tu entorno de desarrollo? Me encantaría conocer tu experiencia y los desafíos que has enfrentado. ¡Hasta la próxima línea de código! 🚀
 
-Deja tus comentarios en el [repositorio](https://github.com/lgzarturo/arthurolg-blog-posts/issues) o en mi perfil de [X@arturolgdev](https://x.com/arturolgdev). Si te es de utilidad, una estrella en [GitHub](https://github.com/lgzarturo) es de gran ayuda o no dudes en compartir este artículo con tus colegas y amigos. ¡Gracias por leer!
+Deja tus comentarios en el [repositorio](https://github.com/lgzarturo/arthurolg-blog-posts/issues) o en mi perfil de [X@algforge](https://x.com/algforge). Si te es de utilidad, una estrella en [GitHub](https://github.com/lgzarturo) es de gran ayuda o no dudes en compartir este artículo con tus colegas y amigos. ¡Gracias por leer!
 
 ## Referencias
 
