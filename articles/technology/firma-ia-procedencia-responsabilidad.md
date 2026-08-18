@@ -9,7 +9,7 @@ label: Tecnología
 
 Cuando reviso las interminables discusiones actuales sobre la Inteligencia Artificial Generativa y su impacto en nuestro día a día, puedo ver un patrón que se repite constantemente. Parece que, como industria y como sociedad, estamos cayendo en la trampa de meter tres problemas completamente distintos en un mismo saco: la autenticidad, la responsabilidad intelectual y la percepción social.
 
-Además, partimos de que llamarle herramienta a una IA es un error conceptual tremendo. Es decir, durante décadas hemos trabajado con lenguajes y en general con la computación de forma determinística. Yo escribía una instrucción y esperaba un resultado concreto. Con las IAs esto cambia radicalmente, ya que incluso con un mismo prompt la salida puede variar, es decir, el resultado no es determinístico, se vuelve probabilístico. Es decir, la IA no "piensa" ni "entiende" como un ser humano, sino que genera texto basándose en patrones estadísticos aprendidos de grandes cantidades de datos. Y esto puede llegar a ser un caos si no somos capaces de gestionar la incertidumbre que genera y regular de alguna manera su uso.
+Además, partimos de que llamarle herramienta a una IA es un error conceptual tremendo. Es decir, durante décadas hemos trabajado con lenguajes y en general con la computación de forma determinista. Yo escribía una instrucción y esperaba un resultado concreto. Con las IAs esto cambia radicalmente, ya que incluso con un mismo prompt la salida puede variar, es decir, se vuelve probabilístico. La IA no "piensa" ni "entiende" como un ser humano, sino que genera texto basándose en patrones estadísticos aprendidos de grandes cantidades de datos. Y esto puede llegar a ser un caos si no somos capaces de gestionar la incertidumbre que genera y regular de alguna manera su uso.
 
 Ahora, el debate suele encenderse y polarizarse alrededor de las famosas "firmas", marcas de agua o metadatos que los proveedores añaden al contenido generado por sus modelos de IA. Para muchos profesionales, especialmente creadores de contenido y desarrolladores junior, esta etiqueta se siente como una especie de letra escarlata. Un certificado que grita a los cuatro vientos: *"Atención, esto no requirió esfuerzo humano real"*.
 
@@ -17,7 +17,7 @@ Me parece que estamos enfocando mal el problema desde la raíz.
 
 A lo largo de mi experiencia lidiando con sistemas, arquitecturas y herramientas que prometen "automatizar el trabajo duro", he aprendido una lección estoica fundamental: el valor no siempre reside en teclear arduamente cada línea de código, ni en trazar manualmente cada píxel. El valor real, el que separa a un artesano de un operador de fábrica, está en el criterio para dirigir, orquestar y validar el resultado final.
 
-Voy a tratar de explicar punto por punto por qué la firma de IA no es tu enemiga, y dónde radica el verdadero desafío en esta nueva era de apalancamiento tecnológico.
+Voy a tratar de explicar punto por punto por qué la firma de IA no es tu enemiga, y dónde radica el verdadero desafío en esta nueva era.
 
 ## 1. La firma de IA no existe para decirte "esto es de menor calidad"
 
@@ -57,7 +57,7 @@ Llevemos esto al terreno del desarrollo de software, donde paso gran parte de mi
 
 Utilizas Claude, un modelo de OpenAI, o herramientas especializadas como Cursor o GitHub Copilot para generar una primera implementación, un esqueleto robusto, o incluso módulos enteros de la capa de acceso a datos. El simple hecho de que un LLM haya escupido el 80% del código en bruto **no determina en lo absoluto si eres un buen ingeniero o un mal ingeniero**.
 
-La pregunta relevante aquí no es quién tipeó los caracteres en el teclado. La pregunta que te va a salvar cuando el sistema colapse en Black Friday es:
+La pregunta relevante aquí no es quién tecleo los caracteres del código. La pregunta que te va a salvar cuando el sistema colapse en Black Friday es:
 
 > **¿Quién tomó las decisiones arquitectónicas pesadas y quién es el responsable último del resultado en producción?**
 
@@ -65,7 +65,7 @@ Si tienes la experiencia y la capacidad técnica para evaluar la complejidad cic
 
 Es exactamente la misma evolución que ha ocurrido con cualquier otra abstracción a lo largo de la historia de la informática.
 
-Me gusta pensar en los videojuegos. Imagina los tiempos de la NES o la SNES, donde los desarrolladores tenían que manipular la memoria ensamblando código a bajísimo nivel para que Mario pudiera saltar sin consumir todos los ciclos del procesador. Un programador de 1990 escribía muchísimo más código manualmente para lograr un juego de plataformas básico que un desarrollador de 2026 usando Unity o Unreal Engine.
+Me gusta pensar en los videojuegos. Imagina los tiempos de la NES o la SNES, donde los desarrolladores tenían que manipular la memoria ensamblando código de bajo nivel para que Mario pudiera saltar sin consumir todos los ciclos del procesador. Un programador de 1990 escribía muchísimo más código manualmente para lograr un juego de plataformas básico que un desarrollador de 2026 usando Unity o Unreal Engine.
 
 ¿Eso significa que los ingenieros de hoy son peores? Por supuesto que no.
 
@@ -82,13 +82,23 @@ Básicamente, la industria está adoptando dos estrategias:
 1. **C2PA (Coalition for Content Provenance and Authenticity):** Es un estándar abierto apoyado por gigantes de la industria. Funciona inyectando metadatos criptográficamente firmados directamente en los archivos (como imágenes, audios o PDFs). Es como un "pasaporte" digital que viaja con el archivo. Es ideal para multimedia, pero tiene un punto ciego gigante en nuestro rubro: el texto plano y el código fuente. Si copias y pegas un fragmento de código generado y lo pegas en tu VS Code, esos metadatos simplemente se pierden.
 2. **Marcas de agua estadísticas (Statistical Watermarking):** Aquí es donde la ingeniería brilla. Para marcar texto o código sin usar metadatos ocultos, los modelos alteran sutilmente la probabilidad de selección de los *tokens* (las unidades de texto que el modelo escupe). Sin comprometer la salida final o la calidad del código, el modelo elige ciertos patrones, sinónimos o estructuras que, vistos en conjunto, forman una firma matemática detectable por herramientas especializadas, pero totalmente invisible para nosotros.
 
-El modelo sigue priorizando generar código sintácticamente válido, seguro y funcional. La marca de agua se esconde en las decisiones de "empate técnico" (como la estructura de un comentario o el espaciado).
+El modelo sigue priorizando generar código válido, seguro y funcional. La marca de agua se esconde en las decisiones de "empate técnico" (como la estructura de un comentario o el espaciado).
 
-Pero hay algo importante que entender: **estas marcas son inherentemente frágiles**. Si tomas el código crudo del LLM, lo pasas por un linter estricto como Ruff o Biome, le aplicas refactorizaciones severas para adaptarlo a tu arquitectura, y lo modificas para que encaje en tu dominio, la marca estadística se diluye o se destruye.
+### La Trampa de la Detección: Procesador vs Autor
+
+Pero hay algo vital que entender sobre estas marcas: **una marca detectada no es una prueba irrefutable de autoría**.
+
+Anthropic, en su documentación sobre transparencia, lo deja muy claro: la marca de agua solo certifica que el modelo actuó como **procesador** de la información, no que es el creador original.
+
+Lo podemos ver con un ejemplo de nuestro día a día. Imagina que tienes un archivo de código *legacy* escrito hace cinco años, lleno de reglas de negocio que pagan las nóminas de la empresa. Copias ese bloque, lo pegas en Claude y le dices: *"Agrégale tipado estricto de TypeScript y documenta las funciones según el estándar de la empresa, sin alterar la lógica"*.
+
+El código que te devuelve el LLM tendrá una marca de agua estadística inyectada en su estructura. Si lo pasas por un detector, directo te dirá que es *"¡Código generado por IA!"*. Y técnicamente, sí, fue generado por un modelo. Pero la **autoría intelectual y la lógica de negocio subyacente** siguen siendo 100% humanas. La IA fue simplemente el que formateó el código según tus instrucciones.
+
+Por el otro lado, ocurre el efecto inverso: **la falta de una marca tampoco garantiza "pureza humana"**. Estas marcas estadísticas son inherentemente frágiles. Si generas un componente complejo con IA, pero luego lo pasas por tu linter estricto (como Ruff o Biome), le aplicas refactorizaciones manuales para adaptarlo a tu *Clean Architecture*, o simplemente renombras variables para que encajen en tu dominio, la firma estadística original se diluye o se destruye por completo.
 
 Y eso está perfectamente bien.
 
-De hecho, subraya una distinción brutalmente importante en esta nueva era: el modelo actúa puramente como un **procesador** de la información. Pero tú, que lo integras, lo adaptas a los *trade-offs* de tu sistema y lo validas, eres el **autor** definitivo.
+De hecho, esta dinámica subraya la distinción más crítica en esta nueva era del desarrollo: la herramienta procesa y asiste, pero tú, que auditas el código, lo integras a los *trade-offs* de tu sistema y asumes la responsabilidad si falla en producción, eres el **autor** definitivo.
 
 ## 4. Cuándo realmente importa la etiqueta de IA
 
@@ -169,10 +179,12 @@ La variable independiente que define tu valor real como profesional en esta déc
 Imagina a dos programadores trabajando en el mismo proyecto, usando exactamente el mismo agente autónomo de IA.
 
 ### El Programador A (Delegación Ciega)
+
 Le dice al agente: *"Construye un sistema completo de autenticación y autorización para la app"*.
 Copia ciegamente el resultado propuesto. Lo integra en el repositorio base. No entiende realmente cómo funciona el flujo OAuth2. No comprende cómo se manejan las sesiones o el refresco de los tokens JWT. No revisa los permisos, ni se para a pensar en los vectores de ataque como XSS o CSRF. No exige la creación de pruebas unitarias. Lo da por bueno y lo empuja a la rama principal de producción.
 
 ### El Programador B (Dirección y Criterio)
+
 Le dice al agente: *"Necesitamos autenticación para este dominio específico. Nuestro modelo de amenazas incluye interceptación de tokens (X) y ataques de fuerza bruta (Y). Las restricciones arquitectónicas son una latencia de verificación menor a 50ms y total compatibilidad con nuestro proveedor actual (Keycloak). Propón tres arquitecturas posibles, compara sus trade-offs de mantenimiento y costos operativos. Implementa la opción más segura, escribe una suite completa de tests de integración para probar los límites, ejecuta análisis estático de seguridad sobre el código generado, intenta romper deliberadamente el flujo de login y muéstrame un reporte detallado de los fallos."*
 
 Ambos programadores pueden afirmar haber "escrito" el **99% del código final mediante IA**.
@@ -186,7 +198,7 @@ Cuando la capacidad de producir grandes volúmenes de código (o texto, o imáge
 
 No importa en absoluto quién (o qué) tecleó la instrucción final. Lo único que importa es quién es capaz de explicar esa decisión de diseño, cuestionar la lógica detrás de ella, depurar el sistema con el pulso firme cuando falle miserablemente un viernes a las 6 PM y, por encima de todo, **asumir la absoluta y rotunda responsabilidad por el sistema**.
 
-Por eso considero que el futuro saludable de nuestra relación con estas herramientas no se trata de resistirnos a ellas con miedo, ni de usarlas a ciegas con pereza. Se trata de aceptar una tríada inevitable: **regular el uso de IA en contextos críticos, aprender a utilizarla magistralmente como palanca multiplicadora, y establecer marcos claros y severos de responsabilidad sobre los resultados que entregamos.**
+Por eso considero que el futuro saludable de nuestra relación con estas herramientas no se trata de resistirnos a ellas con miedo, ni de usarlas a ciegas con pereza. Se trata de aceptar lo inevitable: **regular el uso de IA en contextos críticos, aprender a utilizarla magistralmente como palanca multiplicadora, y establecer marcos claros y severos de responsabilidad sobre los resultados que entregamos.**
 
 La etiqueta "AI-generated" es, y debe ser, una herramienta técnica increíblemente útil para asegurar **autenticidad y procedencia** en un mundo donde generar falsedades es alarmantemente barato. Se vuelve un problema grave solo cuando nosotros, erróneamente, decidimos utilizarla como un **certificado de inferioridad intelectual**. Son dos problemas completamente distintos, y ya es hora de que, como industria, dejemos de meterlos en el mismo saco.
 
