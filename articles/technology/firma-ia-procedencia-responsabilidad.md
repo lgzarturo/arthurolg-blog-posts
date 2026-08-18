@@ -73,7 +73,24 @@ Un compilador no escribe manualmente el ensamblador final, y nosotros no conside
 
 **Automatizar la fase mecánica de la producción no elimina, bajo ninguna circunstancia, la autoría ni la responsabilidad intelectual del arquitecto.**
 
-## 3. Cuándo realmente importa la etiqueta de IA
+## 3. C2PA y Marcas de Agua: Cómo se firma el contenido (y por qué no arruina tu código)
+
+Para entender por qué esta etiqueta no es una amenaza, hay que entender cómo funciona a nivel técnico. Empresas como Anthropic, OpenAI y Google están transparentando exactamente cómo aplican estos compromisos. Y la realidad técnica desmitifica muchos de los miedos actuales.
+
+Básicamente, la industria está adoptando dos estrategias:
+
+1. **C2PA (Coalition for Content Provenance and Authenticity):** Es un estándar abierto apoyado por gigantes de la industria. Funciona inyectando metadatos criptográficamente firmados directamente en los archivos (como imágenes, audios o PDFs). Es como un "pasaporte" digital que viaja con el archivo. Es ideal para multimedia, pero tiene un punto ciego gigante en nuestro rubro: el texto plano y el código fuente. Si copias y pegas un fragmento de código generado y lo pegas en tu VS Code, esos metadatos simplemente se pierden.
+2. **Marcas de agua estadísticas (Statistical Watermarking):** Aquí es donde la ingeniería brilla. Para marcar texto o código sin usar metadatos ocultos, los modelos alteran sutilmente la probabilidad de selección de los *tokens* (las unidades de texto que el modelo escupe). Sin comprometer la salida final o la calidad del código, el modelo elige ciertos patrones, sinónimos o estructuras que, vistos en conjunto, forman una firma matemática detectable por herramientas especializadas, pero totalmente invisible para nosotros.
+
+El modelo sigue priorizando generar código sintácticamente válido, seguro y funcional. La marca de agua se esconde en las decisiones de "empate técnico" (como la estructura de un comentario o el espaciado).
+
+Pero hay algo importante que entender: **estas marcas son inherentemente frágiles**. Si tomas el código crudo del LLM, lo pasas por un linter estricto como Ruff o Biome, le aplicas refactorizaciones severas para adaptarlo a tu arquitectura, y lo modificas para que encaje en tu dominio, la marca estadística se diluye o se destruye.
+
+Y eso está perfectamente bien.
+
+De hecho, subraya una distinción brutalmente importante en esta nueva era: el modelo actúa puramente como un **procesador** de la información. Pero tú, que lo integras, lo adaptas a los *trade-offs* de tu sistema y lo validas, eres el **autor** definitivo.
+
+## 4. Cuándo realmente importa la etiqueta de IA
 
 Si el uso de IA generativa es solo una herramienta más en nuestro cinturón de utilidades, ¿por qué tantas empresas insisten en etiquetar sus resultados? Porque existen contextos y dominios donde **sí importa saber que intervino un modelo**.
 
@@ -117,7 +134,7 @@ Aquí la línea se vuelve borrosa y depende enormemente del contexto. Si el arti
 
 Sin embargo, si el artista declara de forma transparente: *"Utilicé modelos de IA como base exploratoria y luego trabajé iterativamente sobre ellos"*, eso no significa automáticamente que su obra carezca de alma o mérito técnico. Son procesos creativos distintos. Lamentablemente, este es el terreno donde el estigma social golpea más fuerte y con mayor injusticia.
 
-## 4. El estigma, el "esfuerzo" y el nuevo cuello de botella
+## 5. El estigma, el "esfuerzo" y el nuevo cuello de botella
 
 Aquí es donde surge el problema de fondo: la etiqueta "Generado con IA" se convierte rápidamente en un estigma. Existe una tendencia cultural, muy arraigada, a realizar una traducción simplista:
 
@@ -141,7 +158,7 @@ A la nueva pregunta estratégica:
 
 Ese cambio de paradigma es brutal. Es mucho más profundo de lo que parece a simple vista.
 
-## 5. La frontera que realmente importa: La Responsabilidad Intelectual
+## 6. La frontera que realmente importa: La Responsabilidad Intelectual
 
 Para concluir esta reflexión, quiero abordar una afirmación común: *"si la IA hace el 90% de tu trabajo, ya no tienes mérito"*.
 
