@@ -56,7 +56,7 @@ Para evitar desequilibrios donde la introducción sea enorme y el cuerpo quede r
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│                    PRESUPUESTO 10 MIN (2,000 PÁGS)          │
+│                    PRESUPUESTO 10 MIN (2,000 PALABRAS)       │
 ├──────────────────────────────┬───────────────┬───────────────┤
 │ Bloque                       │ % del Total   │ Palabras (10m)│
 ├──────────────────────────────┼───────────────┼───────────────┤
@@ -82,8 +82,8 @@ Para evitar desequilibrios donde la introducción sea enorme y el cuerpo quede r
 
 ## 7. Ejecución de la Validación
 
-Tras generar o modificar el artículo, audita el tiempo real con el script oficial:
+Tras generar o modificar el artículo, audita el tiempo real con el script oficial del repositorio:
 
 ```bash
-python3 /home/alg/.gemini/config/plugins/blog-article-creator/skills/blog-article-creator/scripts/validate_article.py --file "<ruta-al-articulo.md>" --reading-time 10 --ignore-date-today
+python3 .agents/skills/blog-article-creator/scripts/validate_article.py --file "<ruta-al-articulo.md>" --reading-time 10 --ignore-date-today
 ```

@@ -2,54 +2,59 @@
 
 Este documento define la voz, el tono, las estructuras narrativas y las reglas de redacción que caracterizan los artículos de blog de **Arturo López** (`lgzarturo`). 
 
-El objetivo fundamental es que **cada artículo suene 100% auténtico, personal, cercano y profesional**, transmitiendo la voz de un desarrollador experimentado y pensador pragmático, y eliminando cualquier rastro o muletilla generada por modelos de inteligencia artificial.
+El objetivo fundamental es que **cada artículo suene 100% auténtico, personal, cercano y profesional**, transmitiendo la voz de un desarrollador experimentado, artesano del software y pensador pragmático, eliminando de raíz cualquier rastro o muletilla generada por modelos de inteligencia artificial.
 
 ---
 
 ## 1. La Voz y Tono de Arturo López
 
-Arturo López es desarrollador de software, líder técnico y apasionado de la arquitectura de sistemas, la inteligencia artificial, los videojuegos y la filosofía práctica (estoicismo, productividad consciente y aprendizaje continuo).
+Arturo López es desarrollador de software, líder técnico y apasionado de la arquitectura de sistemas, la inteligencia artificial agéntica, los videojuegos de estrategia y rol, y la filosofía práctica (estoicismo, productividad consciente, desapego del resultado y aprendizaje continuo).
 
-### Principios de la Voz:
-1. **Primera Persona Cercana y Directa:** Usa siempre la primera persona ("Yo", "en mi experiencia", "en mi día a día", "hoy quiero compartir contigo", "me gusta pensar que"). Habla directamente al lector como un colega de profesión o un compañero de viaje.
-2. **Pragmático pero Reflexivo:** Combina la solidez técnica (Spring Boot, Kotlin, Java, TypeScript, TDD, Clean Code, Git worktrees, flujos agénticos) con reflexiones profundas sobre la vida, el valor del tiempo, el estoicismo y el crecimiento personal.
-3. **Humildad y Aprendizaje Continuo:** No escribe desde la postura de "sabelotodo", sino desde la posición de un artesano del software que experimenta, tropieza, aprende lecciones y las comparte para ayudar a otros ("De novato a maestro", "Lecciones aprendidas en el camino").
-4. **Metáforas y Analogías Memorables:** Utiliza analogías del mundo real, la cultura pop y los videojuegos (gimnasios Pokémon para explicar dominios de Spring Boot, Age of Mythology para estrategia, Spider-Man para responsabilidad técnica, la dicotomía del control estoica para el manejo de bugs).
+### Principios Fundamentales de la Voz:
+1. **Primera Persona Cercana y Directa:** Escribe siempre en primera persona ("Yo", "en mi experiencia", "en mi día a día", "hoy quiero reflexionar contigo", "me gusta pensar que"). Habla de tú a tú al lector, tratándolo como a un colega de profesión o a un compañero de trinchera tecnológica.
+2. **Pragmático pero Reflexivo:** Combina la solidez técnica (Spring Boot, Kotlin, Java, TypeScript, TDD, Clean Code, Git worktrees, arquitecturas agénticas) con reflexiones humanas profundas sobre el valor del tiempo, el desapego de los frutos de la acción y el crecimiento interior.
+3. **El Artesano vs. El Gurú:** No escribe desde un pedestal de sabelotodo. Escribe desde el taller: experimenta, tropieza, analiza los *trade-offs*, realiza *post-mortems* honestos y comparte sus aprendizajes con humildad ("De novato a maestro", "Lecciones aprendidas en el camino").
+4. **Metáforas y Analogías Memorables:** Recurre a elementos de su universo cultural para aterrizar abstracciones complejas:
+   - *Videojuegos:* Gimnasios Pokémon para modularizar dominios en Spring Boot; civilizaciones y estrategias de *Age of Mythology* para gestión de recursos y prioridades técnicas; mecánicas de *Dark Souls* para la persistencia frente a bugs críticos.
+   - *Cultura Pop:* Spider-Man ("un gran poder conlleva una gran responsabilidad") para ilustrar la deuda técnica y el despliegue a producción.
+   - *Estoicismo:* Dicotomía del control (Epicteto, Marco Aurelio) para afrontar caídas de servidores o refactorizaciones de código *legacy*.
+5. **Actuar sin Depender del Resultado:** El disfrute del proceso y la excelencia artesanal están por encima de la validación externa o las métricas superficiales. Escribir y programar bien es la recompensa en sí misma.
 
 ---
 
 ## 2. Ritmo, Dinámica y Formato Visual
 
-Una redacción natural se distingue por su ritmo respiratorio. Si todos los párrafos miden exactamente 4 líneas o todas las frases contienen 15 palabras, el lector percibirá una cadencia robótica.
+Una redacción humana se distingue por su cadencia respiratoria variada. Si todos los párrafos miden exactamente 4 líneas o todas las oraciones tienen la misma estructura sintáctica, el texto se sentirá rígido y artificial.
 
 ### Reglas de Ritmo:
-* **Variaciones de Longitud de Frase:** Alterna explicaciones profundas con frases cortas de alto impacto.
-  * *Ejemplo:* "Cuando un sistema de producción colapsa a las tres de la mañana por una mala consulta SQL, la teoría universitaria se desvanece. Ahí solo queda la ingeniería."
-* **Variaciones de Párrafo:** Combina párrafos analíticos de 3 a 5 frases con párrafos de una sola frase contundente que dejen espacio a la reflexión.
-* **Citas Destacadas (`>` Blockquotes):** Incluye entre 2 y 4 citas en bloque por artículo con frases filosóficas o técnicas memorables.
-  * *Ejemplo:* `> "El verdadero valor del desarrollador no reside en cuántas líneas de código teclea por minuto, sino en su capacidad para modelar reglas de negocio complejas de forma simple."`
-* **Apoyo Visual Limpio:** Usa diagramas ASCII cuando expliques arquitectura o complejidad algorítmica ($\mathcal{O}(n)$), tablas comparativas claras y bloques de código rigurosamente comentados en Kotlin, Java, TypeScript, SQL o Bash.
+* **Variaciones de Longitud de Frase:** Alterna explicaciones técnicas o analíticas con sentencias breves y contundentes.
+  * *Ejemplo:* "Cuando un sistema de producción colapsa a las tres de la mañana por una consulta mal optimizada, la teoría universitaria se desvanece por completo. Ahí solo queda el temple de la ingeniería."
+* **Variaciones de Párrafo:** Mezcla párrafos descriptivos de 3 a 5 oraciones con párrafos independientes de una sola línea que obliguen al lector a pausar y asimilar la idea.
+* **Citas Destacadas (`>` Blockquotes):** Incluye entre 2 y 4 citas en bloque por artículo con sentencias filosóficas o técnicas memorables.
+  * *Ejemplo:* `> "El verdadero valor del desarrollador no reside en cuántas líneas de código teclea por minuto, sino en su capacidad para modelar reglas de negocio complejas con simplicidad y elegancia."`
+* **Apoyo Visual Limpio:** Emplea diagramas de texto/ASCII limpios para ilustrar arquitecturas o flujos agénticos, tablas comparativas bien formateadas y bloques de código rigurosamente comentados en Kotlin, Java, TypeScript, Bash o SQL.
 
 ---
 
 ## 3. Estructura Narrativa del Artículo
 
 ### A. El Gancho Inicial (Introducción)
-Arranca inmediatamente con una de las siguientes opciones:
-* **Una escena o anécdota concreta:** Un test que tardaba 40 segundos, una guardia nocturna, un deploy fallido.
-* **Una tensión o dilema real:** "Todos hablan de escribir código rápido con IA, pero casi nadie habla de cómo auditar la arquitectura de ese código."
-* **Una pregunta sincera:** "¿Cuántas veces has pospuesto la refactorización de un módulo por miedo a romper algo en producción?"
-* **Una cita de impacto:** Una frase reflexiva que abra el debate.
+Comienza sin rodeos introductorios ni generalidades. Usa una de estas fórmulas:
+* **Una anécdota o escena concreta:** Un bug que costó horas descubrir, una guardia tensa de fin de semana, una refactorización intimidante.
+* **Una tensión o dilema real:** "Muchos celebran la velocidad de autocompletado de la IA, pero muy pocos se detienen a analizar la deuda arquitectónica que se acumula cuando nadie valida el diseño subyacente."
+* **Una pregunta sincera:** "¿Cuántas veces has postergado la limpieza de un servicio crítico por miedo a que se rompan contratos que ni siquiera están testeados?"
+* **Una cita de impacto:** Una sentencia reflexiva que dispare el debate central.
 
 ### B. El Cuerpo Principal (`##` y `###`)
-* Estructurado en **secciones lógicas numeradas o tituladas de forma atractiva** (mínimo 2 secciones `##`, recomendado 4–6 para 10 minutos de lectura).
-* Cada sección aborda un problema concreto, demuestra el "por qué" antes del "cómo", e incluye un ejemplo o caso de uso práctico.
+* Organizado en secciones lógicas tituladas de manera atractiva (mínimo 3 secciones `##`, recomendado 4–6 para un artículo estándar de 10 minutos).
+* Cada sección aborda un problema concreto, demuestra el *por qué* antes del *cómo*, y ofrece un ejemplo o caso de uso práctico.
+* Equilibra la prosa con código y diagramas: no satures con listas de viñetas vacías; privilegia la narrativa técnica explicativa.
 
 ### C. La Conclusión y Llamado a la Acción (CTA)
-No resumas mecánicamente el artículo. Finaliza con:
-1. Una reflexión genuina que retome la tesis inicial.
-2. Un mensaje inspirador y empoderador para el desarrollador.
-3. El cierre característico de Arturo:
+Nunca resumas mecánicamente lo ya dicho. Concluye con:
+1. Una reflexión madura que enlace con el gancho inicial y cierre el arco narrativo.
+2. Un mensaje inspirador que empodere al desarrollador a cuidar su artesanía.
+3. El cierre característico oficial de Arturo López:
    ```markdown
    ¿Ya estás implementando este enfoque en tu entorno de desarrollo? Me encantaría conocer tu experiencia y los desafíos que has enfrentado. ¡Hasta la próxima línea de código! 🚀
 
@@ -57,34 +62,37 @@ No resumas mecánicamente el artículo. Finaliza con:
 
    ## Referencias
 
-   - [Link a documentación relevante]
+   - [Link a documentación relevante](https://github.com/lgzarturo)
    ```
 
 ---
 
-## 4. Lista Negra: Muletillas de IA a Eliminar Sin Excepción
+## 4. Lista Negra: Clichés de IA Prohibidos
 
-Queda estrictamente prohibido usar las siguientes frases y patrones mecánicos:
+El validador rechaza activamente las siguientes expresiones y patrones:
 
-❌ `"En el vertiginoso mundo de la tecnología..."`
-❌ `"En la era digital actual..."`
-❌ `"En el mundo del desarrollo moderno..."`
-❌ `"Es importante destacar que..."` / `"Es fundamental mencionar..."`
-❌ `"Cabe resaltar..."` / `"Cabe señalar..."`
-❌ `"En conclusión,"` / `"En resumen,"` / `"En definitiva,"` al inicio de la conclusión.
-❌ `"Sin lugar a dudas..."` / `"Sin duda alguna..."`
-❌ `"Un papel fundamental"` / `"Una pieza clave en el rompecabezas"`
-❌ Repetición sistemática de tríos de adjetivos (*"rápido, eficiente y escalable"*).
-❌ Listas de viñetas interminables sustituyendo a la prosa narrativa.
-❌ Párrafos de longitud idéntica o cierres cliché tipo *"El futuro es brillante y el viaje apenas comienza"*.
+| Cliché de IA Prohibido | Motivo | Alternativa Natural |
+| :--- | :--- | :--- |
+| *"En el vertiginoso mundo de..."* | Relleno genérico de IA | Arrancar directo con la acción o el problema. |
+| *"En la era digital actual..."* | Tópico sin valor informativo | Contextualizar con el problema técnico real. |
+| *"En el mundo del desarrollo moderno..."* | Frase comodín vacía | Mencionar la herramienta, framework o arquitectura concreta. |
+| *"Cabe destacar / mencionar / resaltar"* | Muletilla burocrática | Exponer el hecho directamente. |
+| *"Es importante / fundamental destacar"* | Adorno prescindible | Dejar que el dato hable por su propia relevancia. |
+| *"En conclusión, / En resumen, / En definitiva,"* | Transición robótica al inicio de conclusión | Iniciar la conclusión con la reflexión final de forma fluida. |
+| *"Sin lugar a dudas / Sin duda alguna"* | Absolutismo innecesario | Aportar argumentos o matices técnicos. |
+| *"Un papel fundamental / Pieza clave en el rompecabezas"* | Metáfora desgastada | Explicar la función arquitectónica precisa. |
+| *"El viaje apenas comienza"* | Cierre cliché inspiracional barato | Cerrar con un reto técnico o una invitación sincera a la práctica. |
+| *"No es una excepción"* | Automatismo sintáctico | Describir el caso particular con naturalidad. |
+| Tríos adjetivales (*"rápido, eficiente y escalable"*) | Patrón rítmico robótico de LLMs | Usar adjetivos precisos justificados con evidencia. |
 
 ---
 
-## 5. Checklist de Calidad antes de Entregar
+## 5. Checklist de Verificación Humana antes de Aprobar
 
-- [ ] ¿El tono suena como Arturo López en primera persona?
-- [ ] ¿El gancho arranca con una escena, tensión o pregunta concreta (sin frases de lista negra)?
-- [ ] ¿Las frases y párrafos tienen un ritmo variado y natural?
-- [ ] ¿Contiene al menos 2 bloques de citas (`>`) inspiradores?
-- [ ] ¿La conclusión evita los cierres mecánicos de IA y tiene el CTA oficial?
-- [ ] ¿Se verificaron los metadatos YAML del frontmatter (autor: Arturo López, fecha de hoy)?
+- [ ] **Voz:** ¿Suena a Arturo López hablando desde la experiencia y no a un texto autogenerado?
+- [ ] **Gancho:** ¿Inicia con una anécdota, dilema o escenario real sin clichés?
+- [ ] **Metáforas:** ¿Incluye analogías de gaming, cultura pop o estoicismo orgánicamente integradas?
+- [ ] **Ritmo:** ¿Hay alternancia de frases largas y cortas con al menos 2 citas en bloque (`>`)?
+- [ ] **Cierre:** ¿La conclusión incluye la reflexión madura y el CTA oficial con enlaces a X y GitHub?
+- [ ] **Referencias:** ¿Contiene la sección `## Referencias` con enlaces funcionales?
+- [ ] **Validación:** ¿Pasa limpio el script `.agents/skills/blog-article-creator/scripts/validate_article.py`?

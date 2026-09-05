@@ -1,126 +1,179 @@
 ---
 name: blog-article-creator
 description: >-
-  Crea, refina y valida artículos para el blog de Arturo López con voz humana natural, tono auténtico (desarrollador, líder técnico y pensador pragmático) y control preciso del tiempo de lectura en minutos (por defecto 10 min por estándar, ~200 WPM).
+  Crea, refina y valida artículos para el blog de Arturo López con voz humana natural, tono auténtico (desarrollador, líder técnico y pensador pragmático), generación automatizada de imágenes WebP responsivas y control preciso del tiempo de lectura en un flujo reproducible en tres fases: Definir, Concretar y Aprobar.
 metadata:
-  version: 2.0.0
+  version: 3.0.0
 ---
 
 # Blog Article Creator (bac)
 
-## Overview
-Esta skill permite redactar nuevos artículos de blog o refinar borradores existentes de tecnología, programación, Spring Boot, videojuegos, marketing y reflexión personal.
+## Visión General
+Esta skill gobierna la creación y refinamiento de artículos para el blog de **Arturo López** (`lgzarturo`), abarcando tecnología, programación, Spring Boot, arquitectura de software, videojuegos, marketing y reflexión personal/estoicismo.
 
-El contenido generado adopta fielmente la **voz auténtica de Arturo López** (primera persona cercana, reflexiva y técnica, inspirada en los artículos reales del repositorio) y ajusta la extensión al **tiempo de lectura objetivo en minutos** definido por el usuario (**estándar por defecto: 10 minutos de lectura**, equivalente a ~2,000 palabras de prosa con alto valor técnico, ejemplos prácticos y reflexiones profundas).
-
-## Quick Start
-Cuando el usuario pida crear o refinar un artículo (ejemplo: *"escribe un artículo sobre flujos agénticos"*, *"redacta un post de 5 minutos sobre Spring Boot"* o *"crea un borrador de 10 min sobre resiliencia"*):
-
-1. **Determina el Tiempo de Lectura Objetivo:**
-   * Si el usuario especifica los minutos (ej. 5, 10, 15 min), usa esa cantidad.
-   * **Si el usuario no especifica el tiempo, usa el Estándar Por Defecto: 10 minutos de lectura (~2,000 palabras de prosa).**
-2. **Determina el `label` y el Directorio de Destino:** Selecciona la categoría correcta y resuelve la carpeta según la tabla de clasificación.
-3. **Diseña el Presupuesto de Palabras y Esquema:** Reparte el número de palabras en introducción, cuerpo (secciones `##`) y conclusión siguiendo el manual de tiempo de lectura.
-4. **Redacta con Voz Humana Natural:** Aplica el tono de Arturo López (primera persona, anécdotas, analogías del software/vida/videojuegos, citas en `>` y cero clichés de IA).
-5. **Guarda el Archivo `.md`:** Escribe el contenido en la ruta adecuada dentro de `articles/`.
-6. **Ejecuta la Validación Local:** Ejecuta el script de validación `validate_article.py` e itera hasta que no queden errores.
+El proceso sigue un **flujo reproducible y óptimo en tres fases deterministas**:
+1. **Definir:** Acordar el enfoque, tiempo de lectura, categoría, tesis, gancho narrativo y esquema antes de redactar.
+2. **Concretar:** Redactar con la voz auténtica de Arturo López, generar la portada 16:9 y procesar automáticamente las 3 versiones WebP responsivas (`desktop`, `tablet`, `mobile`).
+3. **Aprobar:** Ejecutar la suite de validación local y presentar la Hoja de Aprobación con métricas, previsualización de imagen y comando de commit listo para publicación.
 
 ---
 
-## 1. Control del Tiempo de Lectura (Standard: 10 min Default)
+## Flujo de Trabajo en Tres Fases
 
-El tiempo de lectura se calcula a una velocidad base de **200 palabras por minuto (WPM)** para prosa en español reflexiva y técnica.
+```
+┌─────────────────┐       ┌─────────────────┐       ┌─────────────────┐
+│   1. DEFINIR    │ ───>  │  2. CONCRETAR   │ ───>  │   3. APROBAR    │
+│  Ficha y Visto  │       │ Prosa + WebPs   │       │ Validación +    │
+│      Bueno      │       │   Responsivos   │       │     Handoff     │
+└─────────────────┘       └─────────────────┘       └─────────────────┘
+```
 
-$$\text{palabras\_prosa\_objetivo} = \text{minutos\_lectura} \times 200$$
+### FASE 1: DEFINIR (Ideación y Estructura)
 
-### Tabla de Presupuesto:
-| Tiempo Solicitado | Objetivo Prosa | Rango Aceptable | Secciones (`##`) | Bloques de Código / Imágenes |
-| :--- | :--- | :--- | :--- | :--- |
-| 3 min | ~600 palabras | 500 – 700 págs | 2 – 3 | 1 bloque (~20s extra) |
-| 5 min | ~1,000 palabras | 800 – 1,200 págs | 3 – 4 | 1–2 bloques |
-| **10 min (DEFAULT)** | **~2,000 palabras** | **1,600 – 2,400 págs** | **5 – 6** | **2–4 bloques** |
-| 15 min | ~3,000 palabras | 2,400 – 3,500 págs | 6 – 8 | 3–5 bloques |
-| 20 min | ~4,000 palabras | 3,200 – 4,500 págs | 8 – 10 | 4–6 bloques |
+1. **Recepción de la Idea:**
+   - Si la petición es genérica o el usuario pide ideas, consultar opcionalmente `ideas_to_write.md`.
+   - Si la idea es abierta, proponer **2 o 3 ángulos temáticos con enfoques contrastados**.
+2. **Ficha de Definición:**
+   Una vez acordado el ángulo (o si el usuario ya dio una idea precisa), presentar la **Ficha de Definición** y detenerse a esperar el visto bueno del usuario:
 
-*Cada bloque de código suma ~0.33 min (~20s / ~65 palabras equivalentes). Cada imagen o diagrama ASCII suma ~0.20 min (~12s).*
-*Consulta la guía completa en [references/reading-time.md](references/reading-time.md).*
+```markdown
+### 📋 Ficha de Definición del Artículo
+
+- **Título Propuesto:** <Título atractivo y directo, sin punto final>
+- **Slug:** `<slug-del-articulo>`
+- **Categoría (`label`):** `Programación` | `Spring Boot` | `Tecnología` | `Videojuegos` | `Marketing` | `Reflexión`
+- **Ruta Destino:** `articles/<categoria-path>/<slug>.md`
+- **Tiempo de Lectura:** 10 minutos (Estándar por defecto) (~2,000 palabras de prosa @ 200 WPM)
+- **Tesis Central:** <Una oración que resuma la idea fuerza>
+- **Gancho Inicial:** <Anécdota real, dilema técnico o pregunta provocadora>
+- **Concepto Visual de Portada:** <Descripción del estilo visual y elementos del arte 16:9>
+- **Esquema de Secciones:**
+  - `## <Sección 1: Planteamiento del problema / Contexto>`
+  - `## <Sección 2: Concepto técnico o metodológico>`
+  - `## <Sección 3: Caso práctico / Código / Implementación>`
+  - `## <Sección 4: Trade-offs, lecciones o aplicación>`
+  - `## Conclusión` (Reflexión + CTA oficial)
+  - `## Referencias`
+```
+
+> ⚠️ **Punto de Control:** No comenzar la redacción de la prosa ni la generación de imágenes hasta que el usuario confirme la Ficha de Definición.
 
 ---
 
-## 2. Voz, Tono y Estilo de Redacción de Arturo López
+### FASE 2: CONCRETAR (Redacción y Arte WebP Responsivo)
 
-El texto debe reflejar la personalidad y visión de Arturo López (desarrollador, líder técnico, artesano del código y pensador estoico).
+Una vez aprobada la Ficha de Definición:
 
-### Pilares del Tono:
-* **Voz en Primera Persona:** Habla directamente ("Yo", "en mi día a día", "en mi experiencia", "me gusta pensar que").
-* **Pragmático y Técnico pero Humano:** No es un manual universitario seco; es la reflexión de un ingeniero que ha vivido deploys a las 3 a.m., refactorizaciones difíciles y proyectos escalables.
-* **Metáforas Memorables:** Emplea analogías de videojuegos (Pokémon, Age of Mythology), artes marciales o estoicismo (Marco Aurelio, dicotomía del control) para explicar conceptos de arquitectura de software o vida profesional.
-* **Ritmo Respiratorio Variado:** Mezcla frases analíticas profundas con frases cortas de impacto directo. Varía el tamaño de los párrafos. Usa entre 2 y 4 citas en bloque (`>`) destacadas por artículo.
+#### A. Redacción en Prosa Auténtica
+- **Voz de Arturo López:** Primera persona directa, artesano de software, líder técnico humilde y reflexivo. Metáforas de videojuegos (Pokémon, Age of Mythology), cultura pop (Spider-Man) y estoicismo (Marco Aurelio, dicotomía del control, actuar sin depender del resultado).
+- **Ritmo y Variedad:** Alternar frases largas con sentencias breves. Incluir entre **2 y 4 citas en bloque (`>`)**.
+- **Cero Clichés de IA:** Aplicar estrictamente la lista negra (prohibido *"en el vertiginoso mundo"*, *"cabe destacar"*, *"en conclusión,"* al inicio de conclusión, etc.).
+- **Bloques Prácticos:** Diagramas ASCII, tablas y código comentado cuando aplique.
+- **Cierre Oficial (CTA):**
+  ```markdown
+  ## Conclusión
 
-### Lista Negra de Clichés de IA (Prohibidos):
-❌ *"En el vertiginoso mundo de..."* / *"En la era digital..."*
-❌ *"Cabe destacar..."* / *"Cabe mencionar..."* / *"Es importante señalar..."*
-❌ *"En conclusión,"* / *"En resumen,"* al inicio de la conclusión.
-❌ *"Sin lugar a dudas..."*
-❌ Tríologos artificiales repetidos (*"rápido, eficiente y escalable"*).
-❌ Cierres genéricos tipo *"el viaje apenas comienza"*.
+  <Reflexión final que cierre el arco sin usar "En conclusión">
 
-*Consulta la guía detallada de estilo en [references/natural-writing.md](references/natural-writing.md).*
+  ¿Ya estás implementando este enfoque en tu entorno de desarrollo? Me encantaría conocer tu experiencia y los desafíos que has enfrentado. ¡Hasta la próxima línea de código! 🚀
 
----
+  Deja tus comentarios en el [repositorio](https://github.com/lgzarturo/arthurolg-blog-posts/issues) o en mi perfil de [X@arturolgdev](https://x.com/arturolgdev). Si te es de utilidad, una estrella en [GitHub](https://github.com/lgzarturo) es de gran ayuda o no dudes en compartir este artículo con tus colegas y amigos. ¡Gracias por leer!
 
-## 3. Clasificación del Tema y Estructura del Archivo
+  ## Referencias
 
-### A. Frontmatter YAML Requerido
+  - [Documentación / Repositorio Relevante](https://...)
+  ```
+
+#### B. Generación y Procesamiento de la Imagen de Portada
+1. Generar la imagen con la herramienta nativa `generate_image`:
+   - `AspectRatio`: `"16:9"`
+   - `Prompt`: Prompt en inglés siguiendo las pautas de [references/cover-images.md](references/cover-images.md) según la categoría (3D isométrico neón para tecnología, ilustración anime/manga para gaming, fotografía cálida/bodegón para reflexión).
+   - `ImageName`: `<slug_resumido>`
+2. Procesar a las 3 variantes WebP responsivas ejecutando el script local:
+   ```bash
+   python3 .agents/skills/blog-article-creator/scripts/process_article_images.py \
+     --input-image "<ruta_del_png_generado>" \
+     --slug "<slug-del-articulo>"
+   ```
+   Esto generará automáticamente:
+   - `articles/images/<slug>.webp` (1920x1080)
+   - `articles/images/<slug>-tablet.webp` (1024x576)
+   - `articles/images/<slug>-mobile.webp` (600x338)
+
+#### C. Creación del Archivo Markdown
+Escribir el artículo en la ruta correspondiente con el frontmatter YAML estándar:
 ```markdown
 ---
-title: "Título Atractivo y Directo Sin Punto Final"
-image: https://raw.githubusercontent.com/lgzarturo/arthurolg-blog-posts/refs/heads/main/articles/images/<slug-de-la-imagen>.webp
-description: "Resumen SEO en 1 o 2 frases atractivas y honestas (máximo 160 caracteres)."
-author: Arturo López
-date: YYYY-MM-DD
-label: Programación
+title: "Título Atractivo Sin Punto Final"
+image: "https://raw.githubusercontent.com/lgzarturo/arthurolg-blog-posts/refs/heads/main/articles/images/<slug>.webp"
+description: "Descripción concisa para SEO y redes sociales (máximo 160 caracteres)."
+author: "Arturo López"
+date: "YYYY-MM-DD"
+label: "Programación"
 ---
 ```
 
-### B. Mapeo de Categorías y Carpetas
-| Label Permitido | Carpeta Destino | Temas |
-| :--- | :--- | :--- |
-| `Programación` | `articles/programming/` | Lenguajes, algoritmos, SQL, TDD, Clean Code, patrones. |
-| `Spring Boot` o `SpringBoot` | `articles/springboot-course/` | Framework Spring Boot, Java/Kotlin, APIs escalables, JPA. |
-| `Tecnología` | `articles/technology/` | Tendencias tecnológicas, IA agéntica, hardware, arquitectura. |
-| `Videojuegos` | `articles/videogames/` | Reseñas, análisis de mecánicas, reflexiones sobre gaming. |
-| `Marketing` | `articles/marketing/` | Estrategias de canal directo, marca personal, SEO. |
-| `Reflexión` o `General` | `articles/` (Raíz) | Crecimiento personal, estoicismo, mindfulness, bienestar. |
-
 ---
 
-## 4. Cierre Oficial del Artículo (CTA)
+### FASE 3: APROBAR (Validación Local y Handoff)
 
-Todos los artículos deben incluir la firma oficial de Arturo antes de la sección de referencias:
+1. **Ejecución de la Suite de Validación:**
+   Ejecutar el script de auditoría:
+   ```bash
+   python3 .agents/skills/blog-article-creator/scripts/validate_article.py \
+     --file "articles/<categoria>/<slug>.md" \
+     --reading-time 10
+   ```
+   *Si el script reporta errores, corregir el archivo Markdown o las imágenes hasta obtener `[SUCCESS]`.*
+
+2. **Presentación de la Hoja de Aprobación:**
+   Presentar al usuario el resumen final con la imagen embebida y el relevo para publicación:
 
 ```markdown
-## Conclusión
+### 🎯 Hoja de Aprobación del Artículo
 
-<Reflexión final profunda que conecte con la tesis inicial sin usar "En conclusión">
+- **Artículo:** [`<nombre-archivo.md>`](file:///<ruta_absoluta>)
+- **Métricas:** ~X,XXX palabras de prosa | X.X min de lectura estimada | X bloques de código | X citas `>`
+- **Validación:** ✅ Frontmatter, Estructura, Cero Clichés de IA y 3 WebPs Responsivos Verificados.
 
-¿Ya estás implementando este enfoque en tu entorno de desarrollo? Me encantaría conocer tu experiencia y los desafíos que has enfrentado. ¡Hasta la próxima línea de código! 🚀
-
-Deja tus comentarios en el [repositorio](https://github.com/lgzarturo/arthurolg-blog-posts/issues) o en mi perfil de [X@arturolgdev](https://x.com/arturolgdev). Si te es de utilidad, una estrella en [GitHub](https://github.com/lgzarturo) es de gran ayuda o no dudes en compartir este artículo con tus colegas y amigos. ¡Gracias por leer!
-
-## Referencias
-
-- [Documentación / Repositorio Relevante](https://github.com/lgzarturo)
-```
+#### Portada Generada
+![Portada: <slug>](<ruta_al_arte_generado_o_webp>)
 
 ---
 
-## 5. Script de Validación y Autocorrección
-
-Tras escribir o editar el archivo markdown, ejecuta siempre la validación local:
+#### Relevo para Publicación (Git Commit)
+Puedes revisar el borrador y cuando estés listo, comitear y publicar con el siguiente comando (según `.agents/rules/commit-style.md`):
 
 ```bash
-python3 /home/alg/.gemini/config/plugins/blog-article-creator/skills/blog-article-creator/scripts/validate_article.py --file "/home/alg/GitHub/arthurolg-blog-posts/articles/<ruta_relativa>/<slug>.md" --reading-time 10
+git add articles/images/<slug>*.webp articles/<categoria>/<slug>.md
+git commit -m "feat(blog): publicar articulo sobre <tema en español neutro>
+
+- agregar articulo sobre <resumen punto 1>
+- incluir imagenes responsivas en formato WebP (desktop, tablet, mobile)
+- reflexionar sobre <resumen punto 2>"
+```
 ```
 
-Si el script reporta errores o advertencias, lee los detalles en `stderr`, corrige el archivo Markdown y vuelve a validar hasta obtener `[SUCCESS]`.
+3. **Actualización de Ideas (si aplica):**
+   Si el tema provino de `ideas_to_write.md`, sugerir actualizar o tachar el tema correspondiente en dicho archivo.
+
+---
+
+## Mapeo de Categorías y Rutas
+
+| Label Frontmatter | Directorio en Repositorio | Descripción / Temas |
+| :--- | :--- | :--- |
+| `Programación` | `articles/programming/` | Algoritmos, patrones, Clean Code, SQL, TDD, testing. |
+| `Spring Boot` o `SpringBoot` | `articles/springboot-course/` | Framework Spring Boot, Java, Kotlin, microservicios, JPA. |
+| `Tecnología` | `articles/technology/` | IA agéntica, herramientas de desarrollo, arquitectura moderna. |
+| `Videojuegos` | `articles/videogames/` | Análisis de mecánicas, retrospectivas, narrativa gamer. |
+| `Marketing` | `articles/marketing/` | Canal directo, hospitality tech, planes de lealtad. |
+| `Reflexión` o `General` | `articles/` (Raíz) | Estoicismo, mentalidad, crecimiento personal, bienestar. |
+
+---
+
+## Documentación de Referencia
+
+- [references/natural-writing.md](references/natural-writing.md): Manual de estilo, voz y lista negra de clichés de IA.
+- [references/reading-time.md](references/reading-time.md): Presupuesto de palabras y fórmula de cálculo a 200 WPM.
+- [references/cover-images.md](references/cover-images.md): Guía estética y especificaciones técnicas de portadas WebP.
