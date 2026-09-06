@@ -216,8 +216,8 @@ def validate_article(file_path: Path, target_reading_time: int, wpm: int = 200, 
         errors.append("No se encontró la sección '## Conclusión'.")
     else:
         # Verificar firma / CTA oficial
-        if "github.com/lgzarturo" not in body and "x.com/arturolgdev" not in body:
-            warnings.append("No se encontró el enlace oficial al repositorio o a X@arturolgdev en la conclusión.")
+        if "github.com/lgzarturo" not in body and "x.com/algforge" not in body:
+            warnings.append("No se encontró el enlace oficial al repositorio o a X@algforge en la conclusión.")
         if "¡Hasta la próxima línea de código!" not in body and "¡Gracias por leer!" not in body:
             warnings.append("Se sugiere incluir la despedida característica de Arturo en el cierre.")
 

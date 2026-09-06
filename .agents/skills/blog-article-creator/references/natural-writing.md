@@ -1,6 +1,6 @@
 # Manual de Redacción Natural y Estilo de Arturo López
 
-Este documento define la voz, el tono, las estructuras narrativas y las reglas de redacción que caracterizan los artículos de blog de **Arturo López** (`lgzarturo`). 
+Este documento define la voz, el tono, las estructuras narrativas y las reglas de redacción que caracterizan los artículos de blog de **Arturo López** (`lgzarturo`).
 
 El objetivo fundamental es que **cada artículo suene 100% auténtico, personal, cercano y profesional**, transmitiendo la voz de un desarrollador experimentado, artesano del software y pensador pragmático, eliminando de raíz cualquier rastro o muletilla generada por modelos de inteligencia artificial.
 
@@ -58,7 +58,7 @@ Nunca resumas mecánicamente lo ya dicho. Concluye con:
    ```markdown
    ¿Ya estás implementando este enfoque en tu entorno de desarrollo? Me encantaría conocer tu experiencia y los desafíos que has enfrentado. ¡Hasta la próxima línea de código! 🚀
 
-   Deja tus comentarios en el [repositorio](https://github.com/lgzarturo/arthurolg-blog-posts/issues) o en mi perfil de [X@arturolgdev](https://x.com/arturolgdev). Si te es de utilidad, una estrella en [GitHub](https://github.com/lgzarturo) es de gran ayuda o no dudes en compartir este artículo con tus colegas y amigos. ¡Gracias por leer!
+   Deja tus comentarios en el [repositorio](https://github.com/lgzarturo/arthurolg-blog-posts/issues) o en mi perfil de [X@algforge](https://x.com/algforge). Si te es de utilidad, una estrella en [GitHub](https://github.com/lgzarturo) es de gran ayuda o no dudes en compartir este artículo con tus colegas y amigos. ¡Gracias por leer!
 
    ## Referencias
 
@@ -71,19 +71,19 @@ Nunca resumas mecánicamente lo ya dicho. Concluye con:
 
 El validador rechaza activamente las siguientes expresiones y patrones:
 
-| Cliché de IA Prohibido | Motivo | Alternativa Natural |
-| :--- | :--- | :--- |
-| *"En el vertiginoso mundo de..."* | Relleno genérico de IA | Arrancar directo con la acción o el problema. |
-| *"En la era digital actual..."* | Tópico sin valor informativo | Contextualizar con el problema técnico real. |
-| *"En el mundo del desarrollo moderno..."* | Frase comodín vacía | Mencionar la herramienta, framework o arquitectura concreta. |
-| *"Cabe destacar / mencionar / resaltar"* | Muletilla burocrática | Exponer el hecho directamente. |
-| *"Es importante / fundamental destacar"* | Adorno prescindible | Dejar que el dato hable por su propia relevancia. |
-| *"En conclusión, / En resumen, / En definitiva,"* | Transición robótica al inicio de conclusión | Iniciar la conclusión con la reflexión final de forma fluida. |
-| *"Sin lugar a dudas / Sin duda alguna"* | Absolutismo innecesario | Aportar argumentos o matices técnicos. |
-| *"Un papel fundamental / Pieza clave en el rompecabezas"* | Metáfora desgastada | Explicar la función arquitectónica precisa. |
-| *"El viaje apenas comienza"* | Cierre cliché inspiracional barato | Cerrar con un reto técnico o una invitación sincera a la práctica. |
-| *"No es una excepción"* | Automatismo sintáctico | Describir el caso particular con naturalidad. |
-| Tríos adjetivales (*"rápido, eficiente y escalable"*) | Patrón rítmico robótico de LLMs | Usar adjetivos precisos justificados con evidencia. |
+| Cliché de IA Prohibido                                    | Motivo                                      | Alternativa Natural                                                |
+| :-------------------------------------------------------- | :------------------------------------------ | :----------------------------------------------------------------- |
+| *"En el vertiginoso mundo de..."*                         | Relleno genérico de IA                      | Arrancar directo con la acción o el problema.                      |
+| *"En la era digital actual..."*                           | Tópico sin valor informativo                | Contextualizar con el problema técnico real.                       |
+| *"En el mundo del desarrollo moderno..."*                 | Frase comodín vacía                         | Mencionar la herramienta, framework o arquitectura concreta.       |
+| *"Cabe destacar / mencionar / resaltar"*                  | Muletilla burocrática                       | Exponer el hecho directamente.                                     |
+| *"Es importante / fundamental destacar"*                  | Adorno prescindible                         | Dejar que el dato hable por su propia relevancia.                  |
+| *"En conclusión, / En resumen, / En definitiva,"*         | Transición robótica al inicio de conclusión | Iniciar la conclusión con la reflexión final de forma fluida.      |
+| *"Sin lugar a dudas / Sin duda alguna"*                   | Absolutismo innecesario                     | Aportar argumentos o matices técnicos.                             |
+| *"Un papel fundamental / Pieza clave en el rompecabezas"* | Metáfora desgastada                         | Explicar la función arquitectónica precisa.                        |
+| *"El viaje apenas comienza"*                              | Cierre cliché inspiracional barato          | Cerrar con un reto técnico o una invitación sincera a la práctica. |
+| *"No es una excepción"*                                   | Automatismo sintáctico                      | Describir el caso particular con naturalidad.                      |
+| Tríos adjetivales (*"rápido, eficiente y escalable"*)     | Patrón rítmico robótico de LLMs             | Usar adjetivos precisos justificados con evidencia.                |
 
 ---
 
