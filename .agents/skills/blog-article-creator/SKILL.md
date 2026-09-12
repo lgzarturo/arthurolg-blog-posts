@@ -1,13 +1,13 @@
 ---
 name: blog-article-creator
 description: >-
-  Crea, refina y valida artículos para el blog de Arturo López con voz humana
-  natural, tono auténtico (desarrollador, líder técnico y pensador pragmático),
-  generación automatizada de imágenes WebP responsivas y control preciso del
-  tiempo de lectura en un flujo reproducible en tres fases: Definir, Concretar y
-  Aprobar.
+  Crea, refina y valida artículos para el blog de Arturo López en español neutro
+  (tuteo estándar, sin voseo ni regionalismos), con voz humana natural, tono auténtico
+  (desarrollador, líder técnico y pensador pragmático), generación automatizada de
+  imágenes WebP responsivas y control preciso del tiempo de lectura en un flujo
+  reproducible en tres fases: Definir, Concretar y Aprobar.
 metadata:
-  version: 3.0.0
+  version: 3.1.0
 ---
 
 # Blog Article Creator (bac)
@@ -18,6 +18,12 @@ Esta skill gobierna la creación y refinamiento de artículos para el blog de
 **Arturo López** (`lgzarturo`), abarcando tecnología, programación, Spring Boot,
 arquitectura de software, videojuegos, marketing y reflexión
 personal/estoicismo.
+
+Todos los artículos se redactan obligatoriamente en **español neutro** (tuteo
+estándar internacional / mexicano culto: *tú*, *tienes*, *observas*, *revisa*,
+*lee*). Queda **estrictamente prohibido el uso de voseo** (*tenés*, *mirá*, *vos*)
+y regionalismos marcados (chilenos, rioplatenses o ibéricos), garantizando una
+lectura cercana, profesional y de alcance global.
 
 El proceso sigue un **flujo reproducible y óptimo en tres fases deterministas**:
 
@@ -87,6 +93,11 @@ Una vez aprobada la Ficha de Definición:
 
 #### A. Redacción en Prosa Auténtica
 
+- **Idioma Obligatorio (Español Neutro):** Redactar **siempre en español neutro**
+  con tuteo estándar (*tú*, *tienes*, *puedes*, *observas*, *revisa*, *deja*).
+  Está **estrictamente prohibido el voseo** (*tenés*, *podés*, *mirá*, *hacés*,
+  *para vos*, etc.) y modismos regionales (chilenos, rioplatenses, peninsulares).
+  El tono es el de Arturo López (México): cercano, técnico, reflexivo y universal.
 - **Voz de Arturo López:** Primera persona directa, artesano de software, líder
   técnico humilde y reflexivo. Metáforas de videojuegos (Pokémon, Age of
   Mythology), cultura pop (Spider-Man) y estoicismo (Marco Aurelio, dicotomía

@@ -19,6 +19,13 @@ import re
 import sys
 from pathlib import Path
 
+if sys.platform == "win32":
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
 try:
     from PIL import Image
     HAS_PIL = True
@@ -56,6 +63,27 @@ AI_CLICHES = [
     (r"\btestimonio de\b", "Traducción mecánica de 'testament to'"),
     (r"\bactores clave\b", "Jerga genérica corporativa de IA"),
 ]
+
+# Lista de voseo y regionalismos no permitidos (el blog exige español neutro con tuteo estándar)
+VOSEO_AND_REGIONALISMS = [
+    (r"\bvos\b", "Voseo no permitido: 'vos'. El blog se redacta en español neutro con tuteo estándar ('tú')."),
+    (r"\bte decís a vos\b", "Voseo no permitido: 'te decís a vos' -> usar 'te dices a ti mismo'."),
+    (r"\bpara vos\b", "Voseo no permitido: 'para vos' -> usar 'para ti'."),
+    (r"\b(acabás|definís|pulsás|sabés|saltás|abrís|mirás|regresás|sentís|recordás|tenés|ejecutás|lanzás|cambiás|podés|intentás|descuidás|dispersás|inspeccionás|utilizás|transformás|abordás|convertís|hacés|pensás|creés)\b", "Conjugación de voseo no permitida. Usar tuteo en español neutro."),
+    (r"\b(leé|utilizá|dejá|revisá|limpiá|apartá|mirá|estirá|tomá|respirá|poné|agregá|agrupá|cambiame)\b", "Imperativo de voseo no permitido. Usar imperativo en español neutro (lee, utiliza, deja, revisa, limpia, aparta, mira, estira, toma, respira, pon, agrega, agrupa, cámbiame)."),
+    (r"\b(cachai|al tiro|altiro|weón|wn)\b", "Modismo chileno no permitido. El blog se redacta en español neutro."),
+    (r"\b(vosotros|habéis|tenéis|hacéis|sois)\b", "Peninsularismo no permitido. Usar segunda persona neutra latinoamericana."),
+]
+
+
+def mask_code_blocks(text: str) -> str:
+    """Reemplaza el interior de bloques de código por espacios para no alterar líneas ni posiciones."""
+    def replacer(match):
+        return re.sub(r"[^\n]", " ", match.group(0))
+
+    masked = re.sub(r"```[\s\S]*?```", replacer, text)
+    masked = re.sub(r"`[^`\n]+`", replacer, masked)
+    return masked
 
 
 def resolve_repo_root():
@@ -197,13 +225,22 @@ def validate_article(file_path: Path, target_reading_time: int, wpm: int = 200, 
         warnings.append(f"Recuento de palabras elevado: {prose_words} palabras (máximo recomendado {max_words} para {target_reading_time} min).")
 
     # 3. Detección de Clichés de IA
+    masked_body = mask_code_blocks(body)
+
     for pattern, msg in AI_CLICHES:
-        matches = re.finditer(pattern, body, flags=re.IGNORECASE | re.MULTILINE)
+        matches = re.finditer(pattern, masked_body, flags=re.IGNORECASE | re.MULTILINE)
         for m in matches:
             line_num = body[:m.start()].count("\n") + 1
             errors.append(f"Línea {line_num}: {msg} -> encontrado '{m.group(0).strip()}'")
 
-    # 4. Estructura Narrativa y Formato
+    # 4. Detección de Voseo y Regionalismos (Español Neutro Obligatorio)
+    for pattern, msg in VOSEO_AND_REGIONALISMS:
+        matches = re.finditer(pattern, masked_body, flags=re.IGNORECASE | re.MULTILINE)
+        for m in matches:
+            line_num = body[:m.start()].count("\n") + 1
+            errors.append(f"Línea {line_num}: {msg} -> encontrado '{m.group(0).strip()}'")
+
+    # 5. Estructura Narrativa y Formato
     # Citas en bloque (>)
     blockquotes = len(re.findall(r"^>\s+.*$", body, flags=re.MULTILINE))
     if blockquotes < 2:

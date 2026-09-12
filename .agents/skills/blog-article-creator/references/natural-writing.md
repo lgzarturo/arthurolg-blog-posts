@@ -19,6 +19,11 @@ Arturo López es desarrollador de software, líder técnico y apasionado de la a
    - *Cultura Pop:* Spider-Man ("un gran poder conlleva una gran responsabilidad") para ilustrar la deuda técnica y el despliegue a producción.
    - *Estoicismo:* Dicotomía del control (Epicteto, Marco Aurelio) para afrontar caídas de servidores o refactorizaciones de código *legacy*.
 5. **Actuar sin Depender del Resultado:** El disfrute del proceso y la excelencia artesanal están por encima de la validación externa o las métricas superficiales. Escribir y programar bien es la recompensa en sí misma.
+6. **Idioma y Registro Estándar: Español Neutro (Estricto):**
+   - **Tuteo Estándar:** Trata al lector de *tú* con conjugaciones neutras estándar (*tú tienes, tú puedes, tú observas, revisa, lee, diseña, mantén*).
+   - **Cero Voseo:** Prohibido rotundamente el voseo (*tenés, podés, mirá, leé, dejá, hacés, vos, para vos, te dices a vos mismo*).
+   - **Cero Regionalismos:** Prohibidos chilenismos (*po, cachai, altiro*), rioplatismos (*che, laburo, recién + infinitivo*), o giros ibéricos peninsulares (*vosotros, habéis, chaval*).
+   - **Identidad:** Arturo López escribe en un español neutro con naturalidad mexicana culta, técnica, cercana y universal para toda la comunidad hispanohablante.
 
 ---
 
@@ -84,11 +89,15 @@ El validador rechaza activamente las siguientes expresiones y patrones:
 | *"El viaje apenas comienza"*                              | Cierre cliché inspiracional barato          | Cerrar con un reto técnico o una invitación sincera a la práctica. |
 | *"No es una excepción"*                                   | Automatismo sintáctico                      | Describir el caso particular con naturalidad.                      |
 | Tríos adjetivales (*"rápido, eficiente y escalable"*)     | Patrón rítmico robótico de LLMs             | Usar adjetivos precisos justificados con evidencia.                |
+| Voseo (*"tenés, podés, mirá, hacés, vos"*)                | Prohibido. Rompe el registro neutro         | Usar tuteo neutro (*"tienes, puedes, mira, haces, tú"*).           |
+| Modismos regionales marcados (*"cachai, po, che, laburo"*) | Prohibido. Provincializa el artículo        | Usar léxico neutro claro (*"entiendes, colega, trabajo"*).        |
+| Peninsularismos (*"vosotros, habéis, tenéis"*)            | Prohibido. No coincide con el perfil        | Usar segunda persona neutra (*"ustedes tienen"*).                  |
 
 ---
 
 ## 5. Checklist de Verificación Humana antes de Aprobar
 
+- [ ] **Idioma:** ¿Está redactado 100% en español neutro (tuteo estándar), sin voseo (*tenés, mirá*) ni regionalismos chilenos, rioplatenses o peninsulares?
 - [ ] **Voz:** ¿Suena a Arturo López hablando desde la experiencia y no a un texto autogenerado?
 - [ ] **Gancho:** ¿Inicia con una anécdota, dilema o escenario real sin clichés?
 - [ ] **Metáforas:** ¿Incluye analogías de gaming, cultura pop o estoicismo orgánicamente integradas?

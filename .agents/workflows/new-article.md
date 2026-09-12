@@ -15,7 +15,7 @@ Sigue rigurosamente las 3 fases definidas en la skill `blog-article-creator`:
 4. **Detenerse** y esperar la confirmación explícita del usuario antes de continuar.
 
 ### Fase 2: Concretar
-1. Redactar el artículo completo en el archivo `articles/<categoria>/<slug>.md` adoptando la voz auténtica de Arturo López (primera persona, artesano del software, citas `>`, cero clichés de IA, CTA oficial en la conclusión y `## Referencias`).
+1. Redactar el artículo completo en el archivo `articles/<categoria>/<slug>.md` adoptando la voz auténtica de Arturo López en **español neutro obligatorio** (tuteo estándar, sin voseo ni modismos regionales, primera persona, artesano del software, citas `>`, cero clichés de IA, CTA oficial en la conclusión y `## Referencias`).
 2. Generar el arte visual en relación 16:9 con la herramienta `generate_image` siguiendo las directrices estéticas de la categoría (ver `references/cover-images.md`).
 3. Ejecutar el script de procesamiento de imágenes para generar las 3 variantes WebP responsivas:
    ```bash
