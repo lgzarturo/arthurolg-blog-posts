@@ -4,10 +4,10 @@ description: >-
   Crea, refina y valida artículos para el blog de Arturo López en español neutro
   (tuteo estándar, sin voseo ni regionalismos), con voz humana natural, tono auténtico
   (desarrollador, líder técnico y pensador pragmático), generación automatizada de
-  imágenes WebP responsivas y control preciso del tiempo de lectura en un flujo
-  reproducible en tres fases: Definir, Concretar y Aprobar.
+  imágenes WebP responsivas, duración dinámica, edición SEO y diagramas Mermaid
+  en un flujo reproducible en tres fases: Definir, Concretar y Aprobar.
 metadata:
-  version: 3.1.0
+  version: 4.0.0
 ---
 
 # Blog Article Creator (bac)
@@ -27,11 +27,13 @@ lectura cercana, profesional y de alcance global.
 
 El proceso sigue un **flujo reproducible y óptimo en tres fases deterministas**:
 
-1. **Definir:** Acordar el enfoque, tiempo de lectura, categoría, tesis, gancho
-   narrativo y esquema antes de redactar.
-2. **Concretar:** Redactar con la voz auténtica de Arturo López, generar la
-   portada 16:9 y procesar automáticamente las 3 versiones WebP responsivas
-   (`desktop`, `tablet`, `mobile`).
+1. **Definir:** Acordar el enfoque, duración objetivo (o calcularla desde el
+   contexto), categoría, tesis, intención de búsqueda, gancho y esquema antes
+   de redactar.
+2. **Concretar:** Redactar con la voz auténtica de Arturo López, pasar el texto
+   por una edición SEO experta, representar diagramas técnicos con Mermaid,
+   generar una portada basada en el artículo y procesar las 3 versiones WebP
+   responsivas (`desktop`, `tablet`, `mobile`).
 3. **Aprobar:** Ejecutar la suite de validación local y presentar la Hoja de
    Aprobación con métricas, previsualización de imagen y comando de commit listo
    para publicación.
@@ -67,16 +69,21 @@ El proceso sigue un **flujo reproducible y óptimo en tres fases deterministas**
 - **Categoría (`label`):** `Programación` | `Spring Boot` | `Tecnología` |
   `Videojuegos` | `Marketing` | `Reflexión`
 - **Ruta Destino:** `articles/<categoria-path>/<slug>.md`
-- **Tiempo de Lectura:** 10 minutos (Estándar por defecto) (~2,000 palabras de
-  prosa @ 200 WPM)
+- **Tiempo de Lectura:** `<N> minutos` (duración indicada por el usuario o
+  estimada desde la profundidad, audiencia y complejidad del tema). Incluir el
+  rango de palabras objetivo; no asumir 10 minutos si no se especifica.
 - **Tesis Central:** <Una oración que resuma la idea fuerza>
+- **Intención de Búsqueda:** <informacional, comparativa, transaccional o navegación>
+- **Keyword Principal:** <consulta natural que el lector buscaría>
+- **Keywords Secundarias:** <3–6 términos semánticamente relacionados>
 - **Gancho Inicial:** <Anécdota real, dilema técnico o pregunta provocadora>
-- **Concepto Visual de Portada:** <Descripción del estilo visual y elementos del
-  arte 16:9>
+- **Concepto Visual de Portada:** <escena concreta derivada de la tesis,
+  audiencia, ejemplos y metáforas del artículo; no solo la categoría>
 - **Esquema de Secciones:**
   - `## <Sección 1: Planteamiento del problema / Contexto>`
   - `## <Sección 2: Concepto técnico o metodológico>`
   - `## <Sección 3: Caso práctico / Código / Implementación>`
+  - `<Diagrama Mermaid si mejora la comprensión de una relación, flujo o arquitectura>`
   - `## <Sección 4: Trade-offs, lecciones o aplicación>`
   - `## Conclusión` (Reflexión + CTA oficial)
   - `## Referencias`
@@ -93,6 +100,13 @@ Una vez aprobada la Ficha de Definición:
 
 #### A. Redacción en Prosa Auténtica
 
+- **Editor SEO experto:** aplicar antes de aprobar el artículo un pase editorial
+  sobre intención de búsqueda, título, slug, descripción de hasta 160 caracteres,
+  jerarquía de encabezados, keyword principal, términos relacionados, enlaces
+  internos y referencias. Optimizar sin repetir keywords artificialmente ni
+  prometer algo que el artículo no explica. Seguir
+  [references/seo-editor.md](references/seo-editor.md).
+
 - **Idioma Obligatorio (Español Neutro):** Redactar **siempre en español neutro**
   con tuteo estándar (*tú*, *tienes*, *puedes*, *observas*, *revisa*, *deja*).
   Está **estrictamente prohibido el voseo** (*tenés*, *podés*, *mirá*, *hacés*,
@@ -107,8 +121,10 @@ Una vez aprobada la Ficha de Definición:
 - **Cero Clichés de IA:** Aplicar estrictamente la lista negra (prohibido _"en
   el vertiginoso mundo"_, _"cabe destacar"_, _"en conclusión,"_ al inicio de
   conclusión, etc.).
-- **Bloques Prácticos:** Diagramas ASCII, tablas y código comentado cuando
-  aplique.
+- **Bloques Prácticos:** Código comentado, tablas y diagramas Mermaid cuando
+  aplique. Si se representa un flujo, secuencia, arquitectura, relación o ciclo,
+  usar un bloque fenced `mermaid`; no usar ASCII como formato principal para
+  diagramas técnicos. No añadir diagramas por decoración.
 - **Cierre Oficial (CTA):**
 
   ```markdown
@@ -135,10 +151,10 @@ Una vez aprobada la Ficha de Definición:
 
 1. Generar la imagen con la herramienta nativa `generate_image`:
    - `AspectRatio`: `"16:9"`
-   - `Prompt`: Prompt en inglés siguiendo las pautas de
-     [references/cover-images.md](references/cover-images.md) según la categoría
-     (3D isométrico neón para tecnología, ilustración anime/manga para gaming,
-     fotografía cálida/bodegón para reflexión).
+   - `Prompt`: Prompt en inglés construido desde la tesis, problema, audiencia,
+     ejemplos y metáforas del artículo, siguiendo las pautas de
+     [references/cover-images.md](references/cover-images.md). La categoría solo
+     define el lenguaje visual; nunca sustituye el contexto semántico del texto.
    - `ImageName`: `<slug_resumido>`
 2. Procesar a las 3 variantes WebP responsivas ejecutando el script local:
    ```bash
@@ -177,7 +193,7 @@ label: 'Programación'
    ```bash
    python3 .agents/skills/blog-article-creator/scripts/validate_article.py \
      --file "articles/<categoria>/<slug>.md" \
-     --reading-time 10
+     --reading-time <minutos-o-auto>
    ```
 
    _Si el script reporta errores, corregir el archivo Markdown o las imágenes
@@ -241,4 +257,5 @@ git commit -m "feat(blog): publicar articulo sobre <tema en español neutro>
 - [references/natural-writing.md](references/natural-writing.md): Manual de estilo, voz y lista negra de clichés de IA.
 - [references/reading-time.md](references/reading-time.md): Presupuesto de palabras y fórmula de cálculo a 200 WPM.
 - [references/cover-images.md](references/cover-images.md): Guía estética y especificaciones técnicas de portadas WebP.
+- [references/seo-editor.md](references/seo-editor.md): Pase editorial experto para SEO, legibilidad e intención de búsqueda.
 ```

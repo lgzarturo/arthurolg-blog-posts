@@ -37,7 +37,7 @@ Una redacción humana se distingue por su cadencia respiratoria variada. Si todo
 * **Variaciones de Párrafo:** Mezcla párrafos descriptivos de 3 a 5 oraciones con párrafos independientes de una sola línea que obliguen al lector a pausar y asimilar la idea.
 * **Citas Destacadas (`>` Blockquotes):** Incluye entre 2 y 4 citas en bloque por artículo con sentencias filosóficas o técnicas memorables.
   * *Ejemplo:* `> "El verdadero valor del desarrollador no reside en cuántas líneas de código teclea por minuto, sino en su capacidad para modelar reglas de negocio complejas con simplicidad y elegancia."`
-* **Apoyo Visual Limpio:** Emplea diagramas de texto/ASCII limpios para ilustrar arquitecturas o flujos agénticos, tablas comparativas bien formateadas y bloques de código rigurosamente comentados en Kotlin, Java, TypeScript, Bash o SQL.
+* **Apoyo Visual Limpio:** Emplea diagramas Mermaid para arquitecturas, secuencias, flujos o relaciones; usa tablas comparativas y bloques de código rigurosamente comentados en Kotlin, Java, TypeScript, Bash o SQL. Reserva ASCII para bocetos que no sean diagramas técnicos formales.
 
 ---
 
@@ -51,7 +51,7 @@ Comienza sin rodeos introductorios ni generalidades. Usa una de estas fórmulas:
 * **Una cita de impacto:** Una sentencia reflexiva que dispare el debate central.
 
 ### B. El Cuerpo Principal (`##` y `###`)
-* Organizado en secciones lógicas tituladas de manera atractiva (mínimo 3 secciones `##`, recomendado 4–6 para un artículo estándar de 10 minutos).
+* Organizado en secciones lógicas tituladas de manera atractiva (mínimo 3 secciones `##`; ajustar la cantidad a la duración y complejidad acordadas, sin forzar una plantilla de 10 minutos).
 * Cada sección aborda un problema concreto, demuestra el *por qué* antes del *cómo*, y ofrece un ejemplo o caso de uso práctico.
 * Equilibra la prosa con código y diagramas: no satures con listas de viñetas vacías; privilegia la narrativa técnica explicativa.
 

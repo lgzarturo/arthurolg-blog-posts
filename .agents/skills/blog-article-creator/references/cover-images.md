@@ -25,12 +25,17 @@ El motor del blog frontend resuelve automáticamente las variantes `-tablet.webp
 
 ## 2. Pautas Estéticas por Categoría
 
+La portada debe representar el contexto concreto del artículo, no una categoría
+genérica. Antes de escribir el prompt, extrae la tesis, el problema central, la
+audiencia, una metáfora visual y entre uno y tres elementos distintivos del caso
+práctico. La imagen debe permitir imaginar el tema sin leer el título.
+
 Las portadas del blog de Arturo destacan por su elegancia visual, evitando a toda costa imágenes genéricas de banco de fotos corporativas o humanos con sonrisas falsas frente a laptops.
 
 ### A. Programación y Tecnología (`Programación`, `Tecnología`, `Spring Boot`)
 * **Estilo Visual:** Render 3D conceptual isométrico o semi-cenital sobre fondo oscuro (*dark mode aesthetic*, negro mate / grafito profundo).
 * **Elementos Clave:** Estructuras de vidrio translúcido brillante (*glowing glass blocks*), tuberías de datos o circuitos luminiscentes con neón (azul cian, zafiro, verde esmeralda y toques de ámbar cálido).
-* **Concepto:** Representar la abstracción del tema (ej. orquestación de agentes como módulos conectados por haces de luz, microservicios como bloques hexagonales flotantes, arquitecturas resilientes).
+* **Concepto:** Representar la abstracción específica del tema (ej. orquestación de agentes como módulos conectados por haces de luz, microservicios como bloques hexagonales flotantes, arquitecturas resilientes). Evita reutilizar la misma escena para temas distintos.
 * **Prohibido:** Texto superpuesto tipo banner ("HOW TO CODE"), personas genéricas de oficina, marcas de agua.
 
 ### B. Videojuegos (`Videojuegos`)

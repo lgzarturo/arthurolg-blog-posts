@@ -9,7 +9,8 @@ Audita:
   5. Existencia y dimensiones de las 3 imágenes WebP responsivas (desktop, tablet, mobile).
 
 Uso:
-  python3 validate_article.py --file articles/programming/mi-articulo.md --reading-time 10
+  python3 validate_article.py --file articles/programming/mi-articulo.md --reading-time 7
+  python3 validate_article.py --file articles/programming/mi-articulo.md --reading-time auto
 """
 
 import argparse
@@ -137,7 +138,7 @@ def count_prose_words(body: str):
     return len(words)
 
 
-def validate_article(file_path: Path, target_reading_time: int, wpm: int = 200, ignore_date_today: bool = False):
+def validate_article(file_path: Path, target_reading_time, wpm: int = 200, ignore_date_today: bool = False):
     errors = []
     warnings = []
     info = []
@@ -208,13 +209,20 @@ def validate_article(file_path: Path, target_reading_time: int, wpm: int = 200, 
 
     # 2. Análisis de Palabras y Tiempo de Lectura
     prose_words = count_prose_words(body)
-    code_blocks = len(re.findall(r"```[\w]*\r?\n[\s\S]*?```", body))
+    all_code_blocks = len(re.findall(r"```[\w]*\r?\n[\s\S]*?```", body))
+    mermaid_blocks = len(re.findall(r"```mermaid\r?\n[\s\S]*?```", body, flags=re.IGNORECASE))
+    code_blocks = all_code_blocks - mermaid_blocks
     images_count = len(re.findall(r"!\[[^\]]*\]\([^)]+\)", body))
 
-    calculated_reading_time = (prose_words / wpm) + (code_blocks * 0.33) + (images_count * 0.20)
+    calculated_reading_time = (prose_words / wpm) + (code_blocks * 0.33) + ((images_count + mermaid_blocks) * 0.20)
+    if target_reading_time == "auto":
+        # Auto sirve para artículos cuya duración fue calculada desde el contenido.
+        # Se redondea a una cifra útil, sin reintroducir un valor fijo de 10 minutos.
+        target_reading_time = max(1, round(calculated_reading_time))
+        info.append(f"Objetivo dinámico inferido desde el contenido: {target_reading_time} min")
     target_words = target_reading_time * wpm
 
-    info.append(f"Palabras de prosa: {prose_words:,} | Bloques de código: {code_blocks} | Imágenes en cuerpo: {images_count}")
+    info.append(f"Palabras de prosa: {prose_words:,} | Bloques de código: {code_blocks} | Diagramas Mermaid: {mermaid_blocks} | Imágenes en cuerpo: {images_count}")
     info.append(f"Tiempo de lectura estimado: {calculated_reading_time:.1f} min (Objetivo: {target_reading_time} min @ {wpm} WPM)")
 
     min_words = int(target_words * 0.75)
@@ -300,11 +308,18 @@ def validate_article(file_path: Path, target_reading_time: int, wpm: int = 200, 
 def main():
     parser = argparse.ArgumentParser(description="Validar artículos del blog de Arturo López.")
     parser.add_argument("--file", required=True, help="Ruta al archivo Markdown del artículo")
-    parser.add_argument("--reading-time", type=int, default=10, help="Tiempo de lectura objetivo en minutos (por defecto: 10)")
+    parser.add_argument("--reading-time", default="auto", help="Tiempo objetivo en minutos o 'auto' para inferirlo desde el contenido")
     parser.add_argument("--wpm", type=int, default=200, help="Palabras por minuto para cálculo de prosa (por defecto: 200)")
     parser.add_argument("--ignore-date-today", action="store_true", help="No emitir advertencia si la fecha no es hoy")
 
     args = parser.parse_args()
+    if args.reading_time != "auto":
+        try:
+            args.reading_time = int(args.reading_time)
+            if args.reading_time <= 0:
+                raise ValueError
+        except ValueError:
+            parser.error("--reading-time debe ser un entero positivo o 'auto'")
     file_path = Path(args.file)
 
     print(f"\n🔍 Auditando artículo: {file_path.name}")
