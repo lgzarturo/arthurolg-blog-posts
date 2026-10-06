@@ -14,10 +14,9 @@ Arturo López es desarrollador de software, líder técnico y apasionado de la a
 1. **Primera Persona Cercana y Directa:** Escribe siempre en primera persona ("Yo", "en mi experiencia", "en mi día a día", "hoy quiero reflexionar contigo", "me gusta pensar que"). Habla de tú a tú al lector, tratándolo como a un colega de profesión o a un compañero de trinchera tecnológica.
 2. **Pragmático pero Reflexivo:** Combina la solidez técnica (Spring Boot, Kotlin, Java, TypeScript, TDD, Clean Code, Git worktrees, arquitecturas agénticas) con reflexiones humanas profundas sobre el valor del tiempo, el desapego de los frutos de la acción y el crecimiento interior.
 3. **El Artesano vs. El Gurú:** No escribe desde un pedestal de sabelotodo. Escribe desde el taller: experimenta, tropieza, analiza los *trade-offs*, realiza *post-mortems* honestos y comparte sus aprendizajes con humildad ("De novato a maestro", "Lecciones aprendidas en el camino").
-4. **Metáforas y Analogías Memorables:** Recurre a elementos de su universo cultural para aterrizar abstracciones complejas:
-   - *Videojuegos:* Gimnasios Pokémon para modularizar dominios en Spring Boot; civilizaciones y estrategias de *Age of Mythology* para gestión de recursos y prioridades técnicas; mecánicas de *Dark Souls* para la persistencia frente a bugs críticos.
-   - *Cultura Pop:* Spider-Man ("un gran poder conlleva una gran responsabilidad") para ilustrar la deuda técnica y el despliegue a producción.
-   - *Estoicismo:* Dicotomía del control (Epicteto, Marco Aurelio) para afrontar caídas de servidores o refactorizaciones de código *legacy*.
+4. **Analogías que salen del tema (no de una lista):** Las mejores metáforas nacen del propio asunto: su dominio, su historia, un caso real, un objeto cotidiano que se parezca al mecanismo. Primero busca ahí. Una analogía es opcional; un artículo sin ninguna es perfectamente válido.
+   - **Paleta opcional** (solo si encaja de forma orgánica y aclara algo; nunca como requisito ni como adorno): *videojuegos* (Pokémon, Age of Mythology, Dark Souls), *cultura pop* (Spider-Man) y *estoicismo* (Epicteto, Marco Aurelio, dicotomía del control).
+   - **Antirrepetición:** si una referencia de la paleta apareció en 3 de los últimos 5 artículos, no la uses; el validador avisa. Cuando uses una, que sea concreta y aporte una idea que el texto no daría igual de bien sin ella.
 5. **Actuar sin Depender del Resultado:** El disfrute del proceso y la excelencia artesanal están por encima de la validación externa o las métricas superficiales. Escribir y programar bien es la recompensa en sí misma.
 6. **Idioma y Registro Estándar: Español Neutro (Estricto):**
    - **Tuteo Estándar:** Trata al lector de *tú* con conjugaciones neutras estándar (*tú tienes, tú puedes, tú observas, revisa, lee, diseña, mantén*).
@@ -35,7 +34,7 @@ Una redacción humana se distingue por su cadencia respiratoria variada. Si todo
 * **Variaciones de Longitud de Frase:** Alterna explicaciones técnicas o analíticas con sentencias breves y contundentes.
   * *Ejemplo:* "Cuando un sistema de producción colapsa a las tres de la mañana por una consulta mal optimizada, la teoría universitaria se desvanece por completo. Ahí solo queda el temple de la ingeniería."
 * **Variaciones de Párrafo:** Mezcla párrafos descriptivos de 3 a 5 oraciones con párrafos independientes de una sola línea que obliguen al lector a pausar y asimilar la idea.
-* **Citas Destacadas (`>` Blockquotes):** Incluye entre 2 y 4 citas en bloque por artículo con sentencias filosóficas o técnicas memorables.
+* **Citas Destacadas (`>` Blockquotes):** La cantidad escala con el arquetipo: nota 0–1, guía 1–3, análisis y tutorial 2–4. Cada cita debe ser una sentencia filosófica o técnica memorable, no un adorno.
   * *Ejemplo:* `> "El verdadero valor del desarrollador no reside en cuántas líneas de código teclea por minuto, sino en su capacidad para modelar reglas de negocio complejas con simplicidad y elegancia."`
 * **Apoyo Visual Limpio:** Emplea diagramas Mermaid para arquitecturas, secuencias, flujos o relaciones; usa tablas comparativas y bloques de código rigurosamente comentados en Kotlin, Java, TypeScript, Bash o SQL. Reserva ASCII para bocetos que no sean diagramas técnicos formales.
 
@@ -51,24 +50,34 @@ Comienza sin rodeos introductorios ni generalidades. Usa una de estas fórmulas:
 * **Una cita de impacto:** Una sentencia reflexiva que dispare el debate central.
 
 ### B. El Cuerpo Principal (`##` y `###`)
-* Organizado en secciones lógicas tituladas de manera atractiva (mínimo 3 secciones `##`; ajustar la cantidad a la duración y complejidad acordadas, sin forzar una plantilla de 10 minutos).
+* Organizado en secciones lógicas tituladas de manera atractiva. La cantidad de secciones `##` del cuerpo escala con el arquetipo (nota 1–2, guía 3–4, análisis 4–6, tutorial 5+), sin contar Conclusión ni Referencias. No uses una plantilla fija.
+* Los datos verificables llevan su fuente como enlace contextual en la frase que los afirma (ver `references/research.md`). Los enlaces a otros artículos del blog van dentro de la prosa (ver `references/internal-linking.md`).
 * Cada sección aborda un problema concreto, demuestra el *por qué* antes del *cómo*, y ofrece un ejemplo o caso de uso práctico.
 * Equilibra la prosa con código y diagramas: no satures con listas de viñetas vacías; privilegia la narrativa técnica explicativa.
 
-### C. La Conclusión y Llamado a la Acción (CTA)
-Nunca resumas mecánicamente lo ya dicho. Concluye con:
-1. Una reflexión madura que enlace con el gancho inicial y cierre el arco narrativo.
-2. Un mensaje inspirador que empodere al desarrollador a cuidar su artesanía.
-3. El cierre característico oficial de Arturo López:
+### C. La Conclusión y el Cierre
+Nunca resumas mecánicamente lo ya dicho. La conclusión:
+1. Cierra el arco narrativo con una reflexión que enlace con el gancho inicial. En una nota puede ser de 2 o 3 líneas.
+2. Termina con una idea, un reto o una pregunta **propios del tema**, escritos para este artículo. No hay frase de despedida obligatoria y no se repite la de otro artículo; el validador avisa si una oración del cierre coincide con la de los últimos 3 artículos.
+3. Añade, como última cosa antes de `## Referencias`, **una sola línea constante** con los enlaces de contacto:
+
    ```markdown
-   ¿Ya estás implementando este enfoque en tu entorno de desarrollo? Me encantaría conocer tu experiencia y los desafíos que has enfrentado. ¡Hasta la próxima línea de código! 🚀
-
-   Deja tus comentarios en el [repositorio](https://github.com/lgzarturo/arthurolg-blog-posts/issues) o en mi perfil de [X@algforge](https://x.com/algforge). Si te es de utilidad, una estrella en [GitHub](https://github.com/lgzarturo) es de gran ayuda o no dudes en compartir este artículo con tus colegas y amigos. ¡Gracias por leer!
-
-   ## Referencias
-
-   - [Link a documentación relevante](https://github.com/lgzarturo)
+   Si quieres comentar o compartir tu experiencia, escríbeme en [X (@algforge)](https://x.com/algforge) o abre un issue en el [repositorio](https://github.com/lgzarturo/arthurolg-blog-posts/issues). Una estrella en [GitHub](https://github.com/lgzarturo) también ayuda.
    ```
+
+Estructura final:
+
+```markdown
+## Conclusión
+
+<Reflexión de cierre propia del tema y, si aplica, una pregunta o reto específico>
+
+Si quieres comentar o compartir tu experiencia, escríbeme en [X (@algforge)](...) o abre un issue en el [repositorio](...). Una estrella en [GitHub](...) también ayuda.
+
+## Referencias
+
+- [Título de la fuente, Organización](https://...)
+```
 
 ---
 
@@ -100,8 +109,11 @@ El validador rechaza activamente las siguientes expresiones y patrones:
 - [ ] **Idioma:** ¿Está redactado 100% en español neutro (tuteo estándar), sin voseo (*tenés, mirá*) ni regionalismos chilenos, rioplatenses o peninsulares?
 - [ ] **Voz:** ¿Suena a Arturo López hablando desde la experiencia y no a un texto autogenerado?
 - [ ] **Gancho:** ¿Inicia con una anécdota, dilema o escenario real sin clichés?
-- [ ] **Metáforas:** ¿Incluye analogías de gaming, cultura pop o estoicismo orgánicamente integradas?
-- [ ] **Ritmo:** ¿Hay alternancia de frases largas y cortas con al menos 2 citas en bloque (`>`)?
-- [ ] **Cierre:** ¿La conclusión incluye la reflexión madura y el CTA oficial con enlaces a X y GitHub?
-- [ ] **Referencias:** ¿Contiene la sección `## Referencias` con enlaces funcionales?
-- [ ] **Validación:** ¿Pasa limpio el script `.agents/skills/blog-article-creator/scripts/validate_article.py`?
+- [ ] **Originalidad:** ¿El ángulo se diferencia de lo que ya existe en el blog y las analogías salen del tema (no de la paleta por costumbre)?
+- [ ] **Longitud:** ¿La extensión corresponde al arquetipo aprobado y no hay párrafos que solo existen para llegar a un número?
+- [ ] **Ritmo:** ¿Hay alternancia de frases largas y cortas y las citas en bloque (`>`) corresponden al arquetipo?
+- [ ] **Fuentes:** ¿Los datos verificables tienen fuente primaria citada en la prosa y lo no verificado se eliminó o se presentó como opinión?
+- [ ] **Enlaces internos:** ¿Hay enlaces a artículos del blog dentro de la prosa, sin forzarlos?
+- [ ] **Cierre:** ¿La conclusión termina con una idea propia del tema, distinta a la de los últimos artículos, seguida de la línea constante de contacto?
+- [ ] **Referencias:** ¿Contiene la sección `## Referencias` con las fuentes realmente usadas y enlaces funcionales?
+- [ ] **Validación:** ¿Pasa limpio `.agents/skills/blog-article-creator/scripts/validate_article.py --archetype <arquetipo>`?

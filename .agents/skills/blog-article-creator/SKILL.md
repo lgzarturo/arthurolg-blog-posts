@@ -2,12 +2,13 @@
 name: blog-article-creator
 description: >-
   Crea, refina y valida artículos para el blog de Arturo López en español neutro
-  (tuteo estándar, sin voseo ni regionalismos), con voz humana natural, tono auténtico
-  (desarrollador, líder técnico y pensador pragmático), generación automatizada de
-  imágenes WebP responsivas, duración dinámica, edición SEO y diagramas Mermaid
-  en un flujo reproducible en tres fases: Definir, Concretar y Aprobar.
+  (tuteo estándar, sin voseo ni regionalismos), con voz humana natural, longitud
+  decidida por el contexto del tema (arquetipos), investigación con fuentes
+  primarias, enlaces a otros artículos del blog, cierres propios de cada tema,
+  imágenes WebP responsivas, edición SEO y diagramas Mermaid en un flujo
+  reproducible: Definir, Investigar, Concretar y Aprobar.
 metadata:
-  version: 4.0.0
+  version: 5.0.0
 ---
 
 # Blog Article Creator (bac)
@@ -16,8 +17,7 @@ metadata:
 
 Esta skill gobierna la creación y refinamiento de artículos para el blog de
 **Arturo López** (`lgzarturo`), abarcando tecnología, programación, Spring Boot,
-arquitectura de software, videojuegos, marketing y reflexión
-personal/estoicismo.
+arquitectura de software, videojuegos, marketing y reflexión personal.
 
 Todos los artículos se redactan obligatoriamente en **español neutro** (tuteo
 estándar internacional / mexicano culto: *tú*, *tienes*, *observas*, *revisa*,
@@ -25,41 +25,68 @@ estándar internacional / mexicano culto: *tú*, *tienes*, *observas*, *revisa*,
 y regionalismos marcados (chilenos, rioplatenses o ibéricos), garantizando una
 lectura cercana, profesional y de alcance global.
 
-El proceso sigue un **flujo reproducible y óptimo en tres fases deterministas**:
+Principios que gobiernan todo el flujo:
 
-1. **Definir:** Acordar el enfoque, duración objetivo (o calcularla desde el
-   contexto), categoría, tesis, intención de búsqueda, gancho y esquema antes
-   de redactar.
-2. **Concretar:** Redactar con la voz auténtica de Arturo López, pasar el texto
-   por una edición SEO experta, representar diagramas técnicos con Mermaid,
-   generar una portada basada en el artículo y procesar las 3 versiones WebP
-   responsivas (`desktop`, `tablet`, `mobile`).
-3. **Aprobar:** Ejecutar la suite de validación local y presentar la Hoja de
-   Aprobación con métricas, previsualización de imagen y comando de commit listo
-   para publicación.
+- **La longitud la decide el contexto.** Cada artículo tiene un arquetipo (nota,
+  guía, análisis, tutorial) elegido según el tema. Nunca se alarga para llegar a
+  un número ni se parte de un tamaño por defecto.
+- **Lo verificable se investiga.** Los datos se ligan a fuentes primarias y se
+  citan en la prosa. Lo que no se pudo verificar se elimina o se presenta como
+  opinión propia.
+- **El blog dialoga consigo mismo.** Cada artículo enlaza a otros del blog cuando
+  encaja, y aporta un ángulo que el blog aún no tiene.
+- **El tema manda sobre la fórmula.** El tono, la cadencia y la narrativa de
+  Arturo se mantienen; las analogías salen del tema y no se fuerzan (ni el
+  estoicismo, ni los videojuegos).
+- **Cada cierre es propio.** La conclusión termina con una idea del tema y una
+  única línea constante de contacto; no hay despedida repetida.
+
+El proceso sigue **cuatro fases con un solo punto de aprobación (la Ficha)**:
+
+1. **Definir:** revisar el índice del blog, hacer una investigación ligera, elegir
+   el arquetipo y presentar la Ficha.
+2. **Investigar:** un sub-agente construye el dossier completo de fuentes.
+3. **Concretar:** redactar sobre el dossier con la voz de Arturo, editar para SEO,
+   representar diagramas con Mermaid, generar la portada y los 3 WebP.
+4. **Aprobar:** validar con el script y presentar la Hoja de Aprobación.
 
 ---
 
-## Flujo de Trabajo en Tres Fases
+## Flujo de Trabajo
 
 ```
-┌─────────────────┐       ┌─────────────────┐       ┌─────────────────┐
-│   1. DEFINIR    │ ───>  │  2. CONCRETAR   │ ───>  │   3. APROBAR    │
-│  Ficha y Visto  │       │ Prosa + WebPs   │       │ Validación +    │
-│      Bueno      │       │   Responsivos   │       │     Handoff     │
-└─────────────────┘       └─────────────────┘       └─────────────────┘
+┌───────────────┐   ┌───────────────┐   ┌───────────────┐   ┌───────────────┐
+│  1. DEFINIR   │ → │ 2. INVESTIGAR │ → │ 3. CONCRETAR  │ → │  4. APROBAR   │
+│ Índice, tesis │   │ Sub-agente:   │   │ Prosa, enlaces│   │ Validación y  │
+│ y Ficha ✋    │   │ dossier       │   │ y WebPs       │   │ Hoja          │
+└───────────────┘   └───────────────┘   └───────────────┘   └───────────────┘
+        ✋ = único punto de aprobación del usuario
 ```
 
-### FASE 1: DEFINIR (Ideación y Estructura)
+### FASE 1: DEFINIR (Contexto, Ángulo y Ficha)
 
-1. **Recepción de la Idea:**
-   - Si la petición es genérica o el usuario pide ideas, consultar opcionalmente
+1. **Recepción de la idea:**
+   - Si la petición es genérica o el usuario pide ideas, consultar
      `ideas_to_write.md`.
-   - Si la idea es abierta, proponer **2 o 3 ángulos temáticos con enfoques
-     contrastados**.
-2. **Ficha de Definición:** Una vez acordado el ángulo (o si el usuario ya dio
-   una idea precisa), presentar la **Ficha de Definición** y detenerse a esperar
-   el visto bueno del usuario:
+   - Si la idea es abierta, proponer **2 o 3 ángulos con enfoques contrastados**.
+2. **Revisar el blog** con el índice (ver
+   [references/internal-linking.md](references/internal-linking.md)):
+
+   ```bash
+   python3 .agents/skills/blog-article-creator/scripts/index_articles.py \
+     --query "<tema y palabras clave>" --top 8
+   ```
+
+   - **Guardia de originalidad:** si hay solapamiento, proponer un ángulo
+     distinto o enlazar al artículo existente en vez de repetirlo.
+   - **Candidatos a enlazar:** elegir de 2 a 5 artículos relacionados.
+3. **Investigación ligera** (la hace la propia skill; ver
+   [references/research.md](references/research.md)): pocas búsquedas con
+   `WebSearch`, `WebFetch` y `Context7` para confirmar que la tesis se sostiene,
+   conocer la versión o el estado actual del tema y armar el plan de fuentes.
+4. **Elegir el arquetipo** con las señales de
+   [references/reading-time.md](references/reading-time.md). Justificarlo en una línea.
+5. **Presentar la Ficha de Definición** y detenerse a esperar el visto bueno:
 
 ```markdown
 ### 📋 Ficha de Definición del Artículo
@@ -69,89 +96,104 @@ El proceso sigue un **flujo reproducible y óptimo en tres fases deterministas**
 - **Categoría (`label`):** `Programación` | `Spring Boot` | `Tecnología` |
   `Videojuegos` | `Marketing` | `Reflexión`
 - **Ruta Destino:** `articles/<categoria-path>/<slug>.md`
-- **Tiempo de Lectura:** `<N> minutos` (duración indicada por el usuario o
-  estimada desde la profundidad, audiencia y complejidad del tema). Incluir el
-  rango de palabras objetivo; no asumir 10 minutos si no se especifica.
+- **Arquetipo y longitud:** `nota` | `guia` | `analisis` | `tutorial` — <rango de
+  palabras>. **Justificación:** <una línea basada en las señales del tema>
 - **Tesis Central:** <Una oración que resuma la idea fuerza>
+- **Originalidad:** <artículos del blog con ángulo cercano y cómo se diferencia
+  este; o "sin solapamiento">
 - **Intención de Búsqueda:** <informacional, comparativa, transaccional o navegación>
 - **Keyword Principal:** <consulta natural que el lector buscaría>
 - **Keywords Secundarias:** <3–6 términos semánticamente relacionados>
 - **Gancho Inicial:** <Anécdota real, dilema técnico o pregunta provocadora>
+- **Analogía (opcional):** <idea que salga del propio tema, o "ninguna">
+- **Plan de Fuentes:** <fuentes primarias a consultar, afirmaciones que respaldan
+  y mínimo del arquetipo>
+- **Enlaces Internos Candidatos:** <2–5 artículos del índice, con URL y motivo>
 - **Concepto Visual de Portada:** <escena concreta derivada de la tesis,
   audiencia, ejemplos y metáforas del artículo; no solo la categoría>
-- **Esquema de Secciones:**
-  - `## <Sección 1: Planteamiento del problema / Contexto>`
-  - `## <Sección 2: Concepto técnico o metodológico>`
-  - `## <Sección 3: Caso práctico / Código / Implementación>`
-  - `<Diagrama Mermaid si mejora la comprensión de una relación, flujo o arquitectura>`
-  - `## <Sección 4: Trade-offs, lecciones o aplicación>`
-  - `## Conclusión` (Reflexión + CTA oficial)
-  - `## Referencias`
+- **Esquema de Secciones:** <secciones `##` acordes al arquetipo, diagramas
+  Mermaid si mejoran la comprensión>, `## Conclusión`, `## Referencias`
 ```
 
-> ⚠️ **Punto de Control:** No comenzar la redacción de la prosa ni la generación
-> de imágenes hasta que el usuario confirme la Ficha de Definición.
+> ⚠️ **Punto de Control:** No lanzar la investigación completa, redactar la prosa
+> ni generar imágenes hasta que el usuario apruebe la Ficha. Al aprobar, el
+> usuario puede ajustar el arquetipo, los enlaces o el plan de fuentes.
 
 ---
 
-### FASE 2: CONCRETAR (Redacción y Arte WebP Responsivo)
+### FASE 2: INVESTIGAR (Dossier de Fuentes)
 
-Una vez aprobada la Ficha de Definición:
+Tras la aprobación de la Ficha, **siempre** (en todos los arquetipos) lanzar un
+**sub-agente en segundo plano** con la herramienta `Agent`, usando el contrato de
+[references/research.md](references/research.md). El sub-agente abre y lee las
+fuentes primarias y devuelve una tabla afirmación → fuente → URL → confianza,
+más lo que no pudo verificar.
+
+- El dossier **vive solo en la conversación**; no se guarda en el repositorio.
+- No redactar sobre afirmaciones que el dossier marque como no verificadas:
+  eliminarlas o presentarlas como opinión propia.
+- Si el dossier contradice la tesis o revela un ángulo mejor, decirlo al usuario
+  antes de continuar.
+
+---
+
+### FASE 3: CONCRETAR (Redacción y Arte WebP Responsivo)
 
 #### A. Redacción en Prosa Auténtica
 
-- **Editor SEO experto:** aplicar antes de aprobar el artículo un pase editorial
-  sobre intención de búsqueda, título, slug, descripción de hasta 160 caracteres,
+- **Longitud:** respetar el arquetipo aprobado. Nunca rellenar; si falta
+  contenido, profundizar con anécdotas, trade-offs, datos con fuente o código
+  (ver `reading-time.md`, sección 5), o bajar de arquetipo.
+- **Fuentes y enlaces:** citar las fuentes del dossier con enlace contextual en la
+  frase que afirma el dato, y enlazar los artículos internos elegidos dentro de la
+  prosa. No forzar enlaces.
+- **Editor SEO experto:** aplicar antes de aprobar un pase editorial sobre
+  intención de búsqueda, título, slug, descripción de hasta 160 caracteres,
   jerarquía de encabezados, keyword principal, términos relacionados, enlaces
   internos y referencias. Optimizar sin repetir keywords artificialmente ni
   prometer algo que el artículo no explica. Seguir
   [references/seo-editor.md](references/seo-editor.md).
-
-- **Idioma Obligatorio (Español Neutro):** Redactar **siempre en español neutro**
+- **Idioma Obligatorio (Español Neutro):** redactar **siempre en español neutro**
   con tuteo estándar (*tú*, *tienes*, *puedes*, *observas*, *revisa*, *deja*).
   Está **estrictamente prohibido el voseo** (*tenés*, *podés*, *mirá*, *hacés*,
-  *para vos*, etc.) y modismos regionales (chilenos, rioplatenses, peninsulares).
-  El tono es el de Arturo López (México): cercano, técnico, reflexivo y universal.
-- **Voz de Arturo López:** Primera persona directa, artesano de software, líder
-  técnico humilde y reflexivo. Metáforas de videojuegos (Pokémon, Age of
-  Mythology), cultura pop (Spider-Man) y estoicismo (Marco Aurelio, dicotomía
-  del control, actuar sin depender del resultado).
-- **Ritmo y Variedad:** Alternar frases largas con sentencias breves. Incluir
-  entre **2 y 4 citas en bloque (`>`)**.
-- **Cero Clichés de IA:** Aplicar estrictamente la lista negra (prohibido _"en
+  *para vos*, etc.) y los modismos regionales.
+- **Voz de Arturo López:** primera persona directa, artesano de software, líder
+  técnico humilde y reflexivo. El tono, el ritmo y la narrativa son los de
+  siempre. Las analogías salen del tema; Pokémon, Age of Mythology, Spider-Man y
+  el estoicismo son una **paleta opcional**, no un requisito (ver
+  [references/natural-writing.md](references/natural-writing.md)).
+- **Ritmo y Variedad:** alternar frases largas con sentencias breves. Citas en
+  bloque (`>`) según el arquetipo (nota 0–1, guía 1–3, análisis y tutorial 2–4).
+- **Cero Clichés de IA:** aplicar estrictamente la lista negra (prohibido _"en
   el vertiginoso mundo"_, _"cabe destacar"_, _"en conclusión,"_ al inicio de
   conclusión, etc.).
-- **Bloques Prácticos:** Código comentado, tablas y diagramas Mermaid cuando
+- **Bloques Prácticos:** código comentado, tablas y diagramas Mermaid cuando
   aplique. Si se representa un flujo, secuencia, arquitectura, relación o ciclo,
   usar un bloque fenced `mermaid`; no usar ASCII como formato principal para
   diagramas técnicos. No añadir diagramas por decoración.
-- **Cierre Oficial (CTA):**
+- **Cierre:** la conclusión cierra el arco con una reflexión y termina con una
+  idea o pregunta **propia del tema**, distinta a la de los últimos artículos. No
+  hay despedida fija. Lo último antes de `## Referencias` es la **línea
+  constante** de contacto:
 
   ```markdown
   ## Conclusión
 
-  <Reflexión final que cierre el arco sin usar "En conclusión">
+  <Reflexión final propia del tema, sin "En conclusión", con una idea, reto o
+  pregunta específica del artículo. En una nota puede ser de 2 o 3 líneas.>
 
-  ¿Ya estás implementando este enfoque en tu entorno de desarrollo? Me
-  encantaría conocer tu experiencia y los desafíos que has enfrentado. ¡Hasta la
-  próxima línea de código! 🚀
-
-  Deja tus comentarios en el
-  [repositorio](https://github.com/lgzarturo/arthurolg-blog-posts/issues) o en
-  mi perfil de [X@algforge](https://x.com/algforge). Si te es de utilidad, una
-  estrella en [GitHub](https://github.com/lgzarturo) es de gran ayuda o no dudes
-  en compartir este artículo con tus colegas y amigos. ¡Gracias por leer!
+  Si quieres comentar o compartir tu experiencia, escríbeme en [X (@algforge)](https://x.com/algforge) o abre un issue en el [repositorio](https://github.com/lgzarturo/arthurolg-blog-posts/issues). Una estrella en [GitHub](https://github.com/lgzarturo) también ayuda.
 
   ## Referencias
 
-  - [Documentación / Repositorio Relevante](https://...)
+  - [Título de la fuente, Organización](https://...)
   ```
 
 #### B. Generación y Procesamiento de la Imagen de Portada
 
 1. Generar la imagen con la herramienta nativa `generate_image`:
    - `AspectRatio`: `"16:9"`
-   - `Prompt`: Prompt en inglés construido desde la tesis, problema, audiencia,
+   - `Prompt`: prompt en inglés construido desde la tesis, problema, audiencia,
      ejemplos y metáforas del artículo, siguiendo las pautas de
      [references/cover-images.md](references/cover-images.md). La categoría solo
      define el lenguaje visual; nunca sustituye el contexto semántico del texto.
@@ -186,30 +228,44 @@ label: 'Programación'
 
 ---
 
-### FASE 3: APROBAR (Validación Local y Handoff)
+### FASE 4: APROBAR (Validación Local y Handoff)
 
-1. **Ejecución de la Suite de Validación:** Ejecutar el script de auditoría:
+1. **Ejecutar la suite de validación** con el arquetipo aprobado:
 
    ```bash
    python3 .agents/skills/blog-article-creator/scripts/validate_article.py \
      --file "articles/<categoria>/<slug>.md" \
-     --reading-time <minutos-o-auto>
+     --archetype <nota|guia|analisis|tutorial> \
+     --check-links
    ```
 
-   _Si el script reporta errores, corregir el archivo Markdown o las imágenes
-   hasta obtener `[SUCCESS]`._
+   - Los **errores** impiden `[SUCCESS]` y deben corregirse: frontmatter, clichés,
+     voseo, falta de `## Conclusión` o `## Referencias`, imágenes faltantes y
+     **enlaces internos rotos**.
+   - Los **avisos** nunca bloquean, pero deben revisarse y justificarse o
+     corregirse: longitud fuera del arquetipo, pocas fuentes o enlaces internos,
+     enlace externo que no responde, fuentes solo en `## Referencias`, referencias
+     genéricas propias, cierre repetido y referencias recurrentes.
+   - `--check-links` hace peticiones HTTP; si un sitio bloquea bots, confirmar a
+     mano.
 
-2. **Presentación de la Hoja de Aprobación:** Presentar al usuario el resumen
-   final con la imagen embebida y el relevo para publicación:
+2. **Presentar la Hoja de Aprobación** con la imagen embebida, el dossier resumido
+   y el relevo para publicación:
 
 ````markdown
 ### 🎯 Hoja de Aprobación del Artículo
 
 - **Artículo:** [`<nombre-archivo.md>`](file:///<ruta_absoluta>)
-- **Métricas:** ~X,XXX palabras de prosa | X.X min de lectura estimada | X
-  bloques de código | X citas `>`
-- **Validación:** ✅ Frontmatter, Estructura, Cero Clichés de IA y 3 WebPs
-  Responsivos Verificados.
+- **Arquetipo:** <arquetipo> | ~X,XXX palabras de prosa | X.X min de lectura
+  estimada | X bloques de código | X citas `>`
+- **Enlaces:** X internos, X fuentes externas
+- **Validación:** ✅ Sin errores | ⚠️ <avisos pendientes y por qué se aceptan>
+
+#### Dossier de Fuentes (resumen)
+
+| # | Afirmación | Fuente | URL | Confianza |
+|---|------------|--------|-----|-----------|
+| 1 | ...        | ...    | ... | alta      |
 
 #### Portada Generada
 
@@ -232,10 +288,8 @@ git commit -m "feat(blog): publicar articulo sobre <tema en español neutro>
 ```
 ````
 
-```
-
-3. **Actualización de Ideas (si aplica):**
-   Si el tema provino de `ideas_to_write.md`, sugerir actualizar o tachar el tema correspondiente en dicho archivo.
+3. **Actualización de Ideas (si aplica):** si el tema provino de
+   `ideas_to_write.md`, sugerir actualizar o tachar el tema correspondiente.
 
 ---
 
@@ -254,8 +308,11 @@ git commit -m "feat(blog): publicar articulo sobre <tema en español neutro>
 
 ## Documentación de Referencia
 
-- [references/natural-writing.md](references/natural-writing.md): Manual de estilo, voz y lista negra de clichés de IA.
-- [references/reading-time.md](references/reading-time.md): Presupuesto de palabras y fórmula de cálculo a 200 WPM.
-- [references/cover-images.md](references/cover-images.md): Guía estética y especificaciones técnicas de portadas WebP.
+- [references/reading-time.md](references/reading-time.md): Arquetipos de longitud, señales para elegirlos y mínimos por arquetipo.
+- [references/research.md](references/research.md): Política de investigación, jerarquía de fuentes y contrato del sub-agente.
+- [references/internal-linking.md](references/internal-linking.md): Índice del blog, patrón de URL, enlaces internos y guardia de originalidad.
+- [references/natural-writing.md](references/natural-writing.md): Manual de estilo, voz, cierre y lista negra de clichés de IA.
 - [references/seo-editor.md](references/seo-editor.md): Pase editorial experto para SEO, legibilidad e intención de búsqueda.
-```
+- [references/cover-images.md](references/cover-images.md): Guía estética y especificaciones técnicas de portadas WebP.
+- [scripts/index_articles.py](scripts/index_articles.py): Índice y búsqueda de artículos del blog.
+- [scripts/validate_article.py](scripts/validate_article.py): Suite de validación (`--archetype`, `--check-links`).

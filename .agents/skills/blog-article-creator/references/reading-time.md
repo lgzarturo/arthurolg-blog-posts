@@ -1,91 +1,91 @@
-# Sistema de Control y Presupuesto de Tiempo de Lectura
+# Arquetipos y Presupuesto de Longitud
 
-Este documento detalla el estándar y la metodología para calcular, presupuestar y auditar la extensión de los artículos en función del **tiempo de lectura deseado por el usuario**.
-
----
-
-## 1. Regla de Oro: Duración Explícita o Dinámica
-
-* Si el usuario indica una duración (ej. *"artículo de 5 minutos"*, *"post extenso de 15 minutos"*), esa duración es el objetivo principal.
-* Si no la indica, no asumir 10 minutos. Estimar la duración a partir de la profundidad, audiencia, número de conceptos, ejemplos, trade-offs, código y diagramas previstos.
-* Proponer la duración calculada en la Ficha de Definición y detenerse para aprobación. La duración solo queda fijada cuando el usuario la acepta.
-* Usar 3–5 minutos para una explicación breve, 6–9 para una guía normal, 10–15 para un análisis profundo y 16–20 para un tutorial o investigación extensa. No alargar con relleno.
+La longitud de un artículo la decide el **contexto del tema**, no una plantilla. Este documento define cómo elegirla, cómo justificarla en la Ficha y cómo auditarla.
 
 ---
 
-## 2. Velocidad de Lectura Base (WPM)
+## 1. Regla de Oro
 
-Para prosa en español reflexiva y técnica (con términos de arquitectura, bloques de código e investigación), la velocidad base estimada es de:
-
-$$\text{Velocidad Base} = 200 \text{ palabras por minuto (WPM)}$$
-
-Esta velocidad garantiza que el tiempo asignado permita una lectura pausada y comprensiva del material técnico y de las reflexiones filosóficas.
-
----
-
-## 3. Tabla de Presupuesto de Palabras por Tiempo de Lectura
-
-$$\text{palabras\_prosa\_objetivo} = \text{minutos\_lectura} \times 200$$
-
-| Tiempo Deseado | Objetivo Prosa | Rango Aceptable (Prosa) | Secciones (`##`) Recomendadas |
-| :--- | :--- | :--- | :--- |
-| **3 minutos** | ~600 palabras | 500 – 700 palabras | 2 – 3 secciones |
-| **5 minutos** | ~1,000 palabras | 800 – 1,200 palabras | 3 – 4 secciones |
-| **7 minutos** | ~1,400 palabras | 1,100 – 1,600 palabras | 4 – 5 secciones |
-| **10 minutos** | **~2,000 palabras** | **1,600 – 2,400 palabras** | **5 – 6 secciones** |
-| **15 minutos** | ~3,000 palabras | 2,400 – 3,500 palabras | 6 – 8 secciones |
-| **20 minutos** | ~4,000 palabras | 3,200 – 4,500 palabras | 8 – 10 secciones |
+* Si el usuario indica una duración o un arquetipo, ese es el objetivo.
+* Si no, la skill **propone un arquetipo en la Ficha de Definición** y lo justifica en una línea. La longitud solo queda fijada cuando el usuario aprueba la Ficha.
+* **Nunca se alarga para llegar a un número.** Si el tema se agota antes del rango, se baja de arquetipo. Si el tema pide más, se sube y se dice por qué.
+* No existe un tamaño "por defecto". Si varios artículos seguidos caen en el mismo rango, revisa si de verdad el contexto lo pedía.
 
 ---
 
-## 4. Ajuste por Bloques de Código e Imágenes
+## 2. Los Cuatro Arquetipos
 
-Los bloques de código y las imágenes enriquecen el tiempo de lectura sin sumar recuento de palabras puras de prosa. Se aplican las siguientes equivalencias:
+| Arquetipo (`--archetype`) | Palabras de prosa | Secciones `##` del cuerpo | Citas `>` | Fuentes externas (mín.) | Enlaces internos (mín.) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Nota / destello** (`nota`) | 500 – 900 | 1 – 2 | 0 – 1 | 1 | 1 |
+| **Guía / reflexión** (`guia`) | 1,000 – 1,800 | 3 – 4 | 1 – 3 | 3 | 2 |
+| **Análisis profundo** (`analisis`) | 2,000 – 3,200 | 4 – 6 | 2 – 4 | 5 | 3 |
+| **Tutorial / investigación** (`tutorial`) | 3,500 – 5,000+ | 5 o más | 2 – 4 | 8 | 3 |
 
-* **Bloque de código (moderado, 5-15 líneas):** $+0.33 \text{ min}$ (equivalente a ~65 palabras de prosa).
-* **Bloque de código extenso (>15 líneas):** $+0.60 \text{ min}$ (equivalente a ~120 palabras de prosa).
-* **Imagen / Diagrama ASCII:** $+0.20 \text{ min}$ (equivalente a ~40 palabras de prosa).
-* **Diagrama Mermaid:** $+0.20 \text{ min}$ (equivalente a ~40 palabras de prosa).
+Las secciones no cuentan `## Conclusión` ni `## Referencias`, que son obligatorias en todos. Los mínimos se auditan como avisos; el validador usa estos mismos números (`ARCHETYPES` en `validate_article.py`).
 
-### Fórmula del Tiempo Estimado Real:
+En Reflexión (`label: Reflexión` o `General`), las fuentes externas solo son obligatorias si el texto cita datos, estudios o autores. Los enlaces internos siguen aplicando, pero nunca se fuerzan.
+
+### Señales para elegir el arquetipo
+
+Evalúa estas señales con el tema concreto y elige el arquetipo que más se ajuste:
+
+| Señal | Empuja hacia |
+| :--- | :--- |
+| Una sola idea o anécdota, sin necesidad de evidencia | nota |
+| Un concepto con un ejemplo, pocas afirmaciones verificables | guía |
+| Varias afirmaciones que necesitan fuente, trade-offs, alternativas descartadas | análisis |
+| Pasos reproducibles, código obligatorio, comparativas, varias fuentes primarias | tutorial |
+| El tema ya está cubierto en el blog (ver `index_articles.py`) | bajar un nivel y enlazar al artículo existente |
+| Audiencia nueva en el tema, requiere definir conceptos | subir un nivel |
+| El gancho es una escena breve y el aprendizaje cabe en un párrafo | nota |
+
+La Ficha debe incluir: arquetipo, rango de palabras y **una línea de justificación** basada en estas señales.
+
+---
+
+## 3. Velocidad de Lectura y Tiempo Estimado
+
+Velocidad base para prosa técnica reflexiva en español: **200 palabras por minuto**.
+
 $$\text{Tiempo Real (min)} = \left(\frac{\text{palabras\_prosa}}{200}\right) + (\text{bloques\_código} \times 0.33) + ((\text{imágenes} + \text{diagramas Mermaid}) \times 0.20)$$
 
----
-
-## 5. Distribución de Palabras por Bloque
-
-Para evitar desequilibrios donde la introducción sea enorme y el cuerpo quede raquítico, aplica el siguiente reparto porcentual:
-
-```
-┌──────────────────────────────────────────────────────────────┐
-│             PRESUPUESTO DINÁMICO (N × 200 PALABRAS)          │
-├──────────────────────────────┬───────────────┬───────────────┤
-│ Bloque                       │ % del Total   │ Palabras       │
-├──────────────────────────────┼───────────────┼───────────────┤
-│ Gancho / Introducción        │ ~10%          │ N × 20         │
-│ Cuerpo (según complejidad)   │ ~78%          │ N × 156        │
-│ Reflexión final & CTA        │ ~12%          │ N × 24         │
-└──────────────────────────────┴───────────────┴───────────────┘
-```
+El tiempo estimado es una métrica informativa de la Hoja de Aprobación. **No determina la longitud**; la determina el arquetipo.
 
 ---
 
-## 6. Principio de Profundidad Técnica vs. "Paja" (Relleno)
+## 4. Distribución Orientativa
 
-> **Regla de Calidad de Arturo López:** Si al redactar falta volumen para alcanzar el tiempo objetivo, **NUNCA utilices paja, adjetivos huecos ni repeticiones**.
+Para evitar una introducción enorme con un cuerpo raquítico:
 
-### Cómo aumentar la longitud de forma valiosa:
-1. Agrega una **anécdota real** o un caso de uso concreto de producción.
-2. Explica los **compromisos (*trade-offs*)** o las alternativas descartadas.
-3. Incluye un **bloque de código o diagrama ASCII** explicando el problema interno.
-4. Desarrolla los **casos bordes (*edge cases*)** y las lecciones aprendidas.
+| Bloque | Proporción aproximada |
+| :--- | :--- |
+| Gancho / introducción | 8 – 12% |
+| Cuerpo | 75 – 80% |
+| Conclusión | 8 – 12% (en una nota puede ser de 2 o 3 líneas) |
 
 ---
 
-## 7. Ejecución de la Validación
+## 5. Cómo Ganar Profundidad sin Paja
 
-Tras generar o modificar el artículo, audita el tiempo real con el script oficial del repositorio:
+Si falta contenido para el rango del arquetipo, no repitas ni adjetives. Haz una de estas cosas:
+
+1. Añade una **anécdota real** o un caso de producción.
+2. Explica los **trade-offs** o las alternativas descartadas.
+3. Incorpora un **dato verificable** con su fuente (ver `references/research.md`).
+4. Incluye un **bloque de código o diagrama Mermaid** que muestre el mecanismo.
+5. Desarrolla un **caso borde** y la lección que dejó.
+
+Si ninguna aplica, el artículo ya tiene la longitud correcta: baja de arquetipo.
+
+---
+
+## 6. Validación
 
 ```bash
-python3 .agents/skills/blog-article-creator/scripts/validate_article.py --file "<ruta-al-articulo.md>" --reading-time <minutos-o-auto> --ignore-date-today
+python3 .agents/skills/blog-article-creator/scripts/validate_article.py \
+  --file "<ruta-al-articulo.md>" --archetype <nota|guia|analisis|tutorial> --ignore-date-today
 ```
+
+* Con `--archetype`, el rango de palabras, las secciones, las citas y los mínimos de fuentes y enlaces internos se miden contra la tabla de arriba.
+* Sin `--archetype`, `--reading-time N` conserva el modo legado (±25% / +30% del objetivo). `--reading-time auto` solo es diagnóstico: infiere el objetivo del propio texto y no emite avisos de longitud.

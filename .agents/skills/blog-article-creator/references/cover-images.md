@@ -46,7 +46,7 @@ Las portadas del blog de Arturo destacan por su elegancia visual, evitando a tod
 ### C. Reflexión y Crecimiento Personal (`Reflexión`, `General`)
 * **Estilo Visual:** Fotografía artística minimalista o bodegón cálido (*fine-art still life*).
 * **Elementos Clave:** Elementos naturales y contemplativos (bonsáis, piedras de río pulidas, bandejas de madera rústica, tazas de té/café humeante, cuadernos de notas antiguos, luz suave de ventana al amanecer o lámpara de papel de arroz cálida).
-* **Concepto:** Serenidad, pausa consciente, resiliencia y filosofía estoica.
+* **Concepto:** Serenidad, pausa consciente y resiliencia. La escena debe salir del tema concreto del artículo; no recurras a símbolos estoicos si el texto no trata de estoicismo.
 
 ### D. Marketing y Estrategia (`Marketing`)
 * **Estilo Visual:** Visualización 3D conceptual sofisticada (lujo minimalista, hospitalidad moderna, rutas de conversión y datos fluidos).
