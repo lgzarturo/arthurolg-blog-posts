@@ -55,6 +55,8 @@ Sin embargo, el propio Karpathy tuvo que salir un año más tarde a enterrar el 
 
 El siguiente diagrama ilustra con claridad la diferencia entre dejarse llevar por la inercia del prompt y liderar un proceso de desarrollo determinista asistido por agentes:
 
+### Vibecoding
+
 ```mermaid
 graph TD
     subgraph Vibecoding [Enfoque Vibecoding - Frágil]
@@ -64,7 +66,12 @@ graph TD
         V4 -->|Pegar error en el chat| V2
         V4 --> V5[Deuda técnica acumulada e inmanejable]
     end
+```
 
+### Ingeniería Agéntica
+
+```mermaid
+graph TD
     subgraph Ingenieria [Ingeniería Agéntica - Sostenible]
         I1[Diseño de arquitectura y contratos claros] --> I2[Definición de especificaciones y tests de fallo]
         I2 --> I3[Enjambre de agentes especializados]
