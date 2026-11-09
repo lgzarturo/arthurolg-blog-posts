@@ -5,13 +5,16 @@ Audita:
   1. Metadatos YAML del Frontmatter (campos requeridos, límites de caracteres, concordancia de ruta).
   2. Presupuesto de palabras y tiempo de lectura objetivo (WPM = 200 base).
   3. Detección estricta de clichés y muletillas de IA (Lista negra).
-  4. Estructura narrativa escalada por arquetipo (secciones, citas '>', conclusión, referencias).
+  4. Estructura narrativa escalada por arquetipo (citas '>', conclusión, referencias) y, con
+     --type/--objective, presupuesto de intro, conclusión y cada '##', bloques visuales y transiciones.
   5. Existencia y dimensiones de las 3 imágenes WebP responsivas (desktop, tablet, mobile).
   6. Investigación y enlaces: fuentes externas, enlaces internos que existan, referencias genéricas.
   7. Originalidad frente a los últimos artículos: cierres repetidos y referencias recurrentes.
 
 Uso:
-  python3 validate_article.py --file articles/programming/mi-articulo.md --archetype analisis
+  python3 validate_article.py --file articles/programming/mi-articulo.md --type analisis --objective decidir
+  python3 validate_article.py --file articles/programming/mi-articulo.md --type tutorial --objective hacer --visuals 1
+  python3 validate_article.py --file articles/programming/mi-articulo.md --archetype analisis   # artículos legados
   python3 validate_article.py --file articles/programming/mi-articulo.md --archetype guia --check-links
   python3 validate_article.py --file articles/programming/mi-articulo.md --reading-time 7   # modo legado
 """
@@ -27,6 +30,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import index_articles  # noqa: E402  (índice compartido: URLs públicas y resolución de enlaces internos)
+import plan_length  # noqa: E402  (fuente única de rangos de longitud por arquetipo y por parte)
 
 if sys.platform == "win32":
     try:
@@ -85,26 +89,24 @@ VOSEO_AND_REGIONALISMS = [
 ]
 
 
-# Arquetipos: rango de palabras de prosa, estructura esperada y mínimos de investigación.
-# max_words=None significa sin límite superior.
-ARCHETYPES = {
-    "nota": {
-        "name": "Nota / destello", "min_words": 500, "max_words": 900,
-        "sections": (1, 2), "quotes": (0, 1), "sources": 1, "internal": 1, "needs_code": False,
-    },
-    "guia": {
-        "name": "Guía / reflexión", "min_words": 1000, "max_words": 1800,
-        "sections": (3, 4), "quotes": (1, 3), "sources": 3, "internal": 2, "needs_code": False,
-    },
-    "analisis": {
-        "name": "Análisis profundo", "min_words": 2000, "max_words": 3200,
-        "sections": (4, 6), "quotes": (2, 4), "sources": 5, "internal": 3, "needs_code": False,
-    },
-    "tutorial": {
-        "name": "Tutorial / investigación", "min_words": 3500, "max_words": None,
-        "sections": (5, None), "quotes": (2, 4), "sources": 8, "internal": 3, "needs_code": True,
-    },
+# Arquetipos: los rangos de longitud (palabras, tope de intro, conclusión, máximo de citas) vienen de
+# plan_length.py; aquí solo se añaden el nombre y los mínimos de investigación.
+_RESEARCH = {
+    "nota": {"name": "Nota / destello", "sources": 1, "internal": 1, "needs_code": False},
+    "guia": {"name": "Guía / reflexión", "sources": 3, "internal": 2, "needs_code": False},
+    "analisis": {"name": "Análisis profundo", "sources": 5, "internal": 3, "needs_code": False},
+    "tutorial": {"name": "Tutorial / investigación", "sources": 8, "internal": 3, "needs_code": True},
 }
+ARCHETYPES = {name: {**plan_length.ARCHETYPES[name], **_RESEARCH[name]} for name in plan_length.ORDER}
+
+# Muletillas de transición vetadas al inicio de un párrafo (lista ampliable).
+TRANSITION_BLACKLIST = (
+    "Ahora bien", "Dicho esto", "Pasemos a", "Veamos ahora", "Llegados a este punto",
+    "Antes de continuar", "Por otro lado,", "Con esto en mente",
+)
+_TRANSITION_RE = re.compile(r"(?:%s)" % "|".join(re.escape(p) for p in TRANSITION_BLACKLIST), re.IGNORECASE)
+SECTION_TOLERANCE = 0.25  # margen sobre el rango por parte antes de avisar
+TABLE_SEPARATOR_RE = re.compile(r"^\s*\|?\s*:?-{3,}:?\s*(?:\|\s*:?-{3,}:?\s*)+\|?\s*$", re.MULTILINE)
 
 # Labels en los que las fuentes externas solo son obligatorias si el texto cita datos, estudios o autores.
 REFLECTIVE_LABELS = {"Reflexión", "General"}
@@ -248,8 +250,70 @@ def count_prose_words(body: str):
     return len(words)
 
 
+def body_sections(cuerpo: str) -> list:
+    """Divide el cuerpo en (intro, [(t\u00EDtulo, texto, n\u00BA de '###'), ...]) ignorando encabezados dentro de c\u00F3digo."""
+    masked = mask_code_blocks(cuerpo)
+    heads = list(re.finditer(r"^##\s+(.+)$", masked, flags=re.MULTILINE))
+    intro = cuerpo[:heads[0].start()] if heads else cuerpo
+    result = []
+    for i, head in enumerate(heads):
+        end = heads[i + 1].start() if i + 1 < len(heads) else len(cuerpo)
+        subsections = len(re.findall(r"^###\s+", masked[head.end():end], flags=re.MULTILINE))
+        result.append((head.group(1).strip(), cuerpo[head.end():end], subsections))
+    return intro, result
+
+
+def structure_warnings(body: str, archetype: str, type_: str = None, visuals: int = 0) -> list:
+    """Avisos de estructura. Citas y c\u00F3digo siempre; el resto solo con --type (presupuesto v6)."""
+    arch = ARCHETYPES[archetype]
+    warnings = []
+    masked = mask_code_blocks(body)
+
+    blockquotes = len(re.findall(r"(?:^>[^\n]*\n?)+", masked, flags=re.MULTILINE))
+    if blockquotes > arch["quotes_max"]:
+        warnings.append(f"Citas en bloque ('>'): {blockquotes} (m\u00E1ximo {arch['quotes_max']} para '{arch['name']}').")
+    code_blocks = len(re.findall(r"```(?!mermaid)[\w]*\r?\n[\s\S]*?```", body, flags=re.IGNORECASE))
+    if arch["needs_code"] and code_blocks == 0:
+        warnings.append(f"'{arch['name']}' espera al menos un bloque de c\u00F3digo; no se encontr\u00F3 ninguno.")
+
+    if not type_:
+        return warnings
+
+    sections = split_sections(body)
+    intro, parts = body_sections(sections["cuerpo"])
+    intro_words = count_prose_words(intro)
+    if intro_words > arch["intro_max"]:
+        warnings.append(f"Intro: {intro_words} palabras antes del primer '##' (tope {arch['intro_max']} para '{arch['name']}'). Entra antes al tema.")
+
+    closing = "\n\n".join(p for p in re.split(r"\n\s*\n", sections["conclusion"])
+                          if not any(sig in p for sig in SOCIAL_SIGNATURE))
+    closing_words = count_prose_words(closing)
+    c_lo, c_hi = arch["conclusion"]
+    if not c_lo <= closing_words <= c_hi:
+        warnings.append(f"Conclusi\u00F3n: {closing_words} palabras sin la l\u00EDnea de contacto (esperado {c_lo}\u2013{c_hi} para '{arch['name']}').")
+
+    for title, text, subsections in parts:
+        lo, hi = plan_length.section_range(type_, subsections)
+        n = count_prose_words(text)
+        if n < lo * (1 - SECTION_TOLERANCE) or n > hi * (1 + SECTION_TOLERANCE):
+            warnings.append(f"Secci\u00F3n '{title}': {n} palabras (rango {lo}\u2013{hi} \u00B1{SECTION_TOLERANCE:.0%} para '{type_}'). Profundiza o recorta; no rellenes.")
+
+    mermaid = len(re.findall(r"```mermaid\r?\n[\s\S]*?```", body, flags=re.IGNORECASE))
+    tables = len(TABLE_SEPARATOR_RE.findall(masked))
+    if mermaid + tables > visuals:
+        warnings.append(f"Visuales: {mermaid} Mermaid + {tables} tablas (declarados en la Ficha: {visuals}). Elimina los que no expliquen algo que la prosa no puede.")
+
+    lines = masked.splitlines()
+    for i, line in enumerate(lines):
+        starts_paragraph = i == 0 or not lines[i - 1].strip() or lines[i - 1].lstrip().startswith("#")
+        if starts_paragraph and _TRANSITION_RE.match(line.strip()):
+            warnings.append(f"Transici\u00F3n gen\u00E9rica en la l\u00EDnea {i + 1}: '{line.strip()[:40]}'. Retoma algo concreto de la secci\u00F3n anterior.")
+    return warnings
+
+
 def validate_article(file_path: Path, target_reading_time, wpm: int = 200, ignore_date_today: bool = False,
-                     archetype: str = None, check_links: bool = False):
+                     archetype: str = None, check_links: bool = False, type_: str = None, objective: str = None,
+                     visuals: int = 0):
     errors = []
     warnings = []
     info = []
@@ -336,6 +400,13 @@ def validate_article(file_path: Path, target_reading_time, wpm: int = 200, ignor
     target_words = target_reading_time * wpm
 
     info.append(f"Palabras de prosa: {prose_words:,} | Bloques de código: {code_blocks} | Diagramas Mermaid: {mermaid_blocks} | Imágenes en cuerpo: {images_count}")
+    sections = split_sections(body)
+    section_count = len(body_sections(sections["cuerpo"])[1])
+    if type_ and objective:
+        # Con tipo y objetivo, el arquetipo se deriva de las partes reales y tiene precedencia sobre --archetype.
+        derived = plan_length.plan(type_, objective, max(1, section_count))
+        archetype = derived["archetype"]
+        info.append(f"Arquetipo derivado de {type_} · {objective} · {section_count} partes: {archetype} · status {derived['status']}")
     arch = ARCHETYPES.get(archetype) if archetype else None
     if arch:
         upper = f"{arch['max_words']:,}" if arch["max_words"] else "sin límite"
@@ -373,26 +444,11 @@ def validate_article(file_path: Path, target_reading_time, wpm: int = 200, ignor
             errors.append(f"Línea {line_num}: {msg} -> encontrado '{m.group(0).strip()}'")
 
     # 5. Estructura Narrativa y Formato (escalada por arquetipo)
-    sections = split_sections(body)
-
-    # Secciones ## del cuerpo (sin Conclusión ni Referencias)
-    body_sections = len(re.findall(r"^##\s+", mask_code_blocks(sections["cuerpo"]), flags=re.MULTILINE))
     # Citas en bloque: cuenta bloques contiguos, no líneas
     blockquotes = len(re.findall(r"(?:^>[^\n]*\n?)+", mask_code_blocks(body), flags=re.MULTILINE))
+    info.append(f"Citas destacadas en bloque ('>'): {blockquotes} | Secciones '##' del cuerpo: {section_count}")
     if arch:
-        lo, hi = arch["sections"]
-        if body_sections < lo or (hi is not None and body_sections > hi):
-            rng = f"{lo}+" if hi is None else f"{lo}–{hi}"
-            warnings.append(f"Secciones '##' del cuerpo: {body_sections} (esperado {rng} para '{arch['name']}', sin contar Conclusión ni Referencias).")
-        qlo, qhi = arch["quotes"]
-        if blockquotes < qlo or blockquotes > qhi:
-            warnings.append(f"Citas en bloque ('>'): {blockquotes} (esperado {qlo}–{qhi} para '{arch['name']}').")
-        else:
-            info.append(f"Citas destacadas en bloque ('>'): {blockquotes} | Secciones '##' del cuerpo: {body_sections}")
-        if arch["needs_code"] and code_blocks == 0:
-            warnings.append(f"'{arch['name']}' espera al menos un bloque de código; no se encontró ninguno.")
-    else:
-        info.append(f"Citas destacadas en bloque ('>'): {blockquotes} | Secciones '##' del cuerpo: {body_sections}")
+        warnings.extend(structure_warnings(body, archetype, type_ if objective else None, visuals))
 
     # Conclusión
     if not re.search(r"^##\s+Conclusi[oó]n", body, flags=re.MULTILINE | re.IGNORECASE):
@@ -509,13 +565,20 @@ def validate_article(file_path: Path, target_reading_time, wpm: int = 200, ignor
 def main():
     parser = argparse.ArgumentParser(description="Validar artículos del blog de Arturo López.")
     parser.add_argument("--file", required=True, help="Ruta al archivo Markdown del artículo")
-    parser.add_argument("--archetype", choices=sorted(ARCHETYPES), help="Arquetipo aprobado en la Ficha: nota | guia | analisis | tutorial (define rangos y mínimos)")
+    parser.add_argument("--type", choices=list(plan_length.PARTS), help="Tipo de la Ficha; junto con --objective deriva el arquetipo y activa los avisos de presupuesto v6")
+    parser.add_argument("--objective", choices=list(plan_length.OBJECTIVES), help="Objetivo de la Ficha (requiere --type)")
+    parser.add_argument("--visuals", type=int, default=0, help="Bloques visuales (Mermaid + tablas) declarados en la Ficha (por defecto: 0)")
+    parser.add_argument("--archetype", choices=sorted(ARCHETYPES), help="Artículos legados: arquetipo explícito (nota | guia | analisis | tutorial). --type/--objective tiene precedencia")
     parser.add_argument("--check-links", action="store_true", help="Comprobar por HTTP las fuentes externas (avisa, no bloquea)")
     parser.add_argument("--reading-time", default="auto", help="Modo legado: minutos objetivo, o 'auto' (solo diagnóstico). Con --archetype se ignora para longitud")
     parser.add_argument("--wpm", type=int, default=200, help="Palabras por minuto para cálculo de prosa (por defecto: 200)")
     parser.add_argument("--ignore-date-today", action="store_true", help="No emitir advertencia si la fecha no es hoy")
 
     args = parser.parse_args()
+    if bool(args.type) != bool(args.objective):
+        parser.error("--type y --objective van juntos")
+    if args.visuals < 0:
+        parser.error("--visuals debe ser un entero >= 0")
     if args.reading_time != "auto":
         try:
             args.reading_time = int(args.reading_time)
@@ -535,6 +598,9 @@ def main():
         ignore_date_today=args.ignore_date_today,
         archetype=args.archetype,
         check_links=args.check_links,
+        type_=args.type,
+        objective=args.objective,
+        visuals=args.visuals,
     )
 
     if info:
