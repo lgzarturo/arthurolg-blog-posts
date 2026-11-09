@@ -18,8 +18,19 @@ necesidad real, no repetir palabras clave.
 ## Edición en el documento
 
 - El primer párrafo debe confirmar rápidamente el problema y para quién es útil.
-- Cada `##` debe responder una pregunta o avanzar la tesis; los `###` deben
-  ordenar detalles, no fragmentar artificialmente el texto.
+- **Respuesta directa:** en intención informacional, tras el gancho va un
+  párrafo de 40–60 palabras que responde la consulta. Cuenta dentro del tope de
+  intro del arquetipo.
+- **Keyword principal** en el título, el primer párrafo, al menos un `##` y la
+  descripción; en ningún otro lugar se fuerza.
+- Formula los `##` como preguntas reales del lector cuando el tipo lo permite;
+  si no, que cada `##` avance la tesis. Los `###` ordenan detalles, no
+  fragmentan artificialmente el texto.
+- **Pasajes citables (GEO):** escribe párrafos que se entiendan aislados, con
+  sujeto explícito y un dato o afirmación completa, para que un buscador o un
+  asistente pueda citarlos sin el resto del artículo.
+- **FAQ opcional** solo en `novedades` y `tutorial`, y solo si la SERP muestra
+  preguntas relacionadas. Nunca en artículos de reflexión.
 - Incluye sinónimos y entidades del tema en el texto, encabezados, alt text de
   imágenes y enlaces, pero evita la densidad mecánica de keywords.
 - Enlaza a artículos del blog que existan, tomados de `index_articles.py` (ver
@@ -37,8 +48,10 @@ necesidad real, no repetir palabras clave.
 - [ ] La intención de búsqueda se entiende desde el título y la introducción.
 - [ ] El título, slug y descripción son coherentes entre sí.
 - [ ] La keyword principal aparece de forma natural y no domina el texto.
-- [ ] La estructura permite escanear el artículo con encabezados, listas, código
-      y Mermaid solo donde mejoran la comprensión.
+- [ ] Hay respuesta directa tras el gancho (si la intención es informacional) y
+      la keyword aparece en título, primer párrafo, un `##` y descripción.
+- [ ] La estructura permite escanear el artículo con encabezados; Mermaid y
+      tablas solo si la Ficha los declaró.
 - [ ] Las referencias y enlaces respaldan el contenido sin sustituir la voz
       propia del artículo.
 - [ ] Los enlaces internos existen (el validador rompe con un enlace roto) y las

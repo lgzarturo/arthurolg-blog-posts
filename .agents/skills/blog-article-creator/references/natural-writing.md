@@ -11,9 +11,9 @@ El objetivo fundamental es que **cada artículo suene 100% auténtico, personal,
 Arturo López es desarrollador de software, líder técnico y apasionado de la arquitectura de sistemas, la inteligencia artificial agéntica, los videojuegos de estrategia y rol, y la filosofía práctica (estoicismo, productividad consciente, desapego del resultado y aprendizaje continuo).
 
 ### Principios Fundamentales de la Voz:
-1. **Primera Persona Cercana y Directa:** Escribe siempre en primera persona ("Yo", "en mi experiencia", "en mi día a día", "hoy quiero reflexionar contigo", "me gusta pensar que"). Habla de tú a tú al lector, tratándolo como a un colega de profesión o a un compañero de trinchera tecnológica.
+1. **Primera Persona Cercana y Directa:** Escribe en primera persona y habla de tú a tú al lector, como a un colega de profesión. No hay fórmulas de entrada ni frases comodín: la voz sale de lo que cuentas, no de expresiones repetidas entre artículos.
 2. **Pragmático pero Reflexivo:** Combina la solidez técnica (Spring Boot, Kotlin, Java, TypeScript, TDD, Clean Code, Git worktrees, arquitecturas agénticas) con reflexiones humanas profundas sobre el valor del tiempo, el desapego de los frutos de la acción y el crecimiento interior.
-3. **El Artesano vs. El Gurú:** No escribe desde un pedestal de sabelotodo. Escribe desde el taller: experimenta, tropieza, analiza los *trade-offs*, realiza *post-mortems* honestos y comparte sus aprendizajes con humildad ("De novato a maestro", "Lecciones aprendidas en el camino").
+3. **El Artesano vs. El Gurú:** No escribe desde un pedestal de sabelotodo. Escribe desde el taller: experimenta, tropieza, analiza los *trade-offs*, realiza *post-mortems* honestos y comparte sus aprendizajes con humildad.
 4. **Analogías que salen del tema (no de una lista):** Las mejores metáforas nacen del propio asunto: su dominio, su historia, un caso real, un objeto cotidiano que se parezca al mecanismo. Primero busca ahí. Una analogía es opcional; un artículo sin ninguna es perfectamente válido.
    - **Paleta opcional** (solo si encaja de forma orgánica y aclara algo; nunca como requisito ni como adorno): *videojuegos* (Pokémon, Age of Mythology, Dark Souls), *cultura pop* (Spider-Man) y *estoicismo* (Epicteto, Marco Aurelio, dicotomía del control).
    - **Antirrepetición:** si una referencia de la paleta apareció en 3 de los últimos 5 artículos, no la uses; el validador avisa. Cuando uses una, que sea concreta y aporte una idea que el texto no daría igual de bien sin ella.
@@ -32,32 +32,49 @@ Una redacción humana se distingue por su cadencia respiratoria variada. Si todo
 
 ### Reglas de Ritmo:
 * **Variaciones de Longitud de Frase:** Alterna explicaciones técnicas o analíticas con sentencias breves y contundentes.
-  * *Ejemplo:* "Cuando un sistema de producción colapsa a las tres de la mañana por una consulta mal optimizada, la teoría universitaria se desvanece por completo. Ahí solo queda el temple de la ingeniería."
 * **Variaciones de Párrafo:** Mezcla párrafos descriptivos de 3 a 5 oraciones con párrafos independientes de una sola línea que obliguen al lector a pausar y asimilar la idea.
-* **Citas Destacadas (`>` Blockquotes):** La cantidad escala con el arquetipo: nota 0–1, guía 1–3, análisis y tutorial 2–4. Cada cita debe ser una sentencia filosófica o técnica memorable, no un adorno.
-  * *Ejemplo:* `> "El verdadero valor del desarrollador no reside en cuántas líneas de código teclea por minuto, sino en su capacidad para modelar reglas de negocio complejas con simplicidad y elegancia."`
-* **Apoyo Visual Limpio:** Emplea diagramas Mermaid para arquitecturas, secuencias, flujos o relaciones; usa tablas comparativas y bloques de código rigurosamente comentados en Kotlin, Java, TypeScript, Bash o SQL. Reserva ASCII para bocetos que no sean diagramas técnicos formales.
+* **Citas Destacadas (`>` Blockquotes):** Son opcionales y tienen solo un máximo por arquetipo (nota 1, guía 2, análisis y tutorial 3). Cada cita debe ser una sentencia memorable propia del tema, no un adorno.
+* **Bloques Visuales (cero por defecto):** Mermaid y tablas solo si la Ficha los declara, cada uno con lo que explica que la prosa no puede. Si la Ficha no los declara, no se añaden. El código es obligatorio solo en `tutorial`; cuando aparece, va comentado. Reserva ASCII para bocetos que no sean diagramas técnicos formales.
+
+### Registro por Objetivo
+El objetivo de la Ficha fija el registro (ver `reading-time.md`): `reflexionar` → íntimo y narrativo; `estar-al-dia` → periodístico; `entender` → explicativo; `decidir` → evaluativo, con criterios; `hacer` → directo e imperativo. El registro cambia de un artículo a otro; la voz de Arturo se mantiene.
 
 ---
 
 ## 3. Estructura Narrativa del Artículo
 
-### A. El Gancho Inicial (Introducción)
-Comienza sin rodeos introductorios ni generalidades. Usa una de estas fórmulas:
-* **Una anécdota o escena concreta:** Un bug que costó horas descubrir, una guardia tensa de fin de semana, una refactorización intimidante.
-* **Una tensión o dilema real:** "Muchos celebran la velocidad de autocompletado de la IA, pero muy pocos se detienen a analizar la deuda arquitectónica que se acumula cuando nadie valida el diseño subyacente."
-* **Una pregunta sincera:** "¿Cuántas veces has postergado la limpieza de un servicio crítico por miedo a que se rompan contratos que ni siquiera están testeados?"
-* **Una cita de impacto:** Una sentencia reflexiva que dispare el debate central.
+### A. Arco Narrativo por Tipo
+El tipo de la Ficha fija el orden de los movimientos (no los títulos de las secciones):
 
-### B. El Cuerpo Principal (`##` y `###`)
-* Organizado en secciones lógicas tituladas de manera atractiva. La cantidad de secciones `##` del cuerpo escala con el arquetipo (nota 1–2, guía 3–4, análisis 4–6, tutorial 5+), sin contar Conclusión ni Referencias. No uses una plantilla fija.
+| Tipo | Arco |
+| :--- | :--- |
+| `tutorial` | problema → preparación → pasos → verificación → errores comunes |
+| `lista` | escena → lecciones con hilo conductor → síntesis |
+| `analisis` / `comparativa` | tesis → evidencia → contraargumento → postura |
+| `postmortem` | incidente → diagnóstico → causa raíz → lección |
+| `perfil` | mito → hechos → lo que enseña hoy |
+| `ensayo` | tensión → exploración → giro → aprendizaje |
+| `novedades` | qué cambió → por qué importa → qué hacer ahora |
+
+### B. El Gancho Inicial (Introducción)
+Entra al tema sin rodeos y respeta el tope de intro del arquetipo. El gancho sale de una lista cerrada: **escena, dilema, pregunta, cita, dato o contraintuición**. Antes de la Ficha, lee las aperturas recientes y elige un gancho distinto al de los últimos 5:
+
+```bash
+python3 .agents/skills/blog-article-creator/scripts/index_articles.py --recent 5 --openings
+```
+
+No hay frases de ejemplo para copiar: cada gancho se escribe desde el material del artículo.
+
+### C. El Cuerpo Principal (`##` y `###`)
+* Una sección `##` por parte del esquema, con el presupuesto que dio `plan_length.py`. No uses una plantilla fija.
+* **Transiciones con enlace concreto:** cada `##` arranca retomando algo concreto de la sección anterior (un dato, una pregunta abierta, una consecuencia). El validador avisa si un párrafo empieza con una muletilla vetada: "Ahora bien", "Dicho esto", "Pasemos a", "Veamos ahora", "Llegados a este punto", "Antes de continuar", "Por otro lado,", "Con esto en mente".
 * Los datos verificables llevan su fuente como enlace contextual en la frase que los afirma (ver `references/research.md`). Los enlaces a otros artículos del blog van dentro de la prosa (ver `references/internal-linking.md`).
 * Cada sección aborda un problema concreto, demuestra el *por qué* antes del *cómo*, y ofrece un ejemplo o caso de uso práctico.
-* Equilibra la prosa con código y diagramas: no satures con listas de viñetas vacías; privilegia la narrativa técnica explicativa.
+* No satures con listas de viñetas vacías; privilegia la narrativa técnica explicativa.
 
-### C. La Conclusión y el Cierre
+### D. La Conclusión y el Cierre
 Nunca resumas mecánicamente lo ya dicho. La conclusión:
-1. Cierra el arco narrativo con una reflexión que enlace con el gancho inicial. En una nota puede ser de 2 o 3 líneas.
+1. Cierra el arco narrativo con una reflexión que enlace con el gancho inicial, dentro del rango del arquetipo (sin contar la línea de contacto).
 2. Termina con una idea, un reto o una pregunta **propios del tema**, escritos para este artículo. No hay frase de despedida obligatoria y no se repite la de otro artículo; el validador avisa si una oración del cierre coincide con la de los últimos 3 artículos.
 3. Añade, como última cosa antes de `## Referencias`, **una sola línea constante** con los enlaces de contacto:
 
@@ -108,12 +125,15 @@ El validador rechaza activamente las siguientes expresiones y patrones:
 
 - [ ] **Idioma:** ¿Está redactado 100% en español neutro (tuteo estándar), sin voseo (*tenés, mirá*) ni regionalismos chilenos, rioplatenses o peninsulares?
 - [ ] **Voz:** ¿Suena a Arturo López hablando desde la experiencia y no a un texto autogenerado?
-- [ ] **Gancho:** ¿Inicia con una anécdota, dilema o escenario real sin clichés?
+- [ ] **Gancho:** ¿Inicia con un gancho de la lista cerrada, distinto al de los últimos 5 artículos, y la intro respeta su tope?
+- [ ] **Arco y registro:** ¿Sigue el arco de su tipo y el registro de su objetivo?
+- [ ] **Transiciones:** ¿Cada `##` retoma algo concreto de la sección anterior, sin muletillas vetadas?
+- [ ] **Visuales:** ¿Cada Mermaid o tabla está declarado en la Ficha?
 - [ ] **Originalidad:** ¿El ángulo se diferencia de lo que ya existe en el blog y las analogías salen del tema (no de la paleta por costumbre)?
-- [ ] **Longitud:** ¿La extensión corresponde al arquetipo aprobado y no hay párrafos que solo existen para llegar a un número?
-- [ ] **Ritmo:** ¿Hay alternancia de frases largas y cortas y las citas en bloque (`>`) corresponden al arquetipo?
+- [ ] **Longitud:** ¿Cada sección se acerca a su presupuesto y no hay párrafos que solo existen para llegar a un número?
+- [ ] **Ritmo:** ¿Hay alternancia de frases largas y cortas y las citas en bloque (`>`) no superan el máximo del arquetipo?
 - [ ] **Fuentes:** ¿Los datos verificables tienen fuente primaria citada en la prosa y lo no verificado se eliminó o se presentó como opinión?
 - [ ] **Enlaces internos:** ¿Hay enlaces a artículos del blog dentro de la prosa, sin forzarlos?
 - [ ] **Cierre:** ¿La conclusión termina con una idea propia del tema, distinta a la de los últimos artículos, seguida de la línea constante de contacto?
 - [ ] **Referencias:** ¿Contiene la sección `## Referencias` con las fuentes realmente usadas y enlaces funcionales?
-- [ ] **Validación:** ¿Pasa limpio `.agents/skills/blog-article-creator/scripts/validate_article.py --archetype <arquetipo>`?
+- [ ] **Validación:** ¿Pasa limpio `.agents/skills/blog-article-creator/scripts/validate_article.py --type <tipo> --objective <objetivo> --visuals <N>`?

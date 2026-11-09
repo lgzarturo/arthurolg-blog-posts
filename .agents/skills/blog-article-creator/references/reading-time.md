@@ -1,91 +1,110 @@
-# Arquetipos y Presupuesto de Longitud
+# Presupuesto de Longitud: Tipo, Objetivo y Partes
 
-La longitud de un artículo la decide el **contexto del tema**, no una plantilla. Este documento define cómo elegirla, cómo justificarla en la Ficha y cómo auditarla.
+La longitud no se elige como bloque ni se decide a ojo: se **calcula** a partir de las secciones que el tema necesita. El arquetipo da el rango; el cálculo por secciones da la cifra. Las tablas de este documento son las constantes de `scripts/plan_length.py` (una prueba verifica que coincidan).
 
 ---
 
 ## 1. Regla de Oro
 
 * Si el usuario indica una duración o un arquetipo, ese es el objetivo.
-* Si no, la skill **propone un arquetipo en la Ficha de Definición** y lo justifica en una línea. La longitud solo queda fijada cuando el usuario aprueba la Ficha.
-* **Nunca se alarga para llegar a un número.** Si el tema se agota antes del rango, se baja de arquetipo. Si el tema pide más, se sube y se dice por qué.
-* No existe un tamaño "por defecto". Si varios artículos seguidos caen en el mismo rango, revisa si de verdad el contexto lo pedía.
+* Si no, se clasifica el artículo en tres ejes cerrados y se ejecuta `plan_length.py`. Su salida se pega **literal** en la Ficha.
+* **Nunca se rellena ni se comprime.** Si la cifra excede lo que permite el objetivo, se sube de arquetipo (`escalated`); si queda por debajo, se baja (`descended`). En ambos casos la Ficha lleva una línea de justificación.
+* La SERP ajusta la profundidad de forma cualitativa (`--serp-adjust`); nunca se copia su conteo de palabras.
 
 ---
 
-## 2. Los Cuatro Arquetipos
+## 2. Tres Ejes de Clasificación
 
-| Arquetipo (`--archetype`) | Palabras de prosa | Secciones `##` del cuerpo | Citas `>` | Fuentes externas (mín.) | Enlaces internos (mín.) |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **Nota / destello** (`nota`) | 500 – 900 | 1 – 2 | 0 – 1 | 1 | 1 |
-| **Guía / reflexión** (`guia`) | 1,000 – 1,800 | 3 – 4 | 1 – 3 | 3 | 2 |
-| **Análisis profundo** (`analisis`) | 2,000 – 3,200 | 4 – 6 | 2 – 4 | 5 | 3 |
-| **Tutorial / investigación** (`tutorial`) | 3,500 – 5,000+ | 5 o más | 2 – 4 | 8 | 3 |
+* **Tipo (`--type`):** la forma del texto. Fija las palabras por parte.
+* **Objetivo (`--objective`):** lo que busca el lector. Acota los arquetipos permitidos y el registro.
+* **Partes (`--parts`):** entero ≥ 1, obligatorio, contado del esquema propuesto (secciones `##` del cuerpo). No tiene valor por defecto.
 
-Las secciones no cuentan `## Conclusión` ni `## Referencias`, que son obligatorias en todos. Los mínimos se auditan como avisos; el validador usa estos mismos números (`ARCHETYPES` en `validate_article.py`).
+### Palabras por parte según tipo
 
-En Reflexión (`label: Reflexión` o `General`), las fuentes externas solo son obligatorias si el texto cita datos, estudios o autores. Los enlaces internos siguen aplicando, pero nunca se fuerzan.
+| Tipo | Unidad | Rango por parte |
+| :--- | :--- | :--- |
+| `lista` | ítem | 100 – 220 |
+| `novedades` | novedad | 120 – 250 |
+| `ensayo` | movimiento | 250 – 400 |
+| `perfil` | etapa | 300 – 500 |
+| `comparativa` | criterio | 250 – 400 |
+| `analisis` | sección | 350 – 550 |
+| `postmortem` | fase | 300 – 450 |
+| `tutorial` | paso | 300 – 500 (el código no cuenta) |
 
-### Señales para elegir el arquetipo
+### Objetivo → arquetipos permitidos
 
-Evalúa estas señales con el tema concreto y elige el arquetipo que más se ajuste:
-
-| Señal | Empuja hacia |
-| :--- | :--- |
-| Una sola idea o anécdota, sin necesidad de evidencia | nota |
-| Un concepto con un ejemplo, pocas afirmaciones verificables | guía |
-| Varias afirmaciones que necesitan fuente, trade-offs, alternativas descartadas | análisis |
-| Pasos reproducibles, código obligatorio, comparativas, varias fuentes primarias | tutorial |
-| El tema ya está cubierto en el blog (ver `index_articles.py`) | bajar un nivel y enlazar al artículo existente |
-| Audiencia nueva en el tema, requiere definir conceptos | subir un nivel |
-| El gancho es una escena breve y el aprendizaje cabe en un párrafo | nota |
-
-La Ficha debe incluir: arquetipo, rango de palabras y **una línea de justificación** basada en estas señales.
+| Objetivo | Permitidos | Registro |
+| :--- | :--- | :--- |
+| `reflexionar` | nota, guia | íntimo y narrativo |
+| `estar-al-dia` | nota, guia | periodístico |
+| `entender` | guia, analisis | explicativo |
+| `decidir` | analisis | evaluativo, con criterios |
+| `hacer` | analisis, tutorial | directo e imperativo |
 
 ---
 
-## 3. Velocidad de Lectura y Tiempo Estimado
+## 3. Los Cuatro Arquetipos (rangos continuos)
+
+| Arquetipo | Palabras de prosa | Tope intro | Conclusión | Citas `>` (máx.) | Fuentes externas (mín.) | Enlaces internos (mín.) |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `nota` | 400 – 900 | 100 | 40 – 100 | 1 | 1 | 1 |
+| `guia` | 900 – 1,800 | 180 | 100 – 200 | 2 | 3 | 2 |
+| `analisis` | 1,800 – 3,200 | 250 | 100 – 200 | 3 | 5 | 3 |
+| `tutorial` | 3,000 – sin tope | 250 | 100 – 200 | 3 | 8 | 3 |
+
+* Las citas en bloque no tienen mínimo: un artículo sin ninguna es válido.
+* La cantidad de secciones `##` no es fija: la determinan las partes. `## Conclusión` y `## Referencias` son obligatorias en todos y no cuentan como partes.
+* En Reflexión (`label: Reflexión` o `General`), las fuentes externas solo son obligatorias si el texto cita datos, estudios o autores. Los enlaces internos siguen aplicando, pero nunca se fuerzan.
+
+---
+
+## 4. Algoritmo de `plan_length.py`
+
+1. **Punto por parte** según `--serp-adjust`: `-1` → mínimo del rango del tipo, `0` → punto medio, `+1` → máximo.
+2. `cuerpo = partes × punto`.
+3. Para cada arquetipo en orden ascendente: `total = cuerpo + tope_intro + punto_medio_conclusión`; se elige el primero cuyo rango contiene su propio total. Si el total queda por debajo de 400, se asigna `nota` y la salida avisa: no se rellena, se revisa si el tema da para un artículo.
+4. Se compara con los arquetipos que permite el objetivo: dentro → `status ok`; por encima → `status escalated`; por debajo → `status descended`. Los dos últimos exigen una línea de justificación en la Ficha.
+
+```bash
+python3 .agents/skills/blog-article-creator/scripts/plan_length.py \
+  --type analisis --objective decidir --parts 5 --serp-adjust 0
+```
+
+Ejemplos: `lista · reflexionar · 20` → 3,600 → `tutorial` (`escalated`); `tutorial · hacer · 3` → 1,530 → `guia` (`descended`); `analisis · decidir · 4` → 2,200 → `analisis` (`ok`).
+
+---
+
+## 5. Velocidad de Lectura y Tiempo Estimado
 
 Velocidad base para prosa técnica reflexiva en español: **200 palabras por minuto**.
 
 $$\text{Tiempo Real (min)} = \left(\frac{\text{palabras\_prosa}}{200}\right) + (\text{bloques\_código} \times 0.33) + ((\text{imágenes} + \text{diagramas Mermaid}) \times 0.20)$$
 
-El tiempo estimado es una métrica informativa de la Hoja de Aprobación. **No determina la longitud**; la determina el arquetipo.
+El tiempo estimado es una métrica informativa de la Hoja de Aprobación. **No determina la longitud.**
 
 ---
 
-## 4. Distribución Orientativa
+## 6. Cómo Ganar Profundidad sin Paja
 
-Para evitar una introducción enorme con un cuerpo raquítico:
-
-| Bloque | Proporción aproximada |
-| :--- | :--- |
-| Gancho / introducción | 8 – 12% |
-| Cuerpo | 75 – 80% |
-| Conclusión | 8 – 12% (en una nota puede ser de 2 o 3 líneas) |
-
----
-
-## 5. Cómo Ganar Profundidad sin Paja
-
-Si falta contenido para el rango del arquetipo, no repitas ni adjetives. Haz una de estas cosas:
+Si una sección queda corta frente a su presupuesto, no repitas ni adjetives. Haz una de estas cosas:
 
 1. Añade una **anécdota real** o un caso de producción.
 2. Explica los **trade-offs** o las alternativas descartadas.
 3. Incorpora un **dato verificable** con su fuente (ver `references/research.md`).
-4. Incluye un **bloque de código o diagrama Mermaid** que muestre el mecanismo.
-5. Desarrolla un **caso borde** y la lección que dejó.
+4. Desarrolla un **caso borde** y la lección que dejó.
 
-Si ninguna aplica, el artículo ya tiene la longitud correcta: baja de arquetipo.
+Si ninguna aplica, la sección ya tiene la longitud correcta: quita una parte o baja de arquetipo.
 
 ---
 
-## 6. Validación
+## 7. Validación
 
 ```bash
 python3 .agents/skills/blog-article-creator/scripts/validate_article.py \
-  --file "<ruta-al-articulo.md>" --archetype <nota|guia|analisis|tutorial> --ignore-date-today
+  --file "<ruta-al-articulo.md>" --type <tipo> --objective <objetivo> --visuals <N> --ignore-date-today
 ```
 
-* Con `--archetype`, el rango de palabras, las secciones, las citas y los mínimos de fuentes y enlaces internos se miden contra la tabla de arriba.
-* Sin `--archetype`, `--reading-time N` conserva el modo legado (±25% / +30% del objetivo). `--reading-time auto` solo es diagnóstico: infiere el objetivo del propio texto y no emite avisos de longitud.
+* Con `--type/--objective`, el arquetipo se deriva de las secciones `##` reales y tiene precedencia sobre `--archetype`. Avisos (nunca errores): intro por encima del tope, conclusión fuera de rango (sin contar la línea de contacto), cada `##` fuera de su rango por parte ±25% (un `##` con `###` multiplica el rango por el número de `###`), Mermaid + tablas por encima de `--visuals`, citas por encima del máximo, `tutorial` sin código y transiciones vetadas al inicio de párrafo.
+* `--archetype` sin `--type` es para artículos legados: mide el rango de palabras, el máximo de citas, el código en `tutorial` y los mínimos de fuentes y enlaces.
+* Sin ninguno de los dos, `--reading-time N` conserva el modo legado (±25% / +30% del objetivo). `--reading-time auto` solo es diagnóstico.

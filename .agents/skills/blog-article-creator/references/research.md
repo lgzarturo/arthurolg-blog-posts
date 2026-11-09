@@ -24,6 +24,7 @@ Antes de presentar la Ficha, con pocas búsquedas (`WebSearch`, `WebFetch`, y `C
 1. Confirma que la tesis no está contradicha por las fuentes primarias.
 2. Detecta la versión o el estado actual del tema (fechas, releases, cambios recientes). El conocimiento del modelo puede estar desactualizado.
 3. Propón el **plan de fuentes**: qué fuentes primarias se consultarán y qué afirmaciones respaldarán.
+4. **Registra el formato de la SERP:** qué forma tienen los primeros resultados (listas, comparativas con tabla, tutoriales, preguntas relacionadas) y qué tan a fondo van. Con eso decide `--serp-adjust` (`-1` si son breves, `0` si son medios, `+1` si son exhaustivos) para `plan_length.py`. Nunca copies su conteo de palabras: la SERP ajusta formato y profundidad, no la cifra.
 
 ### B. Dossier completo (fase Investigar, lo hace un sub-agente)
 
@@ -89,7 +90,7 @@ Si solo existe una fuente secundaria para un dato, o se marca como tal en el tex
 
 ```bash
 python3 .agents/skills/blog-article-creator/scripts/validate_article.py \
-  --file "<ruta>.md" --archetype <arquetipo> --check-links
+  --file "<ruta>.md" --type <tipo> --objective <objetivo> --check-links
 ```
 
 `--check-links` comprueba por HTTP las fuentes externas. Algunos sitios bloquean peticiones automáticas, por eso un fallo es un aviso: confírmalo a mano antes de descartar la fuente.

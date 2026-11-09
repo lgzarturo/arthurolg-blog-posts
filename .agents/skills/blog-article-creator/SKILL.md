@@ -3,12 +3,12 @@ name: blog-article-creator
 description: >-
   Crea, refina y valida artículos para el blog de Arturo López en español neutro
   (tuteo estándar, sin voseo ni regionalismos), con voz humana natural, longitud
-  decidida por el contexto del tema (arquetipos), investigación con fuentes
-  primarias, enlaces a otros artículos del blog, cierres propios de cada tema,
-  imágenes WebP responsivas, edición SEO y diagramas Mermaid en un flujo
-  reproducible: Definir, Investigar, Concretar y Aprobar.
+  calculada por tipo, objetivo y partes (plan_length.py), arco narrativo por
+  tipo, investigación con fuentes primarias, enlaces a otros artículos del blog,
+  cierres propios de cada tema, imágenes WebP responsivas y edición SEO en un
+  flujo reproducible: Definir, Investigar, Concretar y Aprobar.
 metadata:
-  version: 5.0.0
+  version: 6.0.0
 ---
 
 # Blog Article Creator (bac)
@@ -27,9 +27,11 @@ lectura cercana, profesional y de alcance global.
 
 Principios que gobiernan todo el flujo:
 
-- **La longitud la decide el contexto.** Cada artículo tiene un arquetipo (nota,
-  guía, análisis, tutorial) elegido según el tema. Nunca se alarga para llegar a
-  un número ni se parte de un tamaño por defecto.
+- **La longitud se calcula, no se elige.** El tipo, el objetivo y las partes del
+  esquema dan una cifra con `plan_length.py`; la cifra da el arquetipo (nota,
+  guía, análisis, tutorial). Nunca se rellena ni se comprime para encajar.
+- **Lo visual se justifica.** Mermaid y tablas valen cero por defecto; cada uno
+  se declara en la Ficha con lo que explica que la prosa no puede.
 - **Lo verificable se investiga.** Los datos se ligan a fuentes primarias y se
   citan en la prosa. Lo que no se pudo verificar se elimina o se presenta como
   opinión propia.
@@ -43,11 +45,12 @@ Principios que gobiernan todo el flujo:
 
 El proceso sigue **cuatro fases con un solo punto de aprobación (la Ficha)**:
 
-1. **Definir:** revisar el índice del blog, hacer una investigación ligera, elegir
-   el arquetipo y presentar la Ficha.
+1. **Definir:** revisar el índice del blog, clasificar el artículo, leer las
+   aperturas recientes, hacer una investigación ligera, calcular la longitud y
+   presentar la Ficha.
 2. **Investigar:** un sub-agente construye el dossier completo de fuentes.
-3. **Concretar:** redactar sobre el dossier con la voz de Arturo, editar para SEO,
-   representar diagramas con Mermaid, generar la portada y los 3 WebP.
+3. **Concretar:** redactar sobre el dossier con la voz de Arturo y el arco del
+   tipo, editar para SEO, generar la portada y los 3 WebP.
 4. **Aprobar:** validar con el script y presentar la Hoja de Aprobación.
 
 ---
@@ -80,13 +83,33 @@ El proceso sigue **cuatro fases con un solo punto de aprobación (la Ficha)**:
    - **Guardia de originalidad:** si hay solapamiento, proponer un ángulo
      distinto o enlazar al artículo existente en vez de repetirlo.
    - **Candidatos a enlazar:** elegir de 2 a 5 artículos relacionados.
-3. **Investigación ligera** (la hace la propia skill; ver
+3. **Clasificar** con valores cerrados (ver
+   [references/reading-time.md](references/reading-time.md)): **tipo** (`lista`,
+   `novedades`, `ensayo`, `perfil`, `comparativa`, `analisis`, `postmortem`,
+   `tutorial`), **objetivo** (`hacer`, `entender`, `decidir`, `reflexionar`,
+   `estar-al-dia`) y **partes** (secciones `##` del esquema propuesto).
+4. **Leer las aperturas recientes** y elegir un gancho distinto (escena, dilema,
+   pregunta, cita, dato o contraintuición):
+
+   ```bash
+   python3 .agents/skills/blog-article-creator/scripts/index_articles.py --recent 5 --openings
+   ```
+
+5. **Investigación ligera** (la hace la propia skill; ver
    [references/research.md](references/research.md)): pocas búsquedas con
    `WebSearch`, `WebFetch` y `Context7` para confirmar que la tesis se sostiene,
-   conocer la versión o el estado actual del tema y armar el plan de fuentes.
-4. **Elegir el arquetipo** con las señales de
-   [references/reading-time.md](references/reading-time.md). Justificarlo en una línea.
-5. **Presentar la Ficha de Definición** y detenerse a esperar el visto bueno:
+   conocer la versión o el estado actual del tema, armar el plan de fuentes y
+   registrar el formato de la SERP, que decide `--serp-adjust`.
+6. **Calcular la longitud** y pegar la salida literal en la Ficha:
+
+   ```bash
+   python3 .agents/skills/blog-article-creator/scripts/plan_length.py \
+     --type <tipo> --objective <objetivo> --parts <N> --serp-adjust <-1|0|1>
+   ```
+
+   Si el estado es `escalated` o `descended`, la Ficha lleva una línea de
+   justificación. Nunca se rellena ni se comprime para cambiar el estado.
+7. **Presentar la Ficha de Definición** y detenerse a esperar el visto bueno:
 
 ```markdown
 ### 📋 Ficha de Definición del Artículo
@@ -96,28 +119,33 @@ El proceso sigue **cuatro fases con un solo punto de aprobación (la Ficha)**:
 - **Categoría (`label`):** `Programación` | `Spring Boot` | `Tecnología` |
   `Videojuegos` | `Marketing` | `Reflexión`
 - **Ruta Destino:** `articles/<categoria-path>/<slug>.md`
-- **Arquetipo y longitud:** `nota` | `guia` | `analisis` | `tutorial` — <rango de
-  palabras>. **Justificación:** <una línea basada en las señales del tema>
+- **Tipo / Objetivo / Partes:** <tipo> · <objetivo> · <N>
+- **Registro:** <registro del objetivo>
+- **Formato SERP:** <formato dominante de los primeros resultados> → ajuste <-1|+0|+1>
+- **Presupuesto:** <salida de plan_length.py: N palabras → arquetipo (rango) · status>
+  **Justificación** (solo si `escalated`/`descended`): <una línea>
+- **Gancho:** <tipo de gancho> (últimos 5: <ganchos de las aperturas recientes>)
+- **Bloques visuales:** ninguno | <qué bloque y qué explica que la prosa no puede>
 - **Tesis Central:** <Una oración que resuma la idea fuerza>
 - **Originalidad:** <artículos del blog con ángulo cercano y cómo se diferencia
   este; o "sin solapamiento">
 - **Intención de Búsqueda:** <informacional, comparativa, transaccional o navegación>
 - **Keyword Principal:** <consulta natural que el lector buscaría>
 - **Keywords Secundarias:** <3–6 términos semánticamente relacionados>
-- **Gancho Inicial:** <Anécdota real, dilema técnico o pregunta provocadora>
 - **Analogía (opcional):** <idea que salga del propio tema, o "ninguna">
 - **Plan de Fuentes:** <fuentes primarias a consultar, afirmaciones que respaldan
   y mínimo del arquetipo>
 - **Enlaces Internos Candidatos:** <2–5 artículos del índice, con URL y motivo>
 - **Concepto Visual de Portada:** <escena concreta derivada de la tesis,
   audiencia, ejemplos y metáforas del artículo; no solo la categoría>
-- **Esquema de Secciones:** <secciones `##` acordes al arquetipo, diagramas
-  Mermaid si mejoran la comprensión>, `## Conclusión`, `## Referencias`
+- **Esquema de Secciones:** <una sección `##` por parte, cada una con su
+  presupuesto de palabras>, `## Conclusión` (<rango>), `## Referencias`
 ```
 
 > ⚠️ **Punto de Control:** No lanzar la investigación completa, redactar la prosa
 > ni generar imágenes hasta que el usuario apruebe la Ficha. Al aprobar, el
-> usuario puede ajustar el arquetipo, los enlaces o el plan de fuentes.
+> usuario puede ajustar el tipo, las partes, los enlaces o el plan de fuentes;
+> si cambian, se vuelve a ejecutar `plan_length.py`.
 
 ---
 
@@ -141,9 +169,11 @@ más lo que no pudo verificar.
 
 #### A. Redacción en Prosa Auténtica
 
-- **Longitud:** respetar el arquetipo aprobado. Nunca rellenar; si falta
-  contenido, profundizar con anécdotas, trade-offs, datos con fuente o código
-  (ver `reading-time.md`, sección 5), o bajar de arquetipo.
+- **Longitud y arco:** respetar el presupuesto de cada `##`, el tope de intro y
+  el rango de conclusión; seguir el arco narrativo del tipo y el registro del
+  objetivo (ver `natural-writing.md`). Nunca rellenar; si una sección queda
+  corta, profundizar con anécdotas, trade-offs o datos con fuente (ver
+  `reading-time.md`, sección 6), o quitar una parte.
 - **Fuentes y enlaces:** citar las fuentes del dossier con enlace contextual en la
   frase que afirma el dato, y enlazar los artículos internos elegidos dentro de la
   prosa. No forzar enlaces.
@@ -163,14 +193,17 @@ más lo que no pudo verificar.
   el estoicismo son una **paleta opcional**, no un requisito (ver
   [references/natural-writing.md](references/natural-writing.md)).
 - **Ritmo y Variedad:** alternar frases largas con sentencias breves. Citas en
-  bloque (`>`) según el arquetipo (nota 0–1, guía 1–3, análisis y tutorial 2–4).
+  bloque (`>`) opcionales, con máximo por arquetipo (nota 1, guía 2, análisis y
+  tutorial 3).
+- **Transiciones:** cada `##` arranca retomando algo concreto de la sección
+  anterior; sin muletillas como "Ahora bien" o "Dicho esto".
 - **Cero Clichés de IA:** aplicar estrictamente la lista negra (prohibido _"en
   el vertiginoso mundo"_, _"cabe destacar"_, _"en conclusión,"_ al inicio de
   conclusión, etc.).
-- **Bloques Prácticos:** código comentado, tablas y diagramas Mermaid cuando
-  aplique. Si se representa un flujo, secuencia, arquitectura, relación o ciclo,
-  usar un bloque fenced `mermaid`; no usar ASCII como formato principal para
-  diagramas técnicos. No añadir diagramas por decoración.
+- **Bloques Visuales:** cero por defecto. Solo los que la Ficha declaró, cada uno
+  con lo que explica que la prosa no puede; un diagrama declarado va en un bloque
+  fenced `mermaid`, no en ASCII. El código es obligatorio solo en `tutorial` y va
+  comentado.
 - **Cierre:** la conclusión cierra el arco con una reflexión y termina con una
   idea o pregunta **propia del tema**, distinta a la de los últimos artículos. No
   hay despedida fija. Lo último antes de `## Referencias` es la **línea
@@ -230,12 +263,14 @@ label: 'Programación'
 
 ### FASE 4: APROBAR (Validación Local y Handoff)
 
-1. **Ejecutar la suite de validación** con el arquetipo aprobado:
+1. **Ejecutar la suite de validación** con el tipo, el objetivo y los bloques
+   visuales aprobados en la Ficha (el arquetipo se deriva de las secciones
+   reales; `--archetype` queda para artículos legados):
 
    ```bash
    python3 .agents/skills/blog-article-creator/scripts/validate_article.py \
      --file "articles/<categoria>/<slug>.md" \
-     --archetype <nota|guia|analisis|tutorial> \
+     --type <tipo> --objective <objetivo> --visuals <N> \
      --check-links
    ```
 
@@ -243,7 +278,10 @@ label: 'Programación'
      voseo, falta de `## Conclusión` o `## Referencias`, imágenes faltantes y
      **enlaces internos rotos**.
    - Los **avisos** nunca bloquean, pero deben revisarse y justificarse o
-     corregirse: longitud fuera del arquetipo, pocas fuentes o enlaces internos,
+     corregirse: longitud fuera del arquetipo, intro por encima del tope,
+     conclusión o secciones fuera de presupuesto, bloques visuales no
+     declarados, citas por encima del máximo, transiciones vetadas, pocas
+     fuentes o enlaces internos,
      enlace externo que no responde, fuentes solo en `## Referencias`, referencias
      genéricas propias, cierre repetido y referencias recurrentes.
    - `--check-links` hace peticiones HTTP; si un sitio bloquea bots, confirmar a
@@ -256,7 +294,7 @@ label: 'Programación'
 ### 🎯 Hoja de Aprobación del Artículo
 
 - **Artículo:** [`<nombre-archivo.md>`](file:///<ruta_absoluta>)
-- **Arquetipo:** <arquetipo> | ~X,XXX palabras de prosa | X.X min de lectura
+- **Tipo / Objetivo / Arquetipo:** <tipo> · <objetivo> · <arquetipo> (status) | ~X,XXX palabras de prosa | X.X min de lectura
   estimada | X bloques de código | X citas `>`
 - **Enlaces:** X internos, X fuentes externas
 - **Validación:** ✅ Sin errores | ⚠️ <avisos pendientes y por qué se aceptan>
@@ -308,11 +346,13 @@ git commit -m "feat(blog): publicar articulo sobre <tema en español neutro>
 
 ## Documentación de Referencia
 
-- [references/reading-time.md](references/reading-time.md): Arquetipos de longitud, señales para elegirlos y mínimos por arquetipo.
+- [references/reading-time.md](references/reading-time.md): Tipo, objetivo y partes; arquetipos, palabras por parte y algoritmo del presupuesto.
 - [references/research.md](references/research.md): Política de investigación, jerarquía de fuentes y contrato del sub-agente.
 - [references/internal-linking.md](references/internal-linking.md): Índice del blog, patrón de URL, enlaces internos y guardia de originalidad.
 - [references/natural-writing.md](references/natural-writing.md): Manual de estilo, voz, cierre y lista negra de clichés de IA.
 - [references/seo-editor.md](references/seo-editor.md): Pase editorial experto para SEO, legibilidad e intención de búsqueda.
 - [references/cover-images.md](references/cover-images.md): Guía estética y especificaciones técnicas de portadas WebP.
-- [scripts/index_articles.py](scripts/index_articles.py): Índice y búsqueda de artículos del blog.
-- [scripts/validate_article.py](scripts/validate_article.py): Suite de validación (`--archetype`, `--check-links`).
+- [scripts/plan_length.py](scripts/plan_length.py): Presupuesto de longitud y arquetipo desde tipo, objetivo y partes.
+- [scripts/index_articles.py](scripts/index_articles.py): Índice y búsqueda de artículos del blog (`--recent N --openings`).
+- [scripts/validate_article.py](scripts/validate_article.py): Suite de validación (`--type`, `--objective`, `--visuals`, `--check-links`; `--archetype` para legados).
+- `scripts/tests/`: pruebas `unittest` (`python -m unittest discover .agents/skills/blog-article-creator/scripts/tests`).
