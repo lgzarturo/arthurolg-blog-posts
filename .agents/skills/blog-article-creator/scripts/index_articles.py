@@ -13,6 +13,7 @@ Uso:
   python3 index_articles.py --query "java concurrencia virtual threads"
   python3 index_articles.py --query "liderazgo técnico" --top 8 --label Programación
   python3 index_articles.py --recent 5
+  python3 index_articles.py --recent 5 --openings   # aperturas recientes, para elegir un gancho distinto
   python3 index_articles.py --list --json
 """
 
@@ -171,6 +172,17 @@ def recent(entries: list, n: int) -> list:
     return dated[:n]
 
 
+def first_paragraph(body: str) -> str:
+    """Primer párrafo de prosa: ignora código, encabezados, imágenes y separadores. Las citas '>' cuentan."""
+    no_code = re.sub(r"```[\s\S]*?```", "", body)
+    for block in re.split(r"\n\s*\n", no_code):
+        text = block.strip()
+        if not text or text.startswith(("#", "![")) or re.fullmatch(r"[-*_]{3,}", text):
+            continue
+        return " ".join(line.strip() for line in text.splitlines())
+    return ""
+
+
 def strip_body(entry: dict) -> dict:
     return {k: v for k, v in entry.items() if k != "body"}
 
@@ -181,9 +193,12 @@ def main():
     parser.add_argument("--top", type=int, default=6, help="Cantidad de resultados (por defecto: 6)")
     parser.add_argument("--label", help="Filtrar por label (Programación, Tecnología, ...)")
     parser.add_argument("--recent", type=int, help="Mostrar los N artículos más recientes por fecha")
+    parser.add_argument("--openings", action="store_true", help="Con --recent: imprimir el primer párrafo de prosa de cada artículo")
     parser.add_argument("--list", action="store_true", help="Listar todo el índice")
     parser.add_argument("--json", action="store_true", help="Salida en JSON")
     args = parser.parse_args()
+    if args.openings and not args.recent:
+        parser.error("--openings requiere --recent N")
 
     entries = load_index(resolve_repo_root())
 
@@ -205,10 +220,14 @@ def main():
 
     selected = recent(entries, args.recent) if args.recent else entries
     if args.json:
-        print(json.dumps([strip_body(e) for e in selected], ensure_ascii=False, indent=2))
+        rows = [{**strip_body(e), "opening": first_paragraph(e["body"])} if args.openings else strip_body(e)
+                for e in selected]
+        print(json.dumps(rows, ensure_ascii=False, indent=2))
         return
     for e in selected:
         print(f"{e['date']}  [{e['label']}]  {e['title']}\n            {e['url']}")
+        if args.openings:
+            print(f"            {first_paragraph(e['body'])}\n")
     print(f"\nTotal: {len(selected)} artículo(s)")
 
 
