@@ -7,6 +7,7 @@ SCRIPTS = Path(__file__).resolve().parent.parent
 SKILL_DIR = SCRIPTS.parent
 sys.path.insert(0, str(SCRIPTS))
 import plan_length  # noqa: E402
+import validate_article  # noqa: E402
 
 DOCS = [SKILL_DIR / "SKILL.md", *sorted((SKILL_DIR / "references").glob("*.md"))]
 
@@ -41,8 +42,9 @@ class ReadingTimeTablesMatchCodeTest(unittest.TestCase):
             with self.subTest(archetype=name):
                 upper = f"{a['max_words']:,}" if a["max_words"] else "sin tope"
                 c_lo, c_hi = a["conclusion"]
+                r = validate_article.ARCHETYPES[name]
                 self.assertTrue(has_row_with(self.text, name, f"{a['min_words']:,} – {upper} | {a['intro_max']} | "
-                                             f"{c_lo} – {c_hi} | {a['quotes_max']} |"))
+                                             f"{c_lo} – {c_hi} | {a['quotes_max']} | {r['sources']} | {r['internal']} |"))
 
     def test_parts_rows_match_constants(self):
         for type_, (unit, lo, hi) in plan_length.PARTS.items():

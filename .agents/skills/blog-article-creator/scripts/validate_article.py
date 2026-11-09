@@ -104,7 +104,8 @@ TRANSITION_BLACKLIST = (
     "Ahora bien", "Dicho esto", "Pasemos a", "Veamos ahora", "Llegados a este punto",
     "Antes de continuar", "Por otro lado,", "Con esto en mente",
 )
-_TRANSITION_RE = re.compile(r"(?:%s)" % "|".join(re.escape(p) for p in TRANSITION_BLACKLIST), re.IGNORECASE)
+_TRANSITION_RE = re.compile(r"(?:[-*+>]\s+|\*\*|__)*(?:%s)(?!\w)" % "|".join(re.escape(p) for p in TRANSITION_BLACKLIST),
+                            re.IGNORECASE)
 SECTION_TOLERANCE = 0.25  # margen sobre el rango por parte antes de avisar
 TABLE_SEPARATOR_RE = re.compile(r"^\s*\|?\s*:?-{3,}:?\s*(?:\|\s*:?-{3,}:?\s*)+\|?\s*$", re.MULTILINE)
 
@@ -251,7 +252,7 @@ def count_prose_words(body: str):
 
 
 def body_sections(cuerpo: str) -> list:
-    """Divide el cuerpo en (intro, [(t\u00EDtulo, texto, n\u00BA de '###'), ...]) ignorando encabezados dentro de c\u00F3digo."""
+    """Divide el cuerpo en (intro, [(título, texto, nº de '###'), ...]) ignorando encabezados dentro de código."""
     masked = mask_code_blocks(cuerpo)
     heads = list(re.finditer(r"^##\s+(.+)$", masked, flags=re.MULTILINE))
     intro = cuerpo[:heads[0].start()] if heads else cuerpo
@@ -264,17 +265,19 @@ def body_sections(cuerpo: str) -> list:
 
 
 def structure_warnings(body: str, archetype: str, type_: str = None, visuals: int = 0) -> list:
-    """Avisos de estructura. Citas y c\u00F3digo siempre; el resto solo con --type (presupuesto v6)."""
+    """Avisos de estructura. Citas y código siempre; el resto solo con --type (presupuesto v6)."""
     arch = ARCHETYPES[archetype]
     warnings = []
     masked = mask_code_blocks(body)
 
     blockquotes = len(re.findall(r"(?:^>[^\n]*\n?)+", masked, flags=re.MULTILINE))
     if blockquotes > arch["quotes_max"]:
-        warnings.append(f"Citas en bloque ('>'): {blockquotes} (m\u00E1ximo {arch['quotes_max']} para '{arch['name']}').")
+        warnings.append(f"Citas en bloque ('>'): {blockquotes} (máximo {arch['quotes_max']} para '{arch['name']}').")
     code_blocks = len(re.findall(r"```(?!mermaid)[\w]*\r?\n[\s\S]*?```", body, flags=re.IGNORECASE))
-    if arch["needs_code"] and code_blocks == 0:
-        warnings.append(f"'{arch['name']}' espera al menos un bloque de c\u00F3digo; no se encontr\u00F3 ninguno.")
+    needs_code = type_ == "tutorial" if type_ else arch["needs_code"]
+    if needs_code and code_blocks == 0:
+        who = "El tipo 'tutorial'" if type_ else f"'{arch['name']}'"
+        warnings.append(f"{who} espera al menos un bloque de código; no se encontró ninguno.")
 
     if not type_:
         return warnings
@@ -289,14 +292,15 @@ def structure_warnings(body: str, archetype: str, type_: str = None, visuals: in
                           if not any(sig in p for sig in SOCIAL_SIGNATURE))
     closing_words = count_prose_words(closing)
     c_lo, c_hi = arch["conclusion"]
-    if not c_lo <= closing_words <= c_hi:
-        warnings.append(f"Conclusi\u00F3n: {closing_words} palabras sin la l\u00EDnea de contacto (esperado {c_lo}\u2013{c_hi} para '{arch['name']}').")
+    has_conclusion = re.search(r"^##\s+Conclusi[oó]n", body, flags=re.MULTILINE | re.IGNORECASE)
+    if has_conclusion and not c_lo <= closing_words <= c_hi:
+        warnings.append(f"Conclusión: {closing_words} palabras sin la línea de contacto (esperado {c_lo}–{c_hi} para '{arch['name']}').")
 
     for title, text, subsections in parts:
         lo, hi = plan_length.section_range(type_, subsections)
         n = count_prose_words(text)
         if n < lo * (1 - SECTION_TOLERANCE) or n > hi * (1 + SECTION_TOLERANCE):
-            warnings.append(f"Secci\u00F3n '{title}': {n} palabras (rango {lo}\u2013{hi} \u00B1{SECTION_TOLERANCE:.0%} para '{type_}'). Profundiza o recorta; no rellenes.")
+            warnings.append(f"Sección '{title}': {n} palabras (rango {lo}–{hi} ±{SECTION_TOLERANCE:.0%} para '{type_}'). Profundiza o recorta; no rellenes.")
 
     mermaid = len(re.findall(r"```mermaid\r?\n[\s\S]*?```", body, flags=re.IGNORECASE))
     tables = len(TABLE_SEPARATOR_RE.findall(masked))
@@ -307,7 +311,7 @@ def structure_warnings(body: str, archetype: str, type_: str = None, visuals: in
     for i, line in enumerate(lines):
         starts_paragraph = i == 0 or not lines[i - 1].strip() or lines[i - 1].lstrip().startswith("#")
         if starts_paragraph and _TRANSITION_RE.match(line.strip()):
-            warnings.append(f"Transici\u00F3n gen\u00E9rica en la l\u00EDnea {i + 1}: '{line.strip()[:40]}'. Retoma algo concreto de la secci\u00F3n anterior.")
+            warnings.append(f"Transición genérica en la línea {i + 1}: '{line.strip()[:40]}'. Retoma algo concreto de la sección anterior.")
     return warnings
 
 
@@ -395,7 +399,7 @@ def validate_article(file_path: Path, target_reading_time, wpm: int = 200, ignor
         # Auto sirve para artículos cuya duración fue calculada desde el contenido.
         # Se redondea a una cifra útil, sin reintroducir un valor fijo de 10 minutos.
         target_reading_time = max(1, round(calculated_reading_time))
-        if not archetype:
+        if not archetype and not (type_ and objective):
             info.append(f"Objetivo dinámico inferido desde el contenido: {target_reading_time} min")
     target_words = target_reading_time * wpm
 

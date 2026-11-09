@@ -1,4 +1,6 @@
+import subprocess
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -116,6 +118,58 @@ class QuotesAndCodeTest(unittest.TestCase):
     def test_tutorial_with_code_does_not_warn(self):
         body = article(sections=(400, 400), extra_body="```bash\necho hola\n```")
         self.assertFalse(any("bloque de código" in w for w in warnings_for(body, "tutorial", "tutorial")))
+
+
+class ReviewFixesTest(unittest.TestCase):
+    def test_transition_requires_word_boundary(self):
+        body = article(extra_body="Ahora bienestar es " + words(20))
+        self.assertFalse(any(w.startswith("Transición") for w in warnings_for(body)))
+
+    def test_transition_after_markdown_marker_warns(self):
+        for prefix in ("- ", "> ", "**"):
+            with self.subTest(prefix=prefix):
+                body = article(extra_body=f"{prefix}Dicho esto, {words(20)}")
+                self.assertTrue(any(w.startswith("Transición") for w in warnings_for(body)))
+
+    def test_missing_conclusion_only_reports_the_error(self):
+        body = article().split("## Conclusión")[0]
+        self.assertFalse(any(w.startswith("Conclusión:") for w in warnings_for(body)))
+
+    def test_code_requirement_follows_type_not_derived_archetype(self):
+        self.assertFalse(any("bloque de código" in w for w in warnings_for(article(), "tutorial", "lista")))
+        self.assertTrue(any("bloque de código" in w for w in warnings_for(article(sections=(400,)), "guia", "tutorial")))
+
+
+class ValidateArticleIntegrationTest(unittest.TestCase):
+    def write(self, body: str) -> Path:
+        tmp = Path(tempfile.mkdtemp()) / "sintetico.md"
+        front = ("---\ntitle: 'Sintético'\nimage: 'x/sintetico.webp'\ndescription: 'Artículo sintético de prueba para el validador.'\n"
+                 "author: 'Arturo López'\ndate: '2026-01-01'\nlabel: 'Tecnología'\n---\n")
+        tmp.write_text(front + body, encoding="utf-8")
+        self.addCleanup(lambda: tmp.unlink())
+        return tmp
+
+    def test_short_tutorial_without_code_warns_through_derivation(self):
+        path = self.write(article(sections=(400, 400, 400)))
+        _, _, warnings, info = validate_article.validate_article(path, "auto", ignore_date_today=True,
+                                                                 type_="tutorial", objective="hacer")
+        self.assertTrue(any("guia" in i and "descended" in i for i in info))
+        self.assertTrue(any("bloque de código" in w for w in warnings))
+
+    def test_type_takes_precedence_over_archetype(self):
+        path = self.write(article())
+        _, _, _, info = validate_article.validate_article(path, "auto", ignore_date_today=True, archetype="nota",
+                                                          type_="analisis", objective="decidir")
+        # 2 partes × 450 = 1,330 -> guia (derivado), no 'nota' (el --archetype explícito).
+        self.assertTrue(any("Arquetipo: Guía / reflexión" in i for i in info))
+        self.assertFalse(any("Objetivo dinámico" in i for i in info))
+
+    def test_cli_rejects_type_without_objective_and_negative_visuals(self):
+        script = str(SCRIPTS / "validate_article.py")
+        for extra in (["--type", "lista"], ["--visuals", "-1"]):
+            with self.subTest(args=extra):
+                proc = subprocess.run([sys.executable, script, "--file", "x.md", *extra], capture_output=True)
+                self.assertEqual(proc.returncode, 2)
 
 
 class ArchetypeOnlyModeTest(unittest.TestCase):
