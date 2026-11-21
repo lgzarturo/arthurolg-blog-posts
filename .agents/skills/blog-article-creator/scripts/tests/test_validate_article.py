@@ -171,6 +171,43 @@ class ValidateArticleIntegrationTest(unittest.TestCase):
                 proc = subprocess.run([sys.executable, script, "--file", "x.md", *extra], capture_output=True)
                 self.assertEqual(proc.returncode, 2)
 
+    def test_missing_spanish_accent_is_error_but_ignores_code_and_urls(self):
+        body = article(extra_body="Tambien falla `tambien` y [link](https://example.com/tambien-articulo).")
+        path = self.write(body)
+        ok, errors, _, _ = validate_article.validate_article(path, "auto", ignore_date_today=True)
+        self.assertFalse(ok)
+        accent_errors = [e for e in errors if "acento ortográfico" in e]
+        self.assertEqual(len(accent_errors), 1)
+        self.assertIn("también", accent_errors[0])
+
+    def test_editorial_plural_warns_outside_quotes(self):
+        body = article(extra_body="En nuestra experiencia vimos que «nosotros» no cuenta.")
+        path = self.write(body)
+        _, errors, warnings, _ = validate_article.validate_article(path, "auto", ignore_date_today=True)
+        non_image_errors = [e for e in errors if "imagen" not in e.lower()]
+        self.assertEqual(non_image_errors, [])
+        plural_warnings = [w for w in warnings if "Voz autoral" in w]
+        self.assertEqual(len(plural_warnings), 2)
+
+    def test_missing_opening_question_mark_warns(self):
+        body = article(extra_body="Seguro que funciona esto?")
+        path = self.write(body)
+        _, errors, warnings, _ = validate_article.validate_article(path, "auto", ignore_date_today=True)
+        non_image_errors = [e for e in errors if "imagen" not in e.lower()]
+        self.assertEqual(non_image_errors, [])
+        self.assertTrue(any("Puntuación española" in w for w in warnings))
+
+    def test_missing_accent_in_title_and_description_is_error(self):
+        tmp = Path(tempfile.mkdtemp()) / "sintetico.md"
+        front = ("---\ntitle: 'Analisis rapido'\nimage: 'x/sintetico.webp'\n"
+                 "description: 'Informacion util sobre programacion.'\n"
+                 "author: 'Arturo López'\ndate: '2026-01-01'\nlabel: 'Tecnología'\n---\n")
+        tmp.write_text(front + article(), encoding="utf-8")
+        self.addCleanup(lambda: tmp.unlink())
+        _, errors, _, _ = validate_article.validate_article(tmp, "auto", ignore_date_today=True)
+        accent_errors = [e for e in errors if "acento ortográfico" in e]
+        self.assertEqual(len(accent_errors), 5)
+
 
 class ArchetypeOnlyModeTest(unittest.TestCase):
     def test_without_type_only_quotes_and_code_are_checked(self):

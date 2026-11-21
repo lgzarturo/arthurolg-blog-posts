@@ -1,12 +1,13 @@
 ---
 name: blog-article-creator
 description: >-
-  Crea, refina y valida artículos para el blog de Arturo López en español neutro
-  (tuteo estándar, sin voseo ni regionalismos), con voz humana natural, longitud
-  calculada por tipo, objetivo y partes (plan_length.py), arco narrativo por
-  tipo, investigación con fuentes primarias, enlaces a otros artículos del blog,
-  cierres propios de cada tema, imágenes WebP responsivas y edición SEO en un
-  flujo reproducible: Definir, Investigar, Concretar y Aprobar.
+  Crea, refina y valida artículos para el blog de Arturo López en español
+  mexicano culto (español neutro, tuteo estándar, sin voseo ni regionalismos),
+  con ortografía y acentuación cuidadas, voz de autor único (sin «nosotros»),
+  tecnicismos explicados con claridad, longitud calculada por tipo, objetivo y
+  partes (plan_length.py), arco narrativo enfocado, investigación con fuentes
+  primarias, enlaces internos, cierres propios, imágenes WebP responsivas y
+  edición SEO en un flujo reproducible: Definir, Investigar, Concretar y Aprobar.
 metadata:
   version: 6.0.0
 ---
@@ -19,14 +20,28 @@ Esta skill gobierna la creación y refinamiento de artículos para el blog de
 **Arturo López** (`lgzarturo`), abarcando tecnología, programación, Spring Boot,
 arquitectura de software, videojuegos, marketing y reflexión personal.
 
-Todos los artículos se redactan obligatoriamente en **español neutro** (tuteo
-estándar internacional / mexicano culto: *tú*, *tienes*, *observas*, *revisa*,
-*lee*). Queda **estrictamente prohibido el uso de voseo** (*tenés*, *mirá*, *vos*)
-y regionalismos marcados (chilenos, rioplatenses o ibéricos), garantizando una
-lectura cercana, profesional y de alcance global.
+Todos los artículos se redactan obligatoriamente en **español mexicano culto
+(español neutro estándar)** con tuteo estándar (*tú*, *tienes*, *observas*,
+*revisa*, *lee*), cuidando en todo momento la **ortografía, la gramática y la
+acentuación correcta** (tildes, diacríticos y signos de apertura `¿`/`¡`). Queda
+**estrictamente prohibido el uso de voseo** (*tenés*, *mirá*, *vos*) y de
+regionalismos marcados (chilenos, rioplatenses o ibéricos), garantizando una
+lectura cercana, profesional y comprensible en todo el mundo hispanohablante.
 
 Principios que gobiernan todo el flujo:
 
+- **Voz de autor único (cero «nosotros»).** Arturo López es el único autor del
+  blog. Sus opiniones, experiencias, investigaciones y artículos previos se
+  expresan siempre en **primera persona del singular** (*yo*, *mi*, *mis*,
+  *investigué*, *observé*, *expliqué*). Nunca se usa el plural editorial ni el
+  «nosotros» genérico (*vimos*, *abordamos*, *nuestro*, *debemos*). Al lector se
+  le trata de *tú*; cuando se hable de equipos o de la industria, se nombra al
+  sujeto concreto (*un equipo*, *quienes desarrollan software*).
+- **Tecnicismos mediados con lenguaje claro.** Cada término técnico o
+  anglicismo necesario se acompaña de una explicación breve y accesible en
+  español llano la primera vez que aparece, evitando dar por sentada la jerga.
+- **Narrativa enfocada.** Cada sección y cada párrafo sirven directamente a la
+  tesis central, siguiendo el arco del tipo elegido sin digresiones ni relleno.
 - **La longitud se calcula, no se elige.** El tipo, el objetivo y las partes del
   esquema dan una cifra con `plan_length.py`; la cifra da el arquetipo (nota,
   guía, análisis, tutorial). Nunca se rellena ni se comprime para encajar.
@@ -183,15 +198,27 @@ más lo que no pudo verificar.
   internos y referencias. Optimizar sin repetir keywords artificialmente ni
   prometer algo que el artículo no explica. Seguir
   [references/seo-editor.md](references/seo-editor.md).
-- **Idioma Obligatorio (Español Neutro):** redactar **siempre en español neutro**
-  con tuteo estándar (*tú*, *tienes*, *puedes*, *observas*, *revisa*, *deja*).
-  Está **estrictamente prohibido el voseo** (*tenés*, *podés*, *mirá*, *hacés*,
-  *para vos*, etc.) y los modismos regionales.
-- **Voz de Arturo López:** primera persona directa, artesano de software, líder
-  técnico humilde y reflexivo. El tono, el ritmo y la narrativa son los de
-  siempre. Las analogías salen del tema; Pokémon, Age of Mythology, Spider-Man y
-  el estoicismo son una **paleta opcional**, no un requisito (ver
+- **Idioma Obligatorio (Español Mexicano Culto / Neutro):** redactar **siempre
+  en español mexicano culto (español neutro estándar)** con tuteo (*tú*,
+  *tienes*, *puedes*, *observas*, *revisa*, *deja*). Está **estrictamente
+  prohibido el voseo** (*tenés*, *podés*, *mirá*, *hacés*, *para vos*, etc.) y
+  los modismos regionales.
+- **Ortografía, Gramática y Acentuación:** revisar de forma explícita todas las
+  tildes (agudas, graves, esdrújulas, hiatos y diacríticos como *más/mas*,
+  *aún/aun*, *qué/que*, *cómo/como*, *por qué/porque/porqué*), signos de
+  apertura (`¿`, `¡`), concordancia y puntuación antes de validar.
+- **Voz de Arturo López (Autor Único, Cero «Nosotros»):** primera persona del
+  singular directa (*yo*, *mi*, *mis*, *en mi experiencia*, *mi investigación*,
+  *como expliqué*). Prohibido hablar de «nosotros» o usar plural editorial
+  (*vimos*, *abordamos*, *nuestro*, *nos*, *debemos*, *tenemos que*). El tono es
+  de artesano de software y líder técnico humilde y reflexivo. Las analogías
+  salen del tema; Pokémon, Age of Mythology, Spider-Man y el estoicismo son una
+  **paleta opcional**, no un requisito (ver
   [references/natural-writing.md](references/natural-writing.md)).
+- **Tecnicismos Mediados y Narrativa Enfocada:** cada tecnicismo o anglicismo
+  inevitable debe explicarse de forma breve y clara en español cotidiano para no
+  aislar al lector, y cada párrafo debe empujar directamente la tesis central
+  sin perder el foco narrativo.
 - **Ritmo y Variedad:** alternar frases largas con sentencias breves. Citas en
   bloque (`>`) opcionales, con máximo por arquetipo (nota 1, guía 2, análisis y
   tutorial 3).
@@ -275,15 +302,16 @@ label: 'Programación'
    ```
 
    - Los **errores** impiden `[SUCCESS]` y deben corregirse: frontmatter, clichés,
-     voseo, falta de `## Conclusión` o `## Referencias`, imágenes faltantes y
-     **enlaces internos rotos**.
+     voseo, faltas de acento ortográfico inequívocas, falta de `## Conclusión` o
+     `## Referencias`, imágenes faltantes y **enlaces internos rotos**.
    - Los **avisos** nunca bloquean, pero deben revisarse y justificarse o
      corregirse: longitud fuera del arquetipo, intro por encima del tope,
      conclusión o secciones fuera de presupuesto, bloques visuales no
-     declarados, citas por encima del máximo, transiciones vetadas, pocas
-     fuentes o enlaces internos,
-     enlace externo que no responde, fuentes solo en `## Referencias`, referencias
-     genéricas propias, cierre repetido y referencias recurrentes.
+     declarados, citas por encima del máximo, transiciones vetadas, **voz de
+     plural editorial / «nosotros»**, signos `¿`/`¡` faltantes, pocas fuentes o
+     enlaces internos, enlace externo que no responde, fuentes solo en
+     `## Referencias`, referencias genéricas propias, cierre repetido y
+     referencias recurrentes.
    - `--check-links` hace peticiones HTTP; si un sitio bloquea bots, confirmar a
      mano.
 

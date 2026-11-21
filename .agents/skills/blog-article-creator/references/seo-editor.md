@@ -40,6 +40,17 @@ necesidad real, no repetir palabras clave.
   contextual en la frase que afirma el dato; `## Referencias` solo las lista.
 - Escribe el alt text describiendo la escena y su relación con el artículo; no
   uses frases genéricas como “imagen de tecnología”.
+- **Español mexicano culto, ortografía y acentuación:** revisa título,
+  descripción, encabezados y cuerpo para asegurar tuteo estándar, tildes
+  correctas (incluidas diacríticas), signos de apertura (`¿`, `¡`) y sintaxis
+  natural en español mexicano neutro, sin calcos del inglés ni voseo.
+- **Voz de autor único (sin «nosotros»):** verifica que las opiniones,
+  investigaciones y referencias a artículos previos estén en primera persona del
+  singular (*yo, mi, mis, investigué, expliqué*) y elimina cualquier plural
+  editorial (*vimos, abordamos, nuestro, debemos*).
+- **Tecnicismos claros y narrativa enfocada:** confirma que cada término técnico
+  o anglicismo necesario quede explicado con sencillez la primera vez que
+  aparece, y que ningún párrafo se desvíe de la tesis central.
 - Elimina introducciones vagas, repeticiones, promesas exageradas y párrafos que
   solo existen para alcanzar una duración.
 
@@ -50,6 +61,12 @@ necesidad real, no repetir palabras clave.
 - [ ] La keyword principal aparece de forma natural y no domina el texto.
 - [ ] Hay respuesta directa tras el gancho (si la intención es informacional) y
       la keyword aparece en título, primer párrafo, un `##` y descripción.
+- [ ] El texto está en español mexicano culto (español neutro), con ortografía,
+      gramática y acentos correctos y signos `¿`/`¡` completos.
+- [ ] La voz es de autor único en singular (*yo/mi*), sin «nosotros», «nuestro»
+      ni plural editorial.
+- [ ] Los tecnicismos están mediados con explicaciones claras y la narrativa se
+      mantiene enfocada en la tesis.
 - [ ] La estructura permite escanear el artículo con encabezados; Mermaid y
       tablas solo si la Ficha los declaró.
 - [ ] Las referencias y enlaces respaldan el contenido sin sustituir la voz

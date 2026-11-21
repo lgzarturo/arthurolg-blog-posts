@@ -39,7 +39,7 @@ El dossier **vive solo en la conversación**: no se guarda en el repositorio. La
 Prompt mínimo (adaptar al tema; el sub-agente parte de cero y no ve la conversación):
 
 ```
-Investiga para un artículo de blog técnico en español. No escribas el artículo.
+Investiga para un artículo de blog técnico en español mexicano culto (español neutro). No escribas el artículo.
 
 Tema: <tema>
 Tesis: <tesis de la Ficha>
@@ -55,6 +55,9 @@ Reglas:
 - Abre y lee cada fuente (WebFetch). No cites una URL que solo viste en un buscador.
 - Verifica fechas, versiones y cifras en la fuente, no de memoria.
 - Para librerías y frameworks usa Context7 antes que búsqueda web.
+- Redacta tus notas y afirmaciones con ortografía y acentuación correctas en español
+  mexicano neutro, evitando el plural editorial («nosotros») y explicando brevemente
+  cualquier tecnicismo o término en inglés para facilitar su explicación clara al lector.
 
 Devuelve SOLO una tabla Markdown con estas columnas y nada más de relleno:
 | # | Afirmación verificable (con dato exacto) | Fuente (título, organización) | URL | Tipo (primaria/secundaria) | Confianza (alta/media/baja) | Nota |

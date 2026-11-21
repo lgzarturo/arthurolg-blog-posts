@@ -88,6 +88,108 @@ VOSEO_AND_REGIONALISMS = [
     (r"\b(vosotros|habéis|tenéis|hacéis|sois)\b", "Peninsularismo no permitido. Usar segunda persona neutra latinoamericana."),
 ]
 
+# Palabras en español que llevan tilde obligatoria e inequívoca (excluyendo inglés y ambigüedades verbales).
+SPANISH_MISSING_ACCENTS = {
+    "tambien": "también",
+    "ademas": "además",
+    "segun": "según",
+    "despues": "después",
+    "traves": "través",
+    "aqui": "aquí",
+    "alli": "allí",
+    "ahi": "ahí",
+    "asi": "así",
+    "dificil": "difícil",
+    "dificiles": "difíciles",
+    "facil": "fácil",
+    "faciles": "fáciles",
+    "inutil": "inútil",
+    "inutiles": "inútiles",
+    "util": "útil",
+    "utiles": "útiles",
+    "rapido": "rápido",
+    "rapida": "rápida",
+    "rapidos": "rápidos",
+    "rapidas": "rápidas",
+    "codigo": "código",
+    "codigos": "códigos",
+    "articulo": "artículo",
+    "articulos": "artículos",
+    "tecnologia": "tecnología",
+    "tecnologias": "tecnologías",
+    "programacion": "programación",
+    "informacion": "información",
+    "conclusion": "conclusión",
+    "introduccion": "introducción",
+    "analisis": "análisis",
+    "solucion": "solución",
+    "configuracion": "configuración",
+    "implementacion": "implementación",
+    "validacion": "validación",
+    "optimizacion": "optimización",
+    "automatizacion": "automatización",
+    "produccion": "producción",
+    "operacion": "operación",
+    "investigacion": "investigación",
+    "comunicacion": "comunicación",
+    "documentacion": "documentación",
+    "metodo": "método",
+    "metodos": "métodos",
+    "proposito": "propósito",
+    "propositos": "propósitos",
+    "estandar": "estándar",
+    "estandares": "estándares",
+    "pagina": "página",
+    "paginas": "páginas",
+    "linea": "línea",
+    "lineas": "líneas",
+    "exito": "éxito",
+    "exitos": "éxitos",
+    "unico": "único",
+    "unica": "única",
+    "unicos": "únicos",
+    "unicas": "únicas",
+    "ultimo": "último",
+    "ultima": "última",
+    "ultimos": "últimos",
+    "ultimas": "últimas",
+    "especifico": "específico",
+    "especificos": "específicos",
+    "especificas": "específicas",
+    "automatico": "automático",
+    "automatica": "automática",
+    "automaticos": "automáticos",
+    "automaticas": "automáticas",
+    "dinamico": "dinámico",
+    "dinamica": "dinámica",
+    "jerarquia": "jerarquía",
+    "autonomia": "autonomía",
+    "mayoria": "mayoría",
+    "minoria": "minoría",
+    "garantia": "garantía",
+    "teoria": "teoría",
+    "habia": "había",
+    "tenia": "tenía",
+    "podia": "podía",
+    "deberia": "debería",
+    "podria": "podría",
+    "tendria": "tendría",
+    "estaria": "estaría",
+    "estan": "están",
+    "esten": "estén",
+}
+_MISSING_ACCENT_RE = re.compile(r"\b(" + "|".join(SPANISH_MISSING_ACCENTS) + r")\b", re.IGNORECASE)
+
+# Plural editorial o «nosotros» autoral a evitar (Arturo es el único autor del blog).
+EDITORIAL_PLURAL_WORDS = (
+    "nosotros", "nosotras", "nuestro", "nuestra", "nuestros", "nuestras", "nos",
+    "vimos", "abordamos", "analizamos", "revisamos", "exploramos", "construimos",
+    "encontramos", "sabemos", "creemos", "debemos", "podemos", "tenemos", "hacemos",
+    "pensamos", "elegimos", "decidimos", "usamos", "necesitamos", "solemos",
+    "intentamos", "olvidamos", "empezamos", "comenzamos",
+)
+_EDITORIAL_PLURAL_RE = re.compile(r"\b(" + "|".join(EDITORIAL_PLURAL_WORDS) + r")\b", re.IGNORECASE)
+
 
 # Arquetipos: los rangos de longitud (palabras, tope de intro, conclusión, máximo de citas) vienen de
 # plan_length.py; aquí solo se añaden el nombre y los mínimos de investigación.
@@ -197,6 +299,18 @@ def mask_code_blocks(text: str) -> str:
 
     masked = re.sub(r"```[\s\S]*?```", replacer, text)
     masked = re.sub(r"`[^`\n]+`", replacer, masked)
+    return masked
+
+
+def mask_non_prose(text: str) -> str:
+    """Enmascara código, URLs de enlaces/imágenes y citas textuales entre comillas preservando saltos de línea."""
+    def spaces(match):
+        return re.sub(r"[^\n]", " ", match.group(0))
+
+    masked = mask_code_blocks(text)
+    masked = re.sub(r"\]\([^)\n]+\)", lambda m: "]" + re.sub(r"[^\n]", " ", m.group(0)[1:]), masked)
+    masked = re.sub(r"https?://\S+", spaces, masked)
+    masked = re.sub(r"«[^»\n]*»|“[^”\n]*”|\"[^\"\n]*\"", spaces, masked)
     return masked
 
 
@@ -446,6 +560,36 @@ def validate_article(file_path: Path, target_reading_time, wpm: int = 200, ignor
         for m in matches:
             line_num = body[:m.start()].count("\n") + 1
             errors.append(f"Línea {line_num}: {msg} -> encontrado '{m.group(0).strip()}'")
+
+    # 4b. Detección de acentos ortográficos faltantes inequívocos (título, descripción y prosa)
+    for field_name, field_val in (("Título", title), ("Descripción", desc)):
+        for m in _MISSING_ACCENT_RE.finditer(mask_non_prose(field_val)):
+            word = m.group(0)
+            expected = SPANISH_MISSING_ACCENTS[word.lower()]
+            errors.append(f"{field_name}: Posible falta de acento ortográfico -> '{word}' debe llevar tilde ('{expected}').")
+
+    style_body = mask_non_prose(body)
+    for m in _MISSING_ACCENT_RE.finditer(style_body):
+        line_num = body[:m.start()].count("\n") + 1
+        word = m.group(0)
+        expected = SPANISH_MISSING_ACCENTS[word.lower()]
+        errors.append(f"Línea {line_num}: Posible falta de acento ortográfico -> '{word}' debe llevar tilde ('{expected}').")
+
+    # 4c. Voz de autor único (evitar 'nosotros' / plural editorial) y signos de apertura ¿ / ¡
+    for m in _EDITORIAL_PLURAL_RE.finditer(style_body):
+        line_num = body[:m.start()].count("\n") + 1
+        warnings.append(
+            f"Línea {line_num}: Voz autoral (evitar 'nosotros'): '{m.group(0)}' -> usa primera persona singular ('yo', 'mi', 'observé') o segunda persona ('tú', 'tu equipo')."
+        )
+
+    prose_only = mask_non_prose(sections["cuerpo"] + "\n\n" + sections["conclusion"])
+    for para in re.split(r"\n\s*\n", prose_only):
+        p = para.strip()
+        if not p:
+            continue
+        if p.count("?") > p.count("¿") or p.count("!") > p.count("¡"):
+            snippet = " ".join(p.split())[:60]
+            warnings.append(f"Puntuación española: falta signo de apertura ('¿' o '¡') en el párrafo '{snippet}...'.")
 
     # 5. Estructura Narrativa y Formato (escalada por arquetipo)
     # Citas en bloque: cuenta bloques contiguos, no líneas

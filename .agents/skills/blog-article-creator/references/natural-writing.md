@@ -11,18 +11,20 @@ El objetivo fundamental es que **cada artículo suene 100% auténtico, personal,
 Arturo López es desarrollador de software, líder técnico y apasionado de la arquitectura de sistemas, la inteligencia artificial agéntica, los videojuegos de estrategia y rol, y la filosofía práctica (estoicismo, productividad consciente, desapego del resultado y aprendizaje continuo).
 
 ### Principios Fundamentales de la Voz:
-1. **Primera Persona Cercana y Directa:** Escribe en primera persona y habla de tú a tú al lector, como a un colega de profesión. No hay fórmulas de entrada ni frases comodín: la voz sale de lo que cuentas, no de expresiones repetidas entre artículos.
+1. **Autor Único en Primera Persona Singular (Cero «Nosotros»):** Arturo López es el único autor del blog; son sus opiniones personales, su investigación y sus ideas. Escribe siempre en **primera persona del singular** (*yo*, *mi*, *mis*, *me*, *en mi experiencia*, *mi investigación*, *observé*, *expliqué*) y habla de *tú* al lector, como a un colega de profesión. Queda **prohibido el plural editorial o inclusivo** (*nosotros*, *nos*, *nuestro*, *nuestra*, *vimos*, *abordamos*, *analizamos*, *creemos*, *debemos*, *tenemos que*). Cuando hables de equipos o de la industria, nombra al sujeto concreto (*un equipo de ingeniería*, *quienes mantienen sistemas*, *tu organización*). No hay fórmulas de entrada ni frases comodín: la voz sale de lo que cuentas, no de expresiones repetidas entre artículos.
 2. **Pragmático pero Reflexivo:** Combina la solidez técnica (Spring Boot, Kotlin, Java, TypeScript, TDD, Clean Code, Git worktrees, arquitecturas agénticas) con reflexiones humanas profundas sobre el valor del tiempo, el desapego de los frutos de la acción y el crecimiento interior.
 3. **El Artesano vs. El Gurú:** No escribe desde un pedestal de sabelotodo. Escribe desde el taller: experimenta, tropieza, analiza los *trade-offs*, realiza *post-mortems* honestos y comparte sus aprendizajes con humildad.
 4. **Analogías que salen del tema (no de una lista):** Las mejores metáforas nacen del propio asunto: su dominio, su historia, un caso real, un objeto cotidiano que se parezca al mecanismo. Primero busca ahí. Una analogía es opcional; un artículo sin ninguna es perfectamente válido.
    - **Paleta opcional** (solo si encaja de forma orgánica y aclara algo; nunca como requisito ni como adorno): *videojuegos* (Pokémon, Age of Mythology, Dark Souls), *cultura pop* (Spider-Man) y *estoicismo* (Epicteto, Marco Aurelio, dicotomía del control).
    - **Antirrepetición:** si una referencia de la paleta apareció en 3 de los últimos 5 artículos, no la uses; el validador avisa. Cuando uses una, que sea concreta y aporte una idea que el texto no daría igual de bien sin ella.
 5. **Actuar sin Depender del Resultado:** El disfrute del proceso y la excelencia artesanal están por encima de la validación externa o las métricas superficiales. Escribir y programar bien es la recompensa en sí misma.
-6. **Idioma y Registro Estándar: Español Neutro (Estricto):**
+6. **Idioma, Ortografía, Gramática y Acentuación (Español Mexicano Culto / Neutro):**
    - **Tuteo Estándar:** Trata al lector de *tú* con conjugaciones neutras estándar (*tú tienes, tú puedes, tú observas, revisa, lee, diseña, mantén*).
    - **Cero Voseo:** Prohibido rotundamente el voseo (*tenés, podés, mirá, leé, dejá, hacés, vos, para vos, te dices a vos mismo*).
    - **Cero Regionalismos:** Prohibidos chilenismos (*po, cachai, altiro*), rioplatismos (*che, laburo, recién + infinitivo*), o giros ibéricos peninsulares (*vosotros, habéis, chaval*).
-   - **Identidad:** Arturo López escribe en un español neutro con naturalidad mexicana culta, técnica, cercana y universal para toda la comunidad hispanohablante.
+   - **Identidad:** Arturo López escribe en español mexicano culto (español neutro estándar), técnico, cercano y universal para toda la comunidad hispanohablante.
+   - **Ortografía, Gramática y Acentuación Cuidada:** Antes de dar por terminado un borrador, revisa explícitamente todas las tildes (agudas, graves, esdrújulas, hiatos y diacríticos como *más/mas*, *aún/aun*, *sí/si*, *qué/que*, *cómo/como*, *por qué/porque/porqué*), el uso completo de signos de apertura (`¿...?`, `¡...!`), la concordancia gramatical y la puntuación limpia.
+7. **Mediar los Tecnicismos con Lenguaje Claro:** No des por sentado que todo lector domina la jerga especializada o los anglicismos recientes. Cuando un término técnico sea necesario (*borrow checker*, *sandbox*, *harness*, *latencia de cola*, *pinning*, *idempotencia*, *tokenmaxxing*), explícalo brevemente en español cotidiano la primera vez que aparezca —qué hace o qué problema resuelve en la práctica—, o usa directamente el equivalente claro en español si conserva la precisión técnica.
 
 ---
 
@@ -69,7 +71,7 @@ No hay frases de ejemplo para copiar: cada gancho se escribe desde el material d
 * Una sección `##` por parte del esquema, con el presupuesto que dio `plan_length.py`. No uses una plantilla fija.
 * **Transiciones con enlace concreto:** cada `##` arranca retomando algo concreto de la sección anterior (un dato, una pregunta abierta, una consecuencia). El validador avisa si un párrafo empieza con una muletilla vetada: "Ahora bien", "Dicho esto", "Pasemos a", "Veamos ahora", "Llegados a este punto", "Antes de continuar", "Por otro lado,", "Con esto en mente".
 * Los datos verificables llevan su fuente como enlace contextual en la frase que los afirma (ver `references/research.md`). Los enlaces a otros artículos del blog van dentro de la prosa (ver `references/internal-linking.md`).
-* Cada sección aborda un problema concreto, demuestra el *por qué* antes del *cómo*, y ofrece un ejemplo o caso de uso práctico.
+* **Narrativa enfocada y tecnicismos mediados:** cada sección aborda un problema concreto ligado a la tesis central, demuestra el *por qué* antes del *cómo*, ofrece un ejemplo o caso práctico y traduce cualquier tecnicismo necesario a lenguaje claro sin perder rigor.
 * No satures con listas de viñetas vacías; privilegia la narrativa técnica explicativa.
 
 ### D. La Conclusión y el Cierre
@@ -123,9 +125,11 @@ El validador rechaza activamente las siguientes expresiones y patrones:
 
 ## 5. Checklist de Verificación Humana antes de Aprobar
 
-- [ ] **Idioma:** ¿Está redactado 100% en español neutro (tuteo estándar), sin voseo (*tenés, mirá*) ni regionalismos chilenos, rioplatenses o peninsulares?
-- [ ] **Voz:** ¿Suena a Arturo López hablando desde la experiencia y no a un texto autogenerado?
-- [ ] **Gancho:** ¿Inicia con un gancho de la lista cerrada, distinto al de los últimos 5 artículos, y la intro respeta su tope?
+- [ ] **Idioma:** ¿Está redactado 100% en español mexicano culto / español neutro (tuteo estándar), sin voseo (*tenés, mirá*) ni regionalismos chilenos, rioplatenses o peninsulares?
+- [ ] **Ortografía, gramática y acentos:** ¿Todas las palabras llevan sus tildes correctas (incluidas las diacríticas), signos `¿`/`¡` completos, buena puntuación y concordancia limpia?
+- [ ] **Autor único (cero «nosotros»):** ¿Suena a Arturo López hablando en primera persona del singular (*yo, mi, mis, investigué, observé*) sin plural editorial ni «nosotros» genérico (*vimos, abordamos, nuestro, debemos*)?
+- [ ] **Tecnicismos mediados:** ¿Cada término técnico o anglicismo inevitable viene acompañado de una explicación breve y clara en español cotidiano?
+- [ ] **Narrativa enfocada y gancho:** ¿Cada sección sirve directamente a la tesis central, inicia con un gancho de la lista cerrada distinto al de los últimos 5 artículos y respeta el tope de intro?
 - [ ] **Arco y registro:** ¿Sigue el arco de su tipo y el registro de su objetivo?
 - [ ] **Transiciones:** ¿Cada `##` retoma algo concreto de la sección anterior, sin muletillas vetadas?
 - [ ] **Visuales:** ¿Cada Mermaid o tabla está declarado en la Ficha?
